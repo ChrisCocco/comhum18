@@ -31,7 +31,7 @@
 
 \newcommand\BibTeX{B{\sc ib}\TeX}
 
-\title{Colour quantification of children's drawings}
+\title{Identification and quantification of colours in children's drawings}
 
 \author{Christelle Cocco ${}^1$, Rapha\"el Cer\'e ${}^2$, Aris Xanthos, ${}^3$  Pierre-Yves Brandt ${}^1$\\
   ${}^1$Institute for Social Sciences of Religions / University of Lausanne, Switzerland \\
@@ -62,8 +62,7 @@ queries e.g. ``Which colours appear?'', or ``How much yellow appears?''.
 
 \section{Introduction}\label{introduction}
 
-In computer vision, there are well developed techniques to analyse
-natural images (e.g.~pictures or videos) ; whereas the status of the
+In computer vision, there are well developed techniques to analyse and retrieve natural images (e.g.~pictures or videos); whereas the status of the
 image in humanities or in human sciences depends more on the perception
 of the image, not necessarily natural (e.g.~paintings or drawings), and
 needs specific techniques according to precise research questions.
@@ -164,37 +163,7 @@ colours\ldots{} According to the historian and colour specialist,
 Pastoureau, a colour is not equivalent to the shade of a colour, which
 has neither its own history, nor its own symbolic, unlike colours
 \cite[][p. 12 and p. 63]{pastoureau2017}. Thus, he counts 11 colours for
-the West {[}VERIFIER{]}, whose 6 from the first rank:
-
-\begin{itemize}
-\item
-  white
-\item
-  red
-\item
-  black
-\item
-  green
-\item
-  yellow
-\item
-  blue
-\end{itemize}
-
-and 5 from the second rank:
-
-\begin{itemize}
-\item
-  pink
-\item
-  orange
-\item
-  purple (violet)
-\item
-  gray
-\item
-  brown
-\end{itemize}
+the West {[}VERIFIER{]}, whose 6 from the first rank: white, red, black, green, yellow and blue; and 5 from the second rank: pink, orange, purple (violet), gray and brown.
 
 He also explains that colours are mental categories
 \cite[][p. 36]{pastoureau2017} and he differentiates colours according
@@ -206,6 +175,8 @@ Thus, it is impossible to obtain universal categories of colours and
 there is a ``big'' gap between spectral colours and human categories of
 colours\ldots{}.
 
+Kappa......
+
 For human sciences questions, it is necessary to develop specific
 techniques, since the aim is not to precisely find the nuance of the
 colour in the drawing, but to determine the diversity of colours on the
@@ -215,10 +186,133 @@ out from a set of colours on the other hand (gap 2).
 
 \section{Methods}\label{methods}
 
-As a first step, each image \(k=1,...,N\) is resized with the imresize
+
+
+\subsection{Data}
+
+N = 1212 children's drawings of gods, drawing
+$k = 1,\dots, N$, which are mainly studied from the psychology of
+religion perspective \cite[see][]{ddds}. 
+
+\subsection{Preprocessing}
+Each image $S = (\vec{s}_{ij})$ contains $i \times j$
+pixels ($\vec{s}$) and each pixel has three values (for Red, Green and Blue), \textit{i.e.}
+$\vec{s} = \{ s^{\tt \scriptstyle R}, s^{\tt \scriptstyle G}, s^{\tt \scriptstyle B} \}$.
+
+As a first step, each image $k$ is resized with the imresize
 module of the scipy.misc package, in such a way that the longer side is
-equal to 320 pixels (\(\vec{s}\)). Note here that the drawings are
+equal to 320 pixels. Note here that the drawings are
 rescaled at the same scale but not precisely at the same size.
+
+
+\subsection{Colour recognition/ identification...}
+
+% \hypertarget{from-colour-categories-to-exact-colour-of-pixels}{%
+% \subsection{From colour categories to exact colour of
+% pixels}\label{from-colour-categories-to-exact-colour-of-pixels}}
+
+{[}EXPLIQUER POURQUOI CETTE METHODE? LES ANCIENS ESSAIS? Tout à réécrire
+pour aller avec l'introduction et ajouter les références en latex, vient
+du chapitre sur les couleurs.{]}Most of the researches about colours in
+computer vision concern the field of image retrieval. In this type of
+researches, the aim is to find if two images have the same colours and
+not, as in this project, to discover if the pixels in the image belongs
+to a certain colour of a set {[}REF{]}.
+
+{[}SUITE A REECRIRE{]} When the aim is still to find colour groups, the
+K-means algorithm is often used \cite[see e.g.][]{yendrikhovskij2001,konyushkova2015,hulee2007}. However, there are two main
+drawbacks with this method: 1) it is necessary to define the number of
+clusters (K), thus the number of colours a priori; 2) for each cluster,
+we can obtain a mean of colours belonging to this cluster and these
+means can be difficult to name and to distinguish.
+
+{[}SUITE A REECRIRE{]} Therefore, we decided to start with a set of
+colours. At this point, there are two main choices to make: 1) chose the
+colour space and 2) definition a set of colours.
+
+{[}SUITE A REECRIRE{]} Concerning the first choice, there are many
+colours spaces \cite{tkalcictasic2003}, but RGB can be stated as ``the basic colour space''. For instance, Gong et al.~1998
+for their image indexing and retrieval method based on the NBS colour
+distance, use the HVC space. Regarding the definition of a set of
+colours -\textgreater{} Berlin and Kay and so on\ldots{}. {[}to be
+completed{]}
+
+\begin{itemize}
+	
+	\item
+	First tests: HSV with range of colours -\textgreater{} difficult to
+	define the limit between two colours
+	\item
+	Final choice: distance to colours
+	
+	\begin{itemize}
+		
+		\item
+		Possible with the Munsell colour space, as done by \citet{kimbaelee2007}, near human perception, but no linear transformation between
+		RGB and Munsell \cite[see e.g.][]{zhangsokhansanjwuetal1998}
+		\item
+		Final choice: RGB with a set of colours, each from light to dark and
+		distance to this colour
+	\end{itemize}
+\end{itemize}
+
+In order to fill the second gap between the categories of colour and its
+perception, a method based on the image in the RGB colour space is
+proposed. With a similar approach of the one developed by
+\cite{kimbaelee2007} in the the Munsell colour system, the dissimilarity
+between each pixel and a set of colours is computed. More precisely, for
+each image, a squared Euclidean dissimilarity is computed between each
+pixel \(\vec{s}\) and a set of 117 colours defined in RGB:
+\(\vec{c_l} = \{ c^{\tt \scriptstyle R}_{l}, c^{\tt \scriptstyle G}_{l}, s^{\tt \scriptstyle B}_{l} \}\),
+with \(l = 1, ..., 117\).
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.5\textwidth]{figures/Col_tab.pdf}
+	\caption{Set of 117 colours aggregated in 10 groups. \label{117colours}}
+\end{figure}
+
+For each pixel \(\vec{s}\), the less dissimilar \(c_l\) is considered as
+the colour of the pixel. Finally, the 117 colours are grouped into 10
+main colours (red, orange, yellow, green, cyan, blue, purple, pink,
+white and achromatic) and therefore each pixel belongs to one of these
+10 groups \(c_g\) with \(g=1,...,10\).
+
+{[}REVOIR FORMALISME POUR COHERENCE{]}This permits us to obtain one
+boolean matrix per colour \(g\) and per drawing \(i\):
+\(C=(C_{yx}^{ig})\). Thus the number of pixels of each colour for each
+drawing is \(C_{ig} = \sum_{yx}C_{yx}^{ig}\).
+
+
+
+
+
+{[}REVOIR FORMALISME POUR COHERENCE{]} As a second step, in order to
+count the number of colours used per drawing and to reduce the noise due
+to the scan quality, a median filter of a \(3 \times 3\) is applied on
+each colour matrix \(C_{yx}^{ig}\) and we obtain new matrices, namely
+\(C_{yx}^{\prime g}\).
+
+{[}A COMPLETER + METTRE EXEMPLE{]}Then we can extract the proportion of
+each colour used in each drawing (see table \ref{colquant}), as well as
+the presence or absence of each colour. Thus, we can answer the
+psychological research questions mentioned above. These methods are
+applicable to other data and research, e.g.~studying the main colours
+used by a painter according to various periods of his/her life.
+
+{[}A COMPLETER -\textgreater{} DEJA AJOUTER DANS PARTIE A REECRIRE AU
+DEBUT{]} Why RGB????
+
+{[}A COMPLETER{]} In order to attest these categories, we asked to
+\ldots{} human annotators (two Russians, one Swiss/Iranian, one/two
+Swiss people, one Belgian), to write the colour names of the colour of a
+set of\ldots{} drawings. In the second phase, annotators had to select
+presence or absence of colours in a list based on the Munsell system for
+another set of drawings (\ldots{} were part of both sets). Moreover,
+they had space to write name of missing colours.
+
+
+\subsection{Colour diversity [ARIS]}
 
 % \hypertarget{from-human-perception-to-colour-categorisation}{%
 % \subsection{From human perception to colour
@@ -296,6 +390,28 @@ coloured drawing, whereas the higher the number of types the coloured
 drawing (see figure \ref{enttypesscatter}) and the higher the mean
 intensity the lighter the drawing.
 
+
+
+\section{Results [RAPHAEL]}
+
+\subsection{Colour identification}
+
+% \begin{table}
+% \begin{tabular}[]{@{}cc@{}}
+
+% \includegraphics[height=0.12\textwidth]{../img/jp04_to_m_rnx_08_07_nrx-r.jpg}
+% &
+% \includegraphics[width=0.22\textwidth]{../img/jp04_to_m_rnx_08_07_nrx-r.png}\tabularnewline
+% \bottomrule
+% \end{tabular}
+% \caption{Colours quantification from the left image.} 
+% \label{colquant}
+% \end{table}
+
+{[METTRE DES FIGURES D'UN EXEMPLE QUI FONCTIONNE ET D'UN AUTRE QUI NE FONCTIONNE PAS]}
+
+\subsection{Colour diversity}
+
 % \begin{figure}
 % \centering
 % \includegraphics[width=0.45\textwidth]{../../dev/entropy-mod-comhum.png}
@@ -318,157 +434,28 @@ intensity the lighter the drawing.
 % \end{figure}
 
 \begin{table}
-\begin{tabular}[]{cccc}
-
-\small Index &
-\includegraphics[height=0.06\textwidth]{figures/ru09_sp_m_rf_14_03_ale-r.jpg}
-& essai & essai \\
-% &
-% \includegraphics[height=0.06\textwidth]{../../DATA/IMAGE/jp04_fa_m_pkx_11_05_tyx-r.jpg}
-% &
-% \includegraphics[height=0.06\textwidth]{../../DATA/IMAGE/ch16_fr_m_rec_14_08_sim-r.jpg}\tabularnewline
-
-
-\small \(\mu^{\tt \scriptstyle CRT}\) & \small 0.696 & \small 0.876 &
-\small 0.999\tabularnewline
-\small \(\delta^{\tt \scriptstyle CRT}\) & \small 457068 & \small 37982
-& \small 41\tabularnewline
-\small \(H(S^{\tt \scriptstyle CRT})\) & \small 1.538 & \small 1.903 &
-\small 5.200\tabularnewline
-
-\end{tabular}
-\caption{Illustration of variety measures {[}METTRE A JOUR{]}. }
-\label{varietyill}
+	\begin{tabular}[!h]{cccc}
+		
+		\small Index &
+		\includegraphics[height=0.06\textwidth]{figures/ru09_sp_m_rf_14_03_ale-r.jpg}
+		& essai & essai \\
+		% &
+		% \includegraphics[height=0.06\textwidth]{../../DATA/IMAGE/jp04_fa_m_pkx_11_05_tyx-r.jpg}
+		% &
+		% \includegraphics[height=0.06\textwidth]{../../DATA/IMAGE/ch16_fr_m_rec_14_08_sim-r.jpg}\tabularnewline
+		
+		
+		\small \(\mu^{\tt \scriptstyle CRT}\) & \small 0.696 & \small 0.876 &
+		\small 0.999\tabularnewline
+		\small \(\delta^{\tt \scriptstyle CRT}\) & \small 457068 & \small 37982
+		& \small 41\tabularnewline
+		\small \(H(S^{\tt \scriptstyle CRT})\) & \small 1.538 & \small 1.903 &
+		\small 5.200\tabularnewline
+		
+	\end{tabular}
+	\caption{Illustration of variety measures {[}METTRE A JOUR{]}. }
+	\label{varietyill}
 \end{table}
-
-% \hypertarget{from-colour-categories-to-exact-colour-of-pixels}{%
-% \subsection{From colour categories to exact colour of
-% pixels}\label{from-colour-categories-to-exact-colour-of-pixels}}
-
-{[}EXPLIQUER POURQUOI CETTE METHODE? LES ANCIENS ESSAIS? Tout à réécrire
-pour aller avec l'introduction et ajouter les références en latex, vient
-du chapitre sur les couleurs.{]}Most of the researches about colours in
-computer vision concern the field of image retrieval. In this type of
-researches, the aim is to find if two images have the same colours and
-not, as in this project, to discover if the pixels in the image belongs
-to a certain colour of a set {[}REF{]}.
-
-{[}SUITE A REECRIRE{]} When the aim is still to find colour groups, the
-K-means algorithm is often used (see e.g.~Yendrikhovskij 2001,
-Konyushkova et al.~2015, Hu and Lee 2007). However, there are two main
-drawbacks with this method: 1) it is necessary to define the number of
-clusters (K), thus the number of colours a priori; 2) for each cluster,
-we can obtain a mean of colours belonging to this cluster and these
-means can be difficult to name and to distinguish.
-
-{[}SUITE A REECRIRE{]} Therefore, we decided to start with a set of
-colours. At this point, there are two main choices to make: 1) chose the
-colour space and 2) definition a set of colours.
-
-{[}SUITE A REECRIRE{]} Concerning the first choice, there are many
-colours spaces (Tkalčič and Tasič, 2003). For instance, Gong et al.~1998
-for their image indexing and retrieval method based on the NBS colour
-distance, use the HVC space. Regarding the definition of a set of
-colours -\textgreater{} Berlin and Kay and so on\ldots{}. {[}to be
-completed{]}
-
-\begin{itemize}
-
-\item
-  First tests: HSV with range of colours -\textgreater{} difficult to
-  define the limit between two colours
-\item
-  Final choice: distance to colours
-
-\begin{itemize}
-
-  \item
-    Possible with the Munsell colour space, as done by (Seong-in Kim,
-    2007), near human perception, but no linear transformation between
-    RGB and Munsell (see e.g.~Zhang et al.~1998)
-  \item
-    Final choice: RGB with a set of colours, each from light to dark and
-    distance to this colour
-  \end{itemize}
-\end{itemize}
-
-In order to fill the second gap between the categories of colour and its
-perception, a method based on the image in the RGB colour space is
-proposed. With a similar approach of the one developed by
-\cite{kimbaelee2007} in the the Munsell colour system, the dissimilarity
-between each pixel and a set of colours is computed. More precisely, for
-each image, a squared Euclidean dissimilarity is computed between each
-pixel \(\vec{s}\) and a set of 117 colours defined in RGB:
-\(\vec{c_l} = \{ c^{\tt \scriptstyle R}_{l}, c^{\tt \scriptstyle G}_{l}, s^{\tt \scriptstyle B}_{l} \}\),
-with \(l = 1, ..., 117\).
-
-\begin{figure}
-\centering
-\includegraphics[width=0.45\textwidth]{figures/Col_tab.pdf}
-\caption{Set of 117 colours aggregated in 10 groups. \label{117colours}}
-\end{figure}
-
-For each pixel \(\vec{s}\), the less dissimilar \(c_l\) is considered as
-the colour of the pixel. Finally, the 117 colours are grouped into 10
-main colours (red, orange, yellow, green, cyan, blue, purple, pink,
-white and achromatic) and therefore each pixel belongs to one of these
-10 groups \(c_g\) with \(g=1,...,10\).
-
-{[}REVOIR FORMALISME POUR COHERENCE{]}This permits us to obtain one
-boolean matrix per colour \(g\) and per drawing \(i\):
-\(C=(C_{yx}^{ig})\). Thus the number of pixels of each colour for each
-drawing is \(C_{ig} = \sum_{yx}C_{yx}^{ig}\).
-
-\clearpage
-
-% \begin{table}
-% \begin{tabular}[]{@{}cc@{}}
-
-% \includegraphics[height=0.12\textwidth]{../img/jp04_to_m_rnx_08_07_nrx-r.jpg}
-% &
-% \includegraphics[width=0.22\textwidth]{../img/jp04_to_m_rnx_08_07_nrx-r.png}\tabularnewline
-% \bottomrule
-% \end{tabular}
-% \caption{Colours quantification from the left image.} 
-% \label{colquant}
-% \end{table}
-
-{[}Changer figure ci-dessus pour correspondre aux 10 couleurs, pas 11{]}
-{[}Mettre aussi un exemple qui ne fonctionne pas et expliquer pourquoi
-ou qu'est ce qui ne fonctionne pas.{]}
-
-{[}REVOIR FORMALISME POUR COHERENCE{]} As a second step, in order to
-count the number of colours used per drawing and to reduce the noise due
-to the scan quality, a median filter of a \(3 \times 3\) is applied on
-each colour matrix \(C_{yx}^{ig}\) and we obtain new matrices, namely
-\(C_{yx}^{\prime g}\).
-
-{[}A COMPLETER + METTRE EXEMPLE{]}Then we can extract the proportion of
-each colour used in each drawing (see table \ref{colquant}), as well as
-the presence or absence of each colour. Thus, we can answer the
-psychological research questions mentioned above. These methods are
-applicable to other data and research, e.g.~studying the main colours
-used by a painter according to various periods of his/her life.
-
-{[}A COMPLETER -\textgreater{} DEJA AJOUTER DANS PARTIE A REECRIRE AU
-DEBUT{]} Why RGB????
-
-{[}A COMPLETER{]} In order to attest these categories, we asked to
-\ldots{} human annotators (two Russians, one Swiss/Iranian, one/two
-Swiss people, one Belgian), to write the colour names of the colour of a
-set of\ldots{} drawings. In the second phase, annotators had to select
-presence or absence of colours in a list based on the Munsell system for
-another set of drawings (\ldots{} were part of both sets). Moreover,
-they had space to write name of missing colours.
-
-\subsection{Data}
-\subsection{Colour recognition}
-\subsection{Colour diversity}
-
-\section{Results}
-
-% \hypertarget{further-issues}{%
-% \section{Further issues}\label{further-issues}}
 
 \section{Conclusion}
 
