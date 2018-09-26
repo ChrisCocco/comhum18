@@ -28,6 +28,8 @@
 
 % added
 \usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{dsfont} %to have \mathds{1}
 
 \newcommand\BibTeX{B{\sc ib}\TeX}
 
@@ -51,7 +53,7 @@
 \begin{document}
 \maketitle
 \begin{abstract}
-Children's drawings reveal that developing colour retrieval technics
+[To update] Children's drawings reveal that developing colour retrieval technics
 must consider various aspects of what is a colour from the flow of
 energy (for physics) to discrete information (for humantities and human
 sciences). Hence, the proposed method deals with color variety measures
@@ -102,8 +104,8 @@ developed:
 \end{enumerate}
 
 More precisely, this research is based on a case study whose aim is to
-extract the colours of n = 1212 children's drawings of gods, drawing
-\(i = 1, \dots, n\), which are mainly studied from the psychology of
+extract the colours of $N = 1212$ children's drawings of gods, drawing
+$k = 1, \dots, N$, which are mainly studied from the psychology of
 religion perspective \cite[see][]{ddds}. Several research questions in
 the project are related to colours, such as ``Which colours are used to
 draw god?'', ``Are the same colours utilised in all countries?'', ``Did
@@ -175,7 +177,7 @@ Thus, it is impossible to obtain universal categories of colours and
 there is a ``big'' gap between spectral colours and human categories of
 colours\ldots{}.
 
-Kappa......
+Kappa...... [CITER POUR POOLED KAPPA]
 
 For human sciences questions, it is necessary to develop specific
 techniques, since the aim is not to precisely find the nuance of the
@@ -205,7 +207,7 @@ equal to 320 pixels. Note here that the drawings are
 rescaled at the same scale but not precisely at the same size.
 
 
-\subsection{Colour recognition/ identification...}
+\subsection{Identification of colours}
 
 % \hypertarget{from-colour-categories-to-exact-colour-of-pixels}{%
 % \subsection{From colour categories to exact colour of
@@ -262,36 +264,40 @@ proposed. With a similar approach of the one developed by
 \cite{kimbaelee2007} in the the Munsell colour system, the dissimilarity
 between each pixel and a set of colours is computed. More precisely, for
 each image, a squared Euclidean dissimilarity is computed between each
-pixel \(\vec{s}\) and a set of 117 colours defined in RGB:
+pixel \(\vec{s}\) and a set of $L = 117$ colours (see Figure~\ref{colour_set}) defined in RGB:
 \(\vec{c_l} = \{ c^{\tt \scriptstyle R}_{l}, c^{\tt \scriptstyle G}_{l}, s^{\tt \scriptstyle B}_{l} \}\),
-with \(l = 1, ..., 117\).
+with $l = 1, ..., L$.
 
 \begin{figure}
 	\centering
 	\includegraphics[width=0.5\textwidth]{figures/Col_tab.pdf}
-	\caption{Set of 117 colours aggregated in 10 groups. \label{117colours}}
+	\caption{Set of 117 colours aggregated in 10 groups. \label{colour_set}}
 \end{figure}
 
-For each pixel \(\vec{s}\), the less dissimilar \(c_l\) is considered as
-the colour of the pixel. Finally, the 117 colours are grouped into 10
-main colours (red, orange, yellow, green, cyan, blue, purple, pink,
-white and achromatic) and therefore each pixel belongs to one of these
-10 groups \(c_g\) with \(g=1,...,10\).
+Then, for each pixel \(\vec{s}\), the less dissimilar \(c_l\) is considered as
+the colour of the pixel:
+\begin{equation*}
+c(\vec{s}_{ij}) := \operatornamewithlimits{argmin}_{l \in [1,L]} \| s_{ij} - c_{l} \|^{2}
+\end{equation*}
 
-{[}REVOIR FORMALISME POUR COHERENCE{]}This permits us to obtain one
-boolean matrix per colour \(g\) and per drawing \(i\):
-\(C=(C_{yx}^{ig})\). Thus the number of pixels of each colour for each
-drawing is \(C_{ig} = \sum_{yx}C_{yx}^{ig}\).
+Finally, according to the Figure~\ref{colour_set}, the 117 colours are grouped into $G = 10$
+main colours ($g = 1, \dots, G$), \textit{i.e.} red, orange, yellow, green, cyan, blue, purple, pink,
+white and achromatic. Therefore, each pixel belongs to one of these
+10 groups and the name of the colour of each pixel is defined as $C(\vec{s}_{ij}) = \mathds{1}(c(\vec{s}_{ij}) \in g)$ [CE N'EST PAS ENCORE CA, MAIS ON S'EN APPROCHE, ON NE VEUT PAS 1, MAIS LE NOM... $= g \quad \textrm{if} \quad c(\vec{s}_{ij}) \in g$ ?]. \footnote{Here and in the sequel, $\mathds{1}(A)$ denotes the \textit{indicator function} of event $A$, taking on the value 1 if $A$ is true, and 0 otherwise.}
+
+For each drawing $k$, this permits us to obtain one
+boolean matrix per colour $g$:
+\begin{equation}
+B^{g} = (b_{ij}^{g}) \quad \textrm{with} \quad b_{ij}^{g} =  \mathds{1}(C(\vec{s}_{ij}) = g)
+\end{equation}
+
+Thus, the number of pixels of each main colour $g$ for one drawing is defined as:
+\begin{equation}
+	f^{g} = \sum_{ij}b_{ij}^{g}
+\end{equation}
 
 
 
-
-
-{[}REVOIR FORMALISME POUR COHERENCE{]} As a second step, in order to
-count the number of colours used per drawing and to reduce the noise due
-to the scan quality, a median filter of a \(3 \times 3\) is applied on
-each colour matrix \(C_{yx}^{ig}\) and we obtain new matrices, namely
-\(C_{yx}^{\prime g}\).
 
 {[}A COMPLETER + METTRE EXEMPLE{]}Then we can extract the proportion of
 each colour used in each drawing (see table \ref{colquant}), as well as
@@ -311,8 +317,17 @@ presence or absence of colours in a list based on the Munsell system for
 another set of drawings (\ldots{} were part of both sets). Moreover,
 they had space to write name of missing colours.
 
+[MET-ON LE CODE SUR GITHUB??? ET ENSUITE UN LIEN?]
+
 
 \subsection{Colour diversity [ARIS]}
+
+
+As a second step, in order to
+count the number of colours used per drawing and to reduce the noise due
+to the scan quality, a median filter of a \(3 \times 3\) is applied on
+each boolean colour matrix $B^{g}$ and new matrices are obtained, namely
+$B^{\prime g}$.
 
 % \hypertarget{from-human-perception-to-colour-categorisation}{%
 % \subsection{From human perception to colour
