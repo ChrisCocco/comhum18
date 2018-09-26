@@ -53,7 +53,7 @@
 \begin{document}
 \maketitle
 \begin{abstract}
-[To update] Children's drawings reveal that developing colour retrieval technics
+[TO UPDATE AT THE END] Children's drawings reveal that developing colour retrieval technics
 must consider various aspects of what is a colour from the flow of
 energy (for physics) to discrete information (for humantities and human
 sciences). Hence, the proposed method deals with color variety measures
@@ -64,57 +64,17 @@ queries e.g. ``Which colours appear?'', or ``How much yellow appears?''.
 
 \section{Introduction}\label{introduction}
 
-In computer vision, there are well developed techniques to analyse and retrieve natural images (e.g.~pictures or videos); whereas the status of the
-image in humanities or in human sciences depends more on the perception
-of the image, not necessarily natural (e.g.~paintings or drawings), and
-needs specific techniques according to precise research questions.
+In computer vision, there are well developed techniques to analyse and retrieve natural images (e.g.~pictures or videos). 
+However, the status of the image in humanities or in human sciences depends more on the perception of the image. Moreover, the images are not necessarily natural (e.g.~paintings or drawings). Therefore, specific techniques need to be developed according to precise research questions of humanities.
 
-While colours can be precisely defined in computation, human categories
-are more conceptual, as explained by \citep{wittgenstein1978}:
+For the multicultural and interdisciplinary project: ``Drawings of gods''\footnote{This project is supported by the Swiss National Science Foundation (SNSF), grant number: CR11\textbar1\_156383.}, whose the main fields are developmental psychology and psychology of religion, children's drawings of gods were collected in several countries \cite[for more details about this project, see \textit{e.g.}][]{BrandtKagataSpittelerGillieronPaleologue2009,Dandarova2013,DandarovaRobertDessartSerbaevaEtAl2016}.\footnote{The database of the project is available on \url{http://ddd.unil.ch/}.} 
+In order to analyse these drawings, it would be helpful to identify and quantify the colours used by the children in their drawings. 
+Indeed, several research questions in the project are related to colours, such as ``Which colours are used to draw god?'', ``Are the same colours utilised in all countries?'', ``Did older children use more or less colours than younger ones?''
 
-\begin{quote}
-``When we're asked about''What do the words `red', `blue', `black',
-`white', mean?" we can, of course, immediately point to things which
-have these colours, - but our ability to explain the meanings of these
-words goes no further! For the rest, we have either no idea at all of
-their use, or a very rough and to some extent false one." (68,I)
-\end{quote}
-
-Perception of an image by a human includes colour recognition which is
-the central point of this contribution using a children's drawings
-dataset. The particularity of this kind of image depends on the drawer's
-colour choices. It can be intentional according to his/her own
-perception and his/her human singularity or constraints according to
-colour availability. Subsequently, the resulting object analysis is
-technically constrained: the final colours are altered by the
-digitalisation encoding, as well as the quantification of colours.
-
-Indeed, two aspects of the quantification of a drawing's colours are
-developed:
-
-\begin{enumerate}
-\item
-  the gap between the human perception (continuous colours) and the
-  colour categorisation (discrete colours)
-  \cite[see e.g.][]{parragaakbarinia2016, benavente2008, berlinkay1969},
-\item
-  the gap between the human categories of colours (ideally universal)
-  and the exact colour of each pixel in the image (continuous colours)
-  \cite{khan2012, khan2013}.
-\end{enumerate}
-
-More precisely, this research is based on a case study whose aim is to
-extract the colours of $N = 1212$ children's drawings of gods, drawing
-$k = 1, \dots, N$, which are mainly studied from the psychology of
-religion perspective \cite[see][]{ddds}. Several research questions in
-the project are related to colours, such as ``Which colours are used to
-draw god?'', ``Are the same colours utilised in all countries?'', ``Did
-older children use more or less colours than younger ones?''
-
-%\hypertarget{colour-perception}{%
-%\section{Colour perception}\label{colour-perception}}
-
-The human colour perception occurs through the radiance incident upon
+To answer these questions, the first step is to define a set of colours. 
+However, although it is possible, with a computer, to obtain precise values defining the colour of a pixel, there is no universal colour set.
+It is even difficult to align the perception of two humans.
+Indeed, The human colour perception occurs through the radiance incident upon
 the retina on which three photoreceptor cells, named cones, are located.
 Only these three photoreceptors are necessary, corresponding to the
 \emph{Red}, \emph{Green} and \emph{Blue} numerical components (RGB) of
@@ -135,27 +95,42 @@ drastically different in terms of vision \cite{jobson1997} and,
 respectively, in terms of perception depending on the context e.g.
 \emph{Chubb illusion} or \emph{Checker shadow illusion}.
 
-{[}SUREMENT A DEPLACER{]} Perception according to
+
+MORE DIFFICULT... children's drawings
+dataset. The particularity of this kind of image depends on the drawer's
+colour choices. It can be intentional according to his/her own
+perception and his/her human singularity or constraints according to
+colour availability. Subsequently, the resulting object analysis is
+technically constrained: the final colours are altered by the
+digitalisation encoding, as well as the quantification of colours.
+
+
+
+
+
+
+
+
+
+While colours can be precisely defined in computation, human categories
+are more conceptual, as explained by \citet{wittgenstein1977}:
+
+\begin{quote}
+	``When we're asked about''What do the words `red', `blue', `black',
+	`white', mean?" we can, of course, immediately point to things which
+	have these colours, - but our ability to explain the meanings of these
+	words goes no further! For the rest, we have either no idea at all of
+	their use, or a very rough and to some extent false one." (68,I)
+\end{quote}
+
+Perception according to
 \cite[][p. 35 and p.87]{pastoureau2017}: complex phenomenon,
 neurobiology and cultural. Perception depends on the age and on the
 society. It is not a universal law. West perception not equal to world
 perception.
 
-A number of previous researches in computer vision proposed promising
-descriptors such as colour histograms \cite{sun2006} or colour names
-\cite{weijer2009, lindner2013} through mapping learned from images.
-However, their aims differed from the one found in the human sciences
-and described above. For instance, when colour is used in image
-retrieval, the aim is to find which images of a dataset correspond to
-the one stated as the query. Thus, the main point is to determine if the
-colours of the query and those of the dataset are similar, no matter
-which colour it is. More specifically, the paper of
-\cite{konyushkova2015} proposes a solution closer to the aim of finding
-the set of colours displayed in children's drawings with the well-known
-method of \emph{K-means}. However, it allows to extract mean colours for
-a set of drawings which is not the aim here.
 
-{[}SUREMENT A DEPLACER ET A COMPLETER{]} As explained in the
+As explained in the
 introduction, the second aim of this paper is to fill the gap between
 the universal human categories and the exact colour of each pixel.
 However, it is difficult or even impossible to define universal human
@@ -177,6 +152,13 @@ Thus, it is impossible to obtain universal categories of colours and
 there is a ``big'' gap between spectral colours and human categories of
 colours\ldots{}.
 
+In order to attest these categories, we asked to
+\ldots{} human annotators (two Russians, one Swiss/Iranian, one/two
+Swiss people, one Belgian), to write the colour names of the colour of a
+set of\ldots{} drawings. In the second phase, annotators had to select
+presence or absence of colours in a list based on the Munsell system for
+another set of drawings (\ldots{} were part of both sets). Moreover,
+they had space to write name of missing colours.
 Kappa...... [CITER POUR POOLED KAPPA]
 
 For human sciences questions, it is necessary to develop specific
@@ -185,8 +167,80 @@ colour in the drawing, but to determine the diversity of colours on the
 one hand (gap 1) ; and to figure whether there is one colour that stands
 out from a set of colours on the other hand (gap 2).
 
+ Regarding the definition of a set of
+colours -\textgreater{} Berlin and Kay and so on\ldots{}. {[}to be
+completed{]}
+
+Indeed, two aspects of the quantification of a drawing's colours are
+developed:
+
+\begin{enumerate}
+	\item
+	the gap between the human perception (continuous colours) and the
+	colour categorisation (discrete colours)
+	\cite[see e.g.][]{parragaakbarinia2016, benavente2008, berlinkay1969}, [PERCEPTION]
+	\item
+	the gap between the human categories of colours (ideally universal)
+	and the exact colour of each pixel in the image (continuous colours)
+	\cite{khan2012, khan2013} [STATE OF THE ART?]
+\end{enumerate}
+
+\section{State of the art}
+
+A number of previous researches in computer vision proposed promising
+descriptors such as colour histograms \cite{sun2006} or colour names
+\cite{weijer2009, lindner2013} through mapping learned from images.
+However, their aims differed from the one found in the human sciences
+and described above. For instance, when colour is used in image
+retrieval, the aim is to find which images of a dataset correspond to
+the one stated as the query. Thus, the main point is to determine if the
+colours of the query and those of the dataset are similar, no matter
+which colour it is. More specifically, the paper of
+\cite{konyushkova2015} proposes a solution closer to the aim of finding
+the set of colours displayed in children's drawings with the well-known
+method of \emph{K-means}. However, it allows to extract mean colours for
+a set of drawings which is not the aim here.
+
+Most of the researches about colours in
+computer vision concern the field of image retrieval. In this type of
+researches, the aim is to find if two images have the same colours and
+not, as in this project, to discover if the pixels in the image belongs
+to a certain colour of a set {[}REF{]}.
+
+When the aim is still to find colour groups, the
+K-means algorithm is often used \cite[see e.g.][]{yendrikhovskij2001,konyushkova2015,hulee2007}. However, there are two main
+drawbacks with this method: 1) it is necessary to define the number of
+clusters (K), thus the number of colours a priori; 2) for each cluster,
+we can obtain a mean of colours belonging to this cluster and these
+means can be difficult to name and to distinguish.
+
+Possible with the Munsell colour space, as done by \citet{kimbaelee2007}, near human perception, but no linear transformation between
+RGB and Munsell \cite[see e.g.][]{zhangsokhansanjwuetal1998}
 
 \section{Methods}\label{methods}
+{[}SUITE A REECRIRE{]} Therefore, we decided to start with a set of
+colours. At this point, there are two main choices to make: 1) chose the
+colour space and 2) definition a set of colours.
+
+{[}SUITE A REECRIRE{]} Concerning the first choice, there are many
+colours spaces \cite{tkalcictasic2003}, but RGB can be stated as ``the basic colour space''. For instance, Gong et al.~1998
+for their image indexing and retrieval method based on the NBS colour
+distance, use the HVC space.
+
+\begin{itemize}
+	
+	\item
+	First tests: HSV with range of colours -\textgreater{} difficult to
+	define the limit between two colours
+	\item
+	Final choice: distance to colours
+	
+	\begin{itemize}
+		\item
+		Final choice: RGB with a set of colours, each from light to dark and
+		distance to this colour
+	\end{itemize}
+\end{itemize}
 
 
 
@@ -213,50 +267,8 @@ rescaled at the same scale but not precisely at the same size.
 % \subsection{From colour categories to exact colour of
 % pixels}\label{from-colour-categories-to-exact-colour-of-pixels}}
 
-{[}EXPLIQUER POURQUOI CETTE METHODE? LES ANCIENS ESSAIS? Tout à réécrire
-pour aller avec l'introduction et ajouter les références en latex, vient
-du chapitre sur les couleurs.{]}Most of the researches about colours in
-computer vision concern the field of image retrieval. In this type of
-researches, the aim is to find if two images have the same colours and
-not, as in this project, to discover if the pixels in the image belongs
-to a certain colour of a set {[}REF{]}.
 
-{[}SUITE A REECRIRE{]} When the aim is still to find colour groups, the
-K-means algorithm is often used \cite[see e.g.][]{yendrikhovskij2001,konyushkova2015,hulee2007}. However, there are two main
-drawbacks with this method: 1) it is necessary to define the number of
-clusters (K), thus the number of colours a priori; 2) for each cluster,
-we can obtain a mean of colours belonging to this cluster and these
-means can be difficult to name and to distinguish.
 
-{[}SUITE A REECRIRE{]} Therefore, we decided to start with a set of
-colours. At this point, there are two main choices to make: 1) chose the
-colour space and 2) definition a set of colours.
-
-{[}SUITE A REECRIRE{]} Concerning the first choice, there are many
-colours spaces \cite{tkalcictasic2003}, but RGB can be stated as ``the basic colour space''. For instance, Gong et al.~1998
-for their image indexing and retrieval method based on the NBS colour
-distance, use the HVC space. Regarding the definition of a set of
-colours -\textgreater{} Berlin and Kay and so on\ldots{}. {[}to be
-completed{]}
-
-\begin{itemize}
-	
-	\item
-	First tests: HSV with range of colours -\textgreater{} difficult to
-	define the limit between two colours
-	\item
-	Final choice: distance to colours
-	
-	\begin{itemize}
-		
-		\item
-		Possible with the Munsell colour space, as done by \citet{kimbaelee2007}, near human perception, but no linear transformation between
-		RGB and Munsell \cite[see e.g.][]{zhangsokhansanjwuetal1998}
-		\item
-		Final choice: RGB with a set of colours, each from light to dark and
-		distance to this colour
-	\end{itemize}
-\end{itemize}
 
 In order to fill the second gap between the categories of colour and its
 perception, a method based on the image in the RGB colour space is
@@ -306,16 +318,9 @@ psychological research questions mentioned above. These methods are
 applicable to other data and research, e.g.~studying the main colours
 used by a painter according to various periods of his/her life.
 
-{[}A COMPLETER -\textgreater{} DEJA AJOUTER DANS PARTIE A REECRIRE AU
-DEBUT{]} Why RGB????
 
-{[}A COMPLETER{]} In order to attest these categories, we asked to
-\ldots{} human annotators (two Russians, one Swiss/Iranian, one/two
-Swiss people, one Belgian), to write the colour names of the colour of a
-set of\ldots{} drawings. In the second phase, annotators had to select
-presence or absence of colours in a list based on the Munsell system for
-another set of drawings (\ldots{} were part of both sets). Moreover,
-they had space to write name of missing colours.
+
+
 
 [MET-ON LE CODE SUR GITHUB??? ET ENSUITE UN LIEN?]
 
