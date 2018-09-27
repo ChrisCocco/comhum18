@@ -71,33 +71,27 @@ For the multicultural and interdisciplinary project: ``Drawings of gods''\footno
 In order to analyse these drawings, it would be helpful to identify and quantify the colours used by the children in their drawings. 
 Indeed, several research questions in the project are related to colours, such as ``Which colours are used to draw god?'', ``Are the same colours utilised in all countries?'', ``Did older children use more or less colours than younger ones?''
 
-To answer these questions, the first step is to define a set of colours. 
-However, although it is possible, with a computer, to obtain precise values defining the colour of a pixel, there is no universal colour set.
+To answer this type of questions, the main steps are 1) to define a set of colours; 2) to select a colour space; 3) to assign a colour to each pixel; 4) to count the number of colours in each drawing.
+
+Concerning the first step, although it is possible to obtain precise values defining the colour of a pixel with a computer, there is no universal colour set.
 It is even difficult to align the perception of two humans.
-Indeed, The human colour perception occurs through the radiance incident upon
+Indeed, the human colour perception occurs through the radiance incident upon
 the retina on which three photoreceptor cells, named cones, are located.
-Only these three photoreceptors are necessary, corresponding to the
-\emph{Red}, \emph{Green} and \emph{Blue} numerical components (RGB) of
-the pixel
-\(\vec{s} = \{ s^{\tt \scriptstyle R}, s^{\tt \scriptstyle G}, s^{\tt \scriptstyle B} \}\),
-to describe a colour using appropriate spectral functions. Standard
-curves have been adopted in 1931 by the Commission International de
-l'Eclairage (CIE) to specify the colour by those three numbers from
-spectral power distribution transformation.
+Only these three photoreceptors (corresponding to the \emph{Red}, \emph{Green} and \emph{Blue} numerical components (RGB) of a pixel) are necessary to describe a colour using appropriate spectral functions. Standard curves have been adopted in 1931 by the \textit{Commission Internationale de l'Eclairage} (CIE) to specify the colour by those three numbers from spectral power distribution transformation.
 
 Although the CIE standard exists, only computers are able to assign
 those three numbers to a colour in a precise manner. Therefore, any
 human assignment is basically obsolete due to the influence of an
-individual's interpretation of the colour (e.g. ``Where can I put a
-threshold between red and orange?'', ``Is it not already brown?'').
-Moreover, the human perception of colour distribution of an image can be
-drastically different in terms of vision \cite{jobson1997} and,
-respectively, in terms of perception depending on the context e.g.
-\emph{Chubb illusion} or \emph{Checker shadow illusion}.
+individual's interpretation of the colour. 
+%(e.g. ``Where can I put a threshold between red and orange?'', ``Is it not already brown?'').
+Moreover, the human perception of colour distributions of an image can be
+drastically different from recorded colour images in terms of vision \cite[see \textit{e.g.}][]{jobson1997} and,
+respectively, in terms of perception depending on the context \textit{e.g.}
+\emph{Chubb illusion} or \emph{Checker shadow illusion}\footnote{See \textit{e.g.} \url{http://www.michaelbach.de/ot/lum-adelsonCheckShadow/index.html}}. 
 
 
-MORE DIFFICULT... children's drawings
-dataset. The particularity of this kind of image depends on the drawer's
+Besides this, this paper focusses on a children's drawing dataset. 
+The particularity of this kind of image depends on the drawer's
 colour choices. It can be intentional according to his/her own
 perception and his/her human singularity or constraints according to
 colour availability. Subsequently, the resulting object analysis is
@@ -105,12 +99,7 @@ technically constrained: the final colours are altered by the
 digitalisation encoding, as well as the quantification of colours.
 
 
-
-
-
-
-
-
+\subsection{Attempts to define a set of colours}
 
 While colours can be precisely defined in computation, human categories
 are more conceptual, as explained by \citet{wittgenstein1977}:
@@ -218,6 +207,9 @@ Possible with the Munsell colour space, as done by \citet{kimbaelee2007}, near h
 RGB and Munsell \cite[see e.g.][]{zhangsokhansanjwuetal1998}
 
 \section{Methods}\label{methods}
+
+\subsection{Colour space}
+
 {[}SUITE A REECRIRE{]} Therefore, we decided to start with a set of
 colours. At this point, there are two main choices to make: 1) chose the
 colour space and 2) definition a set of colours.
