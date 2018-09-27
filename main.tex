@@ -86,8 +86,8 @@ individual's interpretation of the colour.
 %(e.g. ``Where can I put a threshold between red and orange?'', ``Is it not already brown?'').
 Moreover, the human perception of colour distributions of an image can be
 drastically different from recorded colour images in terms of vision \cite[see \textit{e.g.}][]{jobson1997} and,
-respectively, in terms of perception depending on the context \textit{e.g.}
-\emph{Chubb illusion} or \emph{Checker shadow illusion}\footnote{See \textit{e.g.} \url{http://www.michaelbach.de/ot/lum-adelsonCheckShadow/index.html}}. 
+respectively, in terms of perception depending on the context ()\textit{e.g.}
+\emph{Chubb illusion}  \cite{ChubbSperlingSolomon1989} or \emph{Checker shadow illusion}\footnote{See \textit{e.g.} \url{http://www.michaelbach.de/ot/lum-adelsonCheckShadow/index.html}}) and on the experience of the human visual system \cite[see \textit{e.g.}][]{LottoPurves2001}.
 
 
 Besides this, this paper focusses on a children's drawing dataset. 
@@ -240,7 +240,7 @@ distance, use the HVC space.
 
 N = 1212 children's drawings of gods, drawing
 $k = 1,\dots, N$, which are mainly studied from the psychology of
-religion perspective \cite[see][]{ddds}. 
+religion perspective %\cite[see][]{ddds}. 
 
 \subsection{Preprocessing}
 Each image $S = (\vec{s}_{ij})$ contains $i \times j$
@@ -287,7 +287,7 @@ c(\vec{s}_{ij}) := \operatornamewithlimits{argmin}_{l \in [1,L]} \| s_{ij} - c_{
 Finally, according to the Figure~\ref{colour_set}, the 117 colours are grouped into $G = 10$
 main colours ($g = 1, \dots, G$), \textit{i.e.} red, orange, yellow, green, cyan, blue, purple, pink,
 white and achromatic. Therefore, each pixel belongs to one of these
-10 groups and the name of the colour of each pixel is defined as $C(\vec{s}_{ij}) = \mathds{1}(c(\vec{s}_{ij}) \in g)$ [CE N'EST PAS ENCORE CA, MAIS ON S'EN APPROCHE, ON NE VEUT PAS 1, MAIS LE NOM... $= g \quad \textrm{if} \quad c(\vec{s}_{ij}) \in g$ ?]. \footnote{Here and in the sequel, $\mathds{1}(A)$ denotes the \textit{indicator function} of event $A$, taking on the value 1 if $A$ is true, and 0 otherwise.}
+$G$ groups and the name of the colour of each pixel is defined as $C(\vec{s}_{ij}) = \mathds{1}(c(\vec{s}_{ij}) \in g)$ [CE N'EST PAS ENCORE CA, MAIS ON S'EN APPROCHE, ON NE VEUT PAS 1, MAIS LE NOM... $= g \quad \textrm{if} \quad c(\vec{s}_{ij}) \in g$ ?]. \footnote{Here and in the sequel, $\mathds{1}(A)$ denotes the \textit{indicator function} of event $A$, taking on the value 1 if $A$ is true, and 0 otherwise.}
 
 For each drawing $k$, this permits us to obtain one
 boolean matrix per colour $g$:
