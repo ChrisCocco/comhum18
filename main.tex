@@ -406,17 +406,29 @@ intensity the lighter the drawing.
 
 \section{Results [RAPHAEL]}
 
-Here, we first show an explicit sample of the results obtained from the method Identification of colours (see section \ref{sec:identification}) applied on all drawings. We then extend the presentation of these results using the method of Colour diversity retrieval (see section \ref{sec:diversity}) crossed with the results of a Colours space definition experiment depicted in section  \ref{sec:colour-space} to attempt to assess the colour perceptions in face of our methods.
+Here, we first show an explicit sample of the results obtained from the method Identification of colours (see section \ref{sec:identification}) applied on all drawings. We then extend the presentation of these results using the method of Colour diversity retrieval (see section \ref{sec:diversity}) crossed with the results of a deeper measure of diversity commonly used in Computer Vision. The results of the Colours space definition experiment depicted in section  \ref{sec:colour-space} is show in order to illustrated the assessment of our methods in face the colour perceptions based on human detection.
 
 \subsection{Colour identification}
+
+The colour identification step yields the boolean $B^g$ matrix per colour $g$ for each $k$ drawing from where masked-image can be reconstructed to reveal the colour configuration of the original drawing as illustrated on Figures~\ref{fig:example1}~and ~\ref{fig:example2}.
 
 \begin{figure}[!h]
 	\centering
 	\includegraphics[width=0.32\linewidth]{figures/ru08_bo_f_pb_07_05_don-r}
 	\includegraphics[width=0.62\linewidth]{figures/ru08_bo_f_pb_07_05_don-rno_filter_mask.pdf}
-	\caption{{[METTRE DES FIGURES D'UN EXEMPLE QUI FONCTIONNE ET D'UN AUTRE QUI NE FONCTIONNE PAS]} }
-	\label{}
+	\caption{{[METTRE UNE FIGURE D'UN EXEMPLE QUI FONCTIONNE ]} }
+	\label{fig:example1}
 \end{figure}
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=0.32\linewidth]{figures/ru08_bo_f_pb_07_05_don-r}
+	\includegraphics[width=0.62\linewidth]{figures/ru08_bo_f_pb_07_05_don-rno_filter_mask.pdf}
+	\caption{{[METTRE UNE FIGURE D'UN EXEMPLE QUI NE FONCTIONNE PAS]} }
+	\label{fig:example2}
+\end{figure}
+
+\noindent The first figure show a good extraction of the main colours whereas the second a less good extraction because ... [CC:  Parler des bons resultats v.s. mauvais avec examples (qui sont encore \`a choisir)].
 
 \begin{figure}[!h]
 	\centering
@@ -424,6 +436,8 @@ Here, we first show an explicit sample of the results obtained from the method I
 	\caption{ }
 	\label{}
 \end{figure}
+
+ [PYB: Que peut-on en dire?]
 
 % \begin{table}
 % \begin{tabular}[]{@{}cc@{}}
