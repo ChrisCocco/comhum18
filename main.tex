@@ -209,7 +209,7 @@ RGB and Munsell \cite[see e.g.][]{zhangsokhansanjwuetal1998}
 \section{Methods}\label{methods}
 
 \subsection{Colour space}
-
+\label{sec:colour-space}
 {[}SUITE A REECRIRE{]} Therefore, we decided to start with a set of
 colours. At this point, there are two main choices to make: 1) chose the
 colour space and 2) definition a set of colours.
@@ -254,7 +254,7 @@ rescaled at the same scale but not precisely at the same size.
 
 
 \subsection{Identification of colours}
-
+\label{sec:identification}
 % \hypertarget{from-colour-categories-to-exact-colour-of-pixels}{%
 % \subsection{From colour categories to exact colour of
 % pixels}\label{from-colour-categories-to-exact-colour-of-pixels}}
@@ -318,7 +318,7 @@ used by a painter according to various periods of his/her life.
 
 
 \subsection{Colour diversity [ARIS]}
-
+\label{sec:diversity}
 
 As a second step, in order to
 count the number of colours used per drawing and to reduce the noise due
@@ -406,9 +406,24 @@ intensity the lighter the drawing.
 
 \section{Results [RAPHAEL]}
 
+Here, we first show an explicit sample of the results obtained from the method Identification of colours (see section \ref{sec:identification}) applied on all drawings. We then extend the presentation of these results using the method of Colour diversity retrieval (see section \ref{sec:diversity}) crossed with the results of a Colours space definition experiment depicted in section  \ref{sec:colour-space} to attempt to assess the colour perceptions in face of our methods.
+
 \subsection{Colour identification}
-example de dessins
-(histogramme des couleur) - regarder si le temps de le faire
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=0.32\linewidth]{figures/ru08_bo_f_pb_07_05_don-r}
+	\includegraphics[width=0.62\linewidth]{figures/ru08_bo_f_pb_07_05_don-rno_filter_mask.pdf}
+	\caption{{[METTRE DES FIGURES D'UN EXEMPLE QUI FONCTIONNE ET D'UN AUTRE QUI NE FONCTIONNE PAS]} }
+	\label{}
+\end{figure}
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=\linewidth]{figures/colors-barplot.png}
+	\caption{ }
+	\label{}
+\end{figure}
 
 % \begin{table}
 % \begin{tabular}[]{@{}cc@{}}
@@ -422,58 +437,67 @@ example de dessins
 % \label{colquant}
 % \end{table}
 
-{[METTRE DES FIGURES D'UN EXEMPLE QUI FONCTIONNE ET D'UN AUTRE QUI NE FONCTIONNE PAS]}
 
 \subsection{Colour diversity}
 
-% \begin{figure}
-% \centering
-% \includegraphics[width=0.45\textwidth]{../../dev/entropy-mod-comhum.png}
-% \caption{Entropy and effective categories logarithmic scatter plot.
-% \label{entscatter}}
-% \end{figure}
+test 
 
-% \begin{figure}
-% \centering
-% \includegraphics[width=0.45\textwidth]{../../dev/perplexity-mod-comhum.png}
-% \caption{Perplexity and effective categories logarithmic scatter plot.
-% \label{perpscatter}}
-% \end{figure}
+\begin{figure*}[h!]
+	\centering
+	\includegraphics[width=\linewidth]{figures/colors-boxplot.png}
+	\caption{ }
+	\label{}
+\end{figure*}
 
-% \begin{figure}
-% \centering
-% \includegraphics[width=0.45\textwidth]{../../dev/ginilorenz.png}
-% \caption{\(G\) Gini coefficient with the associated Lorentz curve.
-% \label{giniloenscatter}}
-% \end{figure}
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=\linewidth]{figures/colors-grille.png}
+	\caption{ }
+	\label{}
+\end{figure}
 
-plots avec entropy
-plots inter-juges
-grille - ajouter les axes
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=\linewidth]{figures/comp_nb_colours_agreement.png}
+	\caption{Bland et Altman}
+	\label{}
+\end{figure}
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=\linewidth]{figures/comp_nb_colours_scatter.png}
+	\caption{ }
+	\label{}
+\end{figure}
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=\linewidth]{figures/comp_nb_colours_sd.png}
+	\caption{ }
+	\label{}
+\end{figure}
 
-\begin{table}
-	\begin{tabular}[!h]{cccc}
+%\begin{table}
+%	\begin{tabular}[!h]{cccc}
 		
-		\small Index &
-		\includegraphics[height=0.06\textwidth]{figures/ru09_sp_m_rf_14_03_ale-r.jpg}
-		& essai & essai \\
+%		\small Index &
+%		\includegraphics[height=0.06\textwidth]{figures/ru09_sp_m_rf_14_03_ale-r.jpg}
+%		& essai & essai \\
 		% &
 		% \includegraphics[height=0.06\textwidth]{../../DATA/IMAGE/jp04_fa_m_pkx_11_05_tyx-r.jpg}
 		% &
 		% \includegraphics[height=0.06\textwidth]{../../DATA/IMAGE/ch16_fr_m_rec_14_08_sim-r.jpg}\tabularnewline
 		
 		
-		\small \(\mu^{\tt \scriptstyle CRT}\) & \small 0.696 & \small 0.876 &
-		\small 0.999\tabularnewline
-		\small \(\delta^{\tt \scriptstyle CRT}\) & \small 457068 & \small 37982
-		& \small 41\tabularnewline
-		\small \(H(S^{\tt \scriptstyle CRT})\) & \small 1.538 & \small 1.903 &
-		\small 5.200\tabularnewline
+%		\small \(\mu^{\tt \scriptstyle CRT}\) & \small 0.696 & \small 0.876 &
+%		\small 0.999\tabularnewline
+%		\small \(\delta^{\tt \scriptstyle CRT}\) & \small 457068 & \small 37982
+%		& \small 41\tabularnewline
+%		\small \(H(S^{\tt \scriptstyle CRT})\) & \small 1.538 & \small 1.903 &
+%		\small 5.200\tabularnewline
 		
-	\end{tabular}
-	\caption{Illustration of variety measures {[}METTRE A JOUR{]}. }
-	\label{varietyill}
-\end{table}
+%	\end{tabular}
+%	\caption{Illustration of variety measures {[}METTRE A JOUR{]}. }
+%	\label{varietyill}
+%\end{table}
 
 \section{Conclusion}
 
