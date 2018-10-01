@@ -405,7 +405,7 @@ intensity the lighter the drawing.
 
 \section{Results [RAPHAEL]}
 
-Here, we first show an explicit sample of the results obtained from the method Identification of colours (see section \ref{sec:identification}) applied on all drawings. We then extend the presentation of these results using the method of Colour diversity retrieval (see section \ref{sec:diversity}) crossed with the results of a deeper measure of diversity commonly used in Computer Vision. The results of the Colours space definition experiment depicted in section  \ref{sec:colour-space} is show in order to illustrated the assessment of our methods in face the colour perceptions based on human detection.
+Here, we first show an explicit sample of the results obtained from the method Identification of colours (see section \ref{sec:identification}) applied on all drawings. We then extend the presentation of these results using the method of Colour diversity retrieval (see section \ref{sec:diversity}) crossed with the results of a deeper measure of diversity commonly used in Computer Vision. The results of the Colours space definition experiment depicted in section  \ref{sec:colour-space} are presented in order to illustrated the assessment of our methods in face the colour perceptions based on human detection.
 
 \subsection{Colour identification}
 
@@ -440,6 +440,11 @@ From there, we compute the proportion of coloured pixels per $g$ colour, where $
 
  [PYB: Que peut-on en dire?]
 
+\subsection{Colour diversity}
+
+However we are able to identified automatically colours with a specific chosen set of colours, the colour variety of the drawing still not considered. Based on the colours identifications results, we then compute the relative entropy as well as the variety in order to reveal first the proportional colour variety of the dataset and, secondly, to compare it with the the absolute variety of the dataset, number of non-empty main colours $g$, see Figure~\ref{fig:boxplotvariety}.
+
+In details, we observe that the entropy values attached to each draw indicates the degree of drawing completeness: the higher the entropy value is, higher the colours are covering the page revealing more complex drawing whereas the lower values depicts lower coloured and complex drawing with $\lim_{H(f) \rightarrow 0}$ depicts white pages.
 % \begin{table}
 % \begin{tabular}[]{@{}cc@{}}
 
@@ -453,15 +458,11 @@ From there, we compute the proportion of coloured pixels per $g$ colour, where $
 % \end{table}
 
 
-\subsection{Colour diversity}
-
-test 
-
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=\linewidth]{figures/colors-boxplot.png}
-	\caption{ }
-	\label{}
+	\caption{}
+	\label{fig:boxplotvariety}
 \end{figure}
 
 \begin{figure}[h!]
