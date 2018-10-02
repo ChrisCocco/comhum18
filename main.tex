@@ -477,18 +477,14 @@ In more details, we observe on Figure \ref{fig:grille} that the entropy values a
 	\label{fig:grille}
 \end{figure}
 
-\
-
 [PYB: Que peut-on en dire?]
 
-Based on the chosen colour sets, the entropy measure is sensitive to the errors of pixels colour attributions (e.g. similar distances, no Brown, etc.). Then, we compare it with a common approach of Computer Vision which consists to measure the entropy on the histogram greyscale levels of the drawing with the bin $g = 1, \dots, G$. (After the linear conversion of the pixel, we estimated and summed each probability that a grey value appears using the absolute variety as the number of unique grey value. )
-
-On Figure~\ref{fig:entropies}
+Based on the chosen colour sets, the entropy measure is sensitive to the errors during the pixel colour attributions (e.g. similar distances, no Brown, etc.). Then, we compare it with a common approach of Computer Vision which consists to measure the entropy on the greyscale levels histogram of the drawing. The scatter plot, figure~\ref{fig:entropies}, depicts the significant Pearson correlation ($r=0.8866$, $p=0.000$) between these two entropy [A citer dans section 3.5 \cite{wu2013}]. 
 
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=\linewidth]{figures/colors-greysacale-entropies.png}
-	\caption{ }
+	\caption{Scatter plot of the entropy on the greyscale levels histogram with the main colours entropy.}
 	\label{fig:entropies}
 \end{figure}
 
