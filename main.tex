@@ -456,7 +456,10 @@ From there, we compute the proportion of coloured pixels per $g$ colour, where $
 
 \subsection{Colour diversity}
 
-However we are able to identified automatically colours with a specific chosen set of colours, the colour variety of the drawing still not considered. Based on the colours identifications results, we then compute the relative entropy as well as the variety in order to reveal first the proportional colour variety of the dataset and, secondly, to compare it with the absolute variety of the dataset, number of non-empty main colours $g$, see Figure~\ref{fig:boxplotvariety}. Globally, the medians of the boxes indicate an linear  relationship between the entropy and the variety, but the absolute frequency of drawings per number of colours identified, the variety, has an normal distribution.
+However we are able to identified automatically colours with a specific chosen set of colours, the colour variety of the drawing still not considered.
+
+\subsubsection{Entropy and variety}
+ Based on the colours identifications results, we then compute the relative entropy as well as the variety in order to reveal, first, the proportional colour variety of the dataset and, secondly, to compare it with the absolute variety of the dataset, number of non-empty main colours $g$, see Figure~\ref{fig:boxplotvariety}. Globally, the medians of the boxes indicate an linear  relationship between the entropy and the variety, but the absolute frequency of drawings per number of colours identified, the variety, has an normal distribution.
 
 \begin{figure}[h!]
 	\centering
@@ -465,18 +468,31 @@ However we are able to identified automatically colours with a specific chosen s
 	\label{fig:boxplotvariety}
 \end{figure}
 
-In more details, we observe on Figure \ref{fig:grille} that the entropy values attached to each drawing indicates a degree of completeness: the higher the entropy value is, more the colours are covering the page revealing more complex drawings whereas the lower values depicts lower coloured and complex drawings where $H(f) \rightarrow 0$ reveals whiter pages. Also, combined with the variety, we observe that measure allows an gradual distinction between white drawing background with a single object to more contextualized (mutli-)object(s).
+In more details, we observe on Figure \ref{fig:grille} that the entropy values attached to each drawing indicates a degree of completeness: the higher the entropy value is, more the colours are covering the page revealing more complex drawings whereas the lower values depicts lower coloured and complex drawings where $H(f) \rightarrow 0$ reveals whiter pages. Also, combined with the variety, we observe that measure allows an gradual distinction between white drawing background with a single object to drawing with more contextualized (mutli-)object(s).
 
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=0.8\linewidth]{figures/colors-grille.png}
-	\caption{Sample of drawings, selected per quartiles, and ordered by entropy (column) and variety (row).}
+	\caption{Sample of drawings, selected per quartiles, and ordered by entropy (column) and variety (row). [AJOUTER ENCORE LE AXES]}
 	\label{fig:grille}
 \end{figure}
 
 \
 
 [PYB: Que peut-on en dire?]
+
+Based on the constrained colour sets chosen, the entropy measure is sensitive to the errors of pixels colour attribution (e.g. similar distances, no Brown, etc.). Then, we compare it with a common approach of Computer Vision which consists to measure the entropy on the greyscale level of the drawing. After the linear conversion of the pixel, we estimated and summed each probability that a grey value appears using the absolute variety as the number of unique grey value. 
+
+On Figure~\ref{fig:entropies}
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=\linewidth]{figures/colors-greysacale-entropies.png}
+	\caption{ }
+	\label{fig:entropies}
+\end{figure}
+
+\subsubsection{Human Concordance}
 
 % \begin{table}
 % \begin{tabular}[]{@{}cc@{}}
@@ -512,12 +528,7 @@ In more details, we observe on Figure \ref{fig:grille} that the entropy values a
 	\label{}
 \end{figure}
 
-\begin{figure}[h!]
-	\centering
-	\includegraphics[width=\linewidth]{figures/colors-greysacale-entropies.png}
-	\caption{ }
-	\label{}
-\end{figure}
+
 
 %\begin{table}
 %	\begin{tabular}[!h]{cccc}
