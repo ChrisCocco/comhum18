@@ -165,10 +165,10 @@ developed:
 	colour categorisation (discrete colours)
 	\cite[see e.g.][]{parragaakbarinia2016, benavente2008, berlinkay1969}, [PERCEPTION]
 
-	the gap between the human categories of colours (ideally universal)
+	\item the gap between the human categories of colours (ideally universal)
 	and the exact colour of each pixel in the image (continuous colours)
 	\cite{khan2012, khan2013} [STATE OF THE ART?]
-
+\end{enumerate}
 
 In order to attest these categories, we asked to
 \ldots{} human annotators (two Russians, one Swiss/Iranian, one/two
@@ -276,7 +276,7 @@ rescaled at the same scale but not precisely at the same size.
 In order to fill the second gap between the categories of colour and its
 perception, a method based on the image in the RGB colour space is
 proposed. With a similar approach of the one developed by
-\cite{kimbaelee2007} in the the Munsell colour system, the dissimilarity
+\cite{kimbaelee2007} in the Munsell colour system, the dissimilarity
 between each pixel and a set of colours is computed. More precisely, for
 each image, a squared Euclidean dissimilarity is computed between each
 pixel \(\vec{s}\) and a set of $L = 117$ colours (see Figure~\ref{colour_set}) defined in RGB:
@@ -450,13 +450,34 @@ From there, we compute the proportion of coloured pixels per $g$ colour, where $
 	\label{fig:propcolours}
 \end{figure}
 
+\ 
+
  [PYB: Que peut-on en dire?]
 
 \subsection{Colour diversity}
 
-However we are able to identified automatically colours with a specific chosen set of colours, the colour variety of the drawing still not considered. Based on the colours identifications results, we then compute the relative entropy as well as the variety in order to reveal first the proportional colour variety of the dataset and, secondly, to compare it with the the absolute variety of the dataset, number of non-empty main colours $g$, see Figure~\ref{fig:boxplotvariety}.
+However we are able to identified automatically colours with a specific chosen set of colours, the colour variety of the drawing still not considered. Based on the colours identifications results, we then compute the relative entropy as well as the variety in order to reveal first the proportional colour variety of the dataset and, secondly, to compare it with the absolute variety of the dataset, number of non-empty main colours $g$, see Figure~\ref{fig:boxplotvariety}. Globally, the medians of the boxes indicate an linear  relationship between the entropy and the variety, but the absolute frequency of drawings per number of colours identified, the variety, has an normal distribution.
 
-In details, we observe that the entropy values attached to each draw indicates the degree of drawing completeness: the higher the entropy value is, higher the colours are covering the page revealing more complex drawing whereas the lower values depicts lower coloured and complex drawing with $\lim_{H(f) \rightarrow 0}$ depicts white pages.
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=\linewidth]{figures/colors-boxplot.png}
+	\caption{Entropy $H(f)$ box plot for the $N$ drawings per the numbers of colours identified, namely the variety $m$.}
+	\label{fig:boxplotvariety}
+\end{figure}
+
+In more details, we observe on Figure \ref{fig:grille} that the entropy values attached to each drawing indicates a degree of completeness: the higher the entropy value is, more the colours are covering the page revealing more complex drawings whereas the lower values depicts lower coloured and complex drawings where $H(f) \rightarrow 0$ reveals whiter pages. Also, combined with the variety, we observe that measure allows an gradual distinction between white drawing background with a single object to more contextualized (mutli-)object(s).
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.8\linewidth]{figures/colors-grille.png}
+	\caption{Sample of drawings, selected per quartiles, and ordered by entropy (column) and variety (row).}
+	\label{fig:grille}
+\end{figure}
+
+\
+
+[PYB: Que peut-on en dire?]
+
 % \begin{table}
 % \begin{tabular}[]{@{}cc@{}}
 
@@ -470,19 +491,7 @@ In details, we observe that the entropy values attached to each draw indicates t
 % \end{table}
 
 
-\begin{figure}[h!]
-	\centering
-	\includegraphics[width=\linewidth]{figures/colors-boxplot.png}
-	\caption{}
-	\label{fig:boxplotvariety}
-\end{figure}
 
-\begin{figure}[h!]
-	\centering
-	\includegraphics[width=\linewidth]{figures/colors-grille.png}
-	\caption{ }
-	\label{}
-\end{figure}
 
 \begin{figure}[h!]
 	\centering
