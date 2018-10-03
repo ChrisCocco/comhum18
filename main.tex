@@ -439,7 +439,7 @@ The colour identification step yields the boolean $B^g$ matrix per colour $g$ fo
 	\label{fig:example2}
 \end{figure}
 
-\noindent The first figure illustrates a good extraction of the main colours whereas the second illustrates a less good colour extractions because of the similar computed distances between $\vec{s}$  pixel and the two or more $G$ main colours e.g. $g = \mbox{Green}$ and $g = \mbox{Achromatic}$. Also, the lack of the Brown in the defined set of colours produces errors during the colours identification process as well as a over attribution of the pixels to the Green when yellow and grey overlap. [CC:  Parler des bons resultats v.s. mauvais avec examples (qui sont encore \`a choisir)].
+\noindent The first figure illustrates a good extraction of the main colours whereas the second illustrates a less good colour extractions because of the similar distances between $\vec{s}$  pixel and the two or more $G$ main colours e.g. $g = \mbox{Green}$ and $g = \mbox{Achromatic}$. Also, the lack of the Brown in the defined set of colours produces errors during the colours identification process as well as a over attribution of the pixels to the Green when yellow and grey overlap. [CC:  Parler des bons resultats v.s. mauvais avec examples (qui sont encore \`a choisir)].
 
 From there, we compute the proportion of coloured pixels per $g$ colour, where $g \in G \not\ni g = white$, to reveal to weighted frequency of the identified colours (see Figure \ref{fig:propcolours}). Then, for this dataset, the results obtained allows to said that the achromatic is the most identified followed by the Blue and the Yellow whereas the Pink and the Purple are clearly less present (they represent $70.3\%$ against $0.9\%$). The Orange, Red, green and Cyan seem to be moderately present ($27.8\%$).
 
@@ -468,7 +468,7 @@ However we are able to identified automatically colours with a specific chosen s
 	\label{fig:boxplotvariety}
 \end{figure}
 
-In more details, we observe on Figure \ref{fig:grille} that the entropy values attached to each drawing indicates a degree of completeness: the higher the entropy value is, more the colours are covering the page revealing more complex drawings whereas the lower values depicts lower coloured and complex drawings where $H(f) \rightarrow 0$ reveals whiter pages. Also, combined with the variety, we observe that measure allows an gradual distinction between white drawing background with a single object to drawing with more contextualized (mutli-)object(s).
+In more details, we observe on Figure \ref{fig:grille} that the entropy values attached to each drawing indicates a degree of completeness: higher is the entropy value, more the colours are covering the page revealing more complex drawings whereas the lower values depicts lower coloured and lower complex drawings - where $H(f) \rightarrow 0$ reveals whiter pages. Also, combined with the variety, we observe that measure allows a gradual distinction between white drawing background with a single object to drawing with more contextualized (mutli-)object(s).
 
 \begin{figure}[h!]
 	\centering
