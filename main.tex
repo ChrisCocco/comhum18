@@ -412,53 +412,45 @@ intensity the lighter the drawing.
 
 \section{Results [RAPHAEL]}
 
-Here, we first show an explicit sample of the results obtained from the method Identification of colours (see section \ref{sec:identification}) applied on all drawings. We then extend the presentation of these results using the method of Colour diversity retrieval (see section \ref{sec:diversity}) crossed with the results of a deeper measure of diversity commonly used in Computer Vision. The results of the Colours space definition experiment depicted in section  \ref{sec:colour-space} is show in order to illustrated the assessment of our methods in face the colour perceptions based on human detection.
+Here, we first show an explicit sample of the results obtained from the method Identification of colours (see section \ref{sec:identification}) applied on all drawings. We then extend the presentation of these results using the method of Colour diversity retrieval (see section \ref{sec:diversity}) crossed with the results of a deeper measure of variety commonly used in Computer Vision. The results of the Colours space definition experiment depicted in section  \ref{sec:colour-space} are presented in order to illustrated the quality of the automatic method of variety estimation in face of the variety human perception.
 
 \subsection{Colour identification}
-\label{sec:results_identification}
-
-The colour identification step yields the boolean $B^g$ matrix per colour $g$ for each $k$ drawing from where masked-image can be reconstructed to reveal the colour configuration of the original drawing as illustrated on Figures~\ref{fig:example1}~and ~\ref{fig:example2}.
+The colour identification step yields the filtered boolean $B^g$ matrix per colour $g$ for each $k$ drawing from where masked-image can be reconstructed to reveal the colour configuration of the original drawing as illustrated on Figures~\ref{fig:example1}~and ~\ref{fig:example2}.
 
 \begin{figure}[!h]
 	\centering
-	\includegraphics[width=0.32\linewidth]{figures/ru08_bo_f_pb_07_05_ali-r.jpg}
-	\includegraphics[width=0.62\linewidth]{figures/ru08_bo_f_pb_07_05_ali-rno_filter_mask.pdf}
+	\raisebox{0.45cm}{\includegraphics[width=0.32\linewidth]{figures/ru08_bo_f_pb_07_05_ali-r.jpg}}
+	\includegraphics[width=0.62\linewidth]{figures/ru08_bo_f_pb_07_05_ali-rno_filter_mask.pdf}\hfil
 	\caption{{[METTRE UNE FIGURE D'UN EXEMPLE QUI FONCTIONNE ]} }
 	\label{fig:example1}
 \end{figure}
 
 \begin{figure}[!h]
 	\centering
-	\includegraphics[width=0.32\linewidth]{figures/ru08_bo_f_pb_07_05_ali-r.jpg}
-	\includegraphics[width=0.62\linewidth]{figures/ru08_bo_f_pb_07_05_ali-rno_filter_mask.pdf}
+	\includegraphics[width=0.32\linewidth]{figures/ch15_fr_m_rrs_08_08_fim-r.jpg}
+	\includegraphics[width=0.62\linewidth]{figures/ch15_fr_m_rrs_08_08_fim-rno_filter_mask.pdf}
 	\caption{{[METTRE UNE FIGURE D'UN EXEMPLE QUI NE FONCTIONNE PAS]} }
 	\label{fig:example2}
 \end{figure}
 
-<<<<<<< HEAD
-\noindent The first figure illustrates a good extraction of the main colours whereas the second illustrates a less good colour extractions because of the similar distances between $\vec{s}$  pixel and the two or more $G$ main colours e.g. $g = \mbox{Green}$ and $g = \mbox{Achromatic}$. Also, the lack of the Brown in the defined set of colours produces errors during the colours identification process as well as a over attribution of the pixels to the Green when yellow and grey overlap. [CC:  Parler des bons resultats v.s. mauvais avec examples (qui sont encore \`a choisir)].
-=======
-\noindent The first figure show a good extraction of the main colours whereas the second show a less good extraction because ... [CC:  Parler des bons resultats v.s. mauvais avec examples (qui sont encore \`a choisir)].
->>>>>>> 0d21e34704f6d8f2e608797745ee480349dca147
+\noindent The first figure illustrates a good extraction of the main colours whereas the second illustrates a less good colour extractions because of the similar computed distances between $\vec{s}$  pixel and the two or more $G$ main colours e.g. $g = \mbox{Green}$ and $g = \mbox{Achromatic}$. Also, the lack of the Brown in the defined set of colours produces errors during the colours identification process as well as a over attribution of the pixels to the Green when yellow and grey overlap. [CC:  Parler des bons resultats v.s. mauvais avec examples (qui sont encore \`a choisir)].
 
-From there, we compute the proportion of coloured pixels per $g$ colour, where $g \in G \not\ni g = white$, to reveal to weighted frequency of the observed (or used) colours (see Figure \ref{fig:propcolours}). Then, for this dataset, the results obtained allows to said that the achromatic is the most used followed by the Blue and the Yellow whereas the Pink and the Purple are clearly less used (they represent $70.3\%$ against $0.9\%$). The Orange, Red, green and Cyan seem to be moderately used ($27.8\%$).
+From there, we compute the proportion of coloured pixels per $g$ colour, where $g \in G \not\ni g = white$, to reveal to weighted frequency of the identified colours (see Figure \ref{fig:propcolours}). Then, for this dataset, the results obtained allows to said that the achromatic is the most identified followed by the Blue and the Yellow whereas the Pink and the Purple are clearly less present (they represent $70.3\%$ against $0.9\%$). The Orange, Red, green and Cyan seem to be moderately present ($27.8\%$).
 
 \begin{figure}[!h]
 	\centering
 	\includegraphics[width=\linewidth]{figures/colors-barplot.png}
-	\caption{ }
+	\caption{Proportion of coloured pixels per $g$ colour, where $g \in G \not\ni g = white$.}
 	\label{fig:propcolours}
 \end{figure}
 
- [PYB: Que peut-on en dire?]
+[IDEE : Cross validation en prennant al\' eatoirement quelques pixels par dessin et les attribuer manuelle \`a une couleurs principales ou avoir un toy example avec un dessin o\`u l'on "connait" les couleurs.]
 
-<<<<<<< HEAD
 \subsection{Colour diversity}
-
-However we are able to identified automatically colours with a specific chosen set of colours, the colour variety of the drawing still not considered.
+However we are able to identified automatically colours with a specific chosen set of colours, the colour variety of the drawing still not considered. 
 
 \subsubsection{Entropy and variety}
- Based on the colours identifications results, we then compute the relative entropy as well as the variety in order to reveal, first, the proportional colour variety of the dataset and, secondly, to compare it with the absolute variety of the dataset, number of non-empty main colours $g$, see Figure~\ref{fig:boxplotvariety}. Globally, the medians of the boxes indicate an linear  relationship between the entropy and the variety, but the absolute frequency of drawings per number of colours identified, the variety, has an normal distribution.
+Based on the colours identifications results, we then compute the relative entropy as well as the variety in order to reveal, first, the proportional colour variety of the dataset and, secondly, to compare it with the absolute variety of the dataset, number of non-empty main colours $g$, see Figure~\ref{fig:boxplotvariety}. Globally, the medians of the boxes indicate an linear  relationship between the entropy and the variety, but the absolute frequency of drawings per number of colours identified, the variety, has an normal distribution.
 
 \begin{figure}[h!]
 	\centering
@@ -467,7 +459,7 @@ However we are able to identified automatically colours with a specific chosen s
 	\label{fig:boxplotvariety}
 \end{figure}
 
-In more details, we observe on Figure \ref{fig:grille} that the entropy values attached to each drawing indicates a degree of completeness: higher is the entropy value, more the colours are covering the page revealing more complex drawings whereas the lower values depicts lower coloured and lower complex drawings - where $H(f) \rightarrow 0$ reveals whiter pages. Also, combined with the variety, we observe that measure allows a gradual distinction between white drawing background with a single object to drawing with more contextualized (mutli-)object(s).
+In more details, we observe on Figure \ref{fig:grille} that the entropy values attached to each drawing indicates a degree of completeness: the higher the entropy value is, more the colours are covering the page revealing more complex drawings whereas the lower values depicts lower coloured and complex drawings where $H(f) \rightarrow 0$ reveals whiter pages. Also, combined with the variety, we observe that measure allows an gradual distinction between white drawing background with a single object to drawing with more contextualized (mutli-)object(s).
 
 \begin{figure}[h!]
 	\centering
@@ -476,9 +468,7 @@ In more details, we observe on Figure \ref{fig:grille} that the entropy values a
 	\label{fig:grille}
 \end{figure}
 
-[PYB: Que peut-on en dire?]
-
-Based on the chosen colour sets, the entropy measure is sensitive to the errors during the pixel colour attributions (e.g. similar distances, no Brown, etc.). Then, we compare it with a common approach of Computer Vision which consists to measure the entropy on the greyscale levels histogram of the drawing. The scatter plot, figure~\ref{fig:entropies}, depicts the significant Pearson correlation ($r=0.8866$, $p=0.000$) between these two entropy [A citer dans section 3.5 \cite{wu2013}]. 
+Based on the chosen colour sets, the entropy measure is sensitive to the errors during the pixel colour attributions (e.g. similar distances, no Brown, etc.). Then, we compare it with a common approach of Computer Vision which consists to measure the entropy on the greyscale levels histogram of the drawing. The scatter plot, figure~\ref{fig:entropies}, depicts the significant Pearson correlation ($r=0.8866$, $p=0.000$) between these two entropy [A citer dans section 3.5 \citet{wu2013}]. 
 
 \begin{figure}[h!]
 	\centering
@@ -487,10 +477,11 @@ Based on the chosen colour sets, the entropy measure is sensitive to the errors 
 	\label{fig:entropies}
 \end{figure}
 
-\subsubsection{Human Concordance}
+\subsubsection{Colours Concordances}
 
-=======
->>>>>>> 0d21e34704f6d8f2e608797745ee480349dca147
+We evaluate the concordances of the variety computed automatically, by the algorithm of section \ref{sec:identification}, and the human perceived variety. First, we observe on Figure~\ref{fig:compnbcolourssd} that the numbers of colours identified automatically is different to the humans in a range of two colours in average. These results are quite impressive in face of the number of factor considered during both estimation of variety; on one hand the errors of the automatic attribution observed and, on the other hand, the human perception bias). 
+
+ the Figure~\ref{fig:blandandaltman} show the range of the disagreement using the Bland and Altman graphic
 % \begin{table}
 % \begin{tabular}[]{@{}cc@{}}
 
@@ -504,30 +495,11 @@ Based on the chosen colour sets, the entropy measure is sensitive to the errors 
 % \end{table}
 
 
-\subsection{Colour diversity}
-\label{sec:results_diversity}
-
-test 
-
-\begin{figure}[h!]
-	\centering
-	\includegraphics[width=\linewidth]{figures/colors-boxplot.png}
-	\caption{ }
-	\label{}
-\end{figure}
-
-\begin{figure}[h!]
-	\centering
-	\includegraphics[width=\linewidth]{figures/colors-grille.png}
-	\caption{ }
-	\label{}
-\end{figure}
-
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=\linewidth]{figures/comp_nb_colours_agreement.png}
 	\caption{Bland et Altman}
-	\label{}
+	\label{fig:blandandaltman}
 \end{figure}
 \begin{figure}[h!]
 	\centering
@@ -538,36 +510,31 @@ test
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=\linewidth]{figures/comp_nb_colours_sd.png}
-	\caption{ }
-	\label{}
+	\caption{}
+	\label{fig:compnbcolourssd}
 \end{figure}
 
-\begin{figure}[h!]
-	\centering
-	\includegraphics[width=\linewidth]{figures/colors-greysacale-entropies.png}
-	\caption{ }
-	\label{}
-\end{figure}
+
 
 %\begin{table}
 %	\begin{tabular}[!h]{cccc}
-		
+
 %		\small Index &
 %		\includegraphics[height=0.06\textwidth]{figures/ru09_sp_m_rf_14_03_ale-r.jpg}
 %		& essai & essai \\
-		% &
-		% \includegraphics[height=0.06\textwidth]{../../DATA/IMAGE/jp04_fa_m_pkx_11_05_tyx-r.jpg}
-		% &
-		% \includegraphics[height=0.06\textwidth]{../../DATA/IMAGE/ch16_fr_m_rec_14_08_sim-r.jpg}\tabularnewline
-		
-		
+% &
+% \includegraphics[height=0.06\textwidth]{../../DATA/IMAGE/jp04_fa_m_pkx_11_05_tyx-r.jpg}
+% &
+% \includegraphics[height=0.06\textwidth]{../../DATA/IMAGE/ch16_fr_m_rec_14_08_sim-r.jpg}\tabularnewline
+
+
 %		\small \(\mu^{\tt \scriptstyle CRT}\) & \small 0.696 & \small 0.876 &
 %		\small 0.999\tabularnewline
 %		\small \(\delta^{\tt \scriptstyle CRT}\) & \small 457068 & \small 37982
 %		& \small 41\tabularnewline
 %		\small \(H(S^{\tt \scriptstyle CRT})\) & \small 1.538 & \small 1.903 &
 %		\small 5.200\tabularnewline
-		
+
 %	\end{tabular}
 %	\caption{Illustration of variety measures {[}METTRE A JOUR{]}. }
 %	\label{varietyill}
