@@ -137,38 +137,19 @@ Thus, it is impossible to obtain universal categories of colours and
 there is a ``big'' gap between spectral colours and human categories of
 colours\ldots{}.
 
-In order to attest these categories, we asked to
-\ldots{} human annotators (two Russians, one Swiss/Iranian, one/two
-Swiss people, one Belgian), to write the colour names of the colour of a
-set of\ldots{} drawings. In the second phase, annotators had to select
-presence or absence of colours in a list based on the Munsell system for
-another set of drawings (\ldots{} were part of both sets). Moreover,
-they had space to write name of missing colours.
-Kappa...... [CITER POUR POOLED KAPPA]
-
-For human sciences questions, it is necessary to develop specific
-techniques, since the aim is not to precisely find the nuance of the
-colour in the drawing, but to determine the diversity of colours on the
-one hand (gap 1) ; and to figure whether there is one colour that stands
-out from a set of colours on the other hand (gap 2).
-
  Regarding the definition of a set of
 colours -\textgreater{} Berlin and Kay and so on\ldots{}. {[}to be
 completed{]}
 
-Indeed, two aspects of the quantification of a drawing's colours are
-developed:
 
-\begin{enumerate}
-	\item
 	the gap between the human perception (continuous colours) and the
 	colour categorisation (discrete colours)
 	\cite[see e.g.][]{parragaakbarinia2016, benavente2008, berlinkay1969}, [PERCEPTION]
 
-	\item the gap between the human categories of colours (ideally universal)
+	the gap between the human categories of colours (ideally universal)
 	and the exact colour of each pixel in the image (continuous colours)
 	\cite{khan2012, khan2013} [STATE OF THE ART?]
-\end{enumerate}
+
 
 In order to attest these categories, we asked to
 \ldots{} human annotators (two Russians, one Swiss/Iranian, one/two
@@ -276,7 +257,7 @@ rescaled at the same scale but not precisely at the same size.
 In order to fill the second gap between the categories of colour and its
 perception, a method based on the image in the RGB colour space is
 proposed. With a similar approach of the one developed by
-\cite{kimbaelee2007} in the Munsell colour system, the dissimilarity
+\cite{kimbaelee2007} in the the Munsell colour system, the dissimilarity
 between each pixel and a set of colours is computed. More precisely, for
 each image, a squared Euclidean dissimilarity is computed between each
 pixel \(\vec{s}\) and a set of $L = 117$ colours (see Figure~\ref{colour_set}) defined in RGB:
@@ -331,11 +312,25 @@ used by a painter according to various periods of his/her life.
 \subsection{Colour diversity [ARIS]}
 \label{sec:diversity}
 
-As a second step, in order to
-count the number of colours used per drawing and to reduce the noise due
-to the scan quality, a median filter of a \(3 \times 3\) is applied on
-each boolean colour matrix $B^{g}$ and new matrices are obtained, namely
-$B^{\prime g}$.
+There are a number of ways of quantifying the diversity associated with
+a discrete distribution, such as the distribution of colours in a drawing
+obtained with the identification method described in section~\ref{sec:identification}
+above. In the present study, we experiment with two diversity measures,
+namely the {\em variety} or number of distinct colours in a drawing, and the
+{\em Shannon entropy} of the colour distribution.
+
+In the case of variety, an additional preprocessing step is performed: in order
+to reduce the amount of noise--anomalous pixels resulting from the
+digitisation process--a median filter of \(3 \times 3\) pixels is applied to each 
+boolean matrix colour matrix $B^{g}$. The filtered matrix, $\tilde{B}^{g}$, is 
+then used to compute new frequency values $\tilde{f}^{g} = 
+\sum_{ij}\tilde{b}_{ij}^{g}$, which in turn make it possible to calculate the colour 
+variety as:
+\begin{equation}
+	V = \sum_{g}\mathds{1}(\tilde{f}^{g} > 0)
+\end{equation}
+
+[TODO Aris: Entropy] 
 
 % \hypertarget{from-human-perception-to-colour-categorisation}{%
 % \subsection{From human perception to colour
@@ -417,43 +412,47 @@ intensity the lighter the drawing.
 
 \section{Results [RAPHAEL]}
 
-Here, we first show an explicit sample of the results obtained from the method Identification of colours (see section \ref{sec:identification}) applied on all drawings. We then extend the presentation of these results using the method of Colour diversity retrieval (see section \ref{sec:diversity}) crossed with the results of a deeper measure of diversity commonly used in Computer Vision. The results of the Colours space definition experiment depicted in section  \ref{sec:colour-space} are presented in order to illustrated the assessment of our methods in face the colour perceptions based on human detection.
+Here, we first show an explicit sample of the results obtained from the method Identification of colours (see section \ref{sec:identification}) applied on all drawings. We then extend the presentation of these results using the method of Colour diversity retrieval (see section \ref{sec:diversity}) crossed with the results of a deeper measure of diversity commonly used in Computer Vision. The results of the Colours space definition experiment depicted in section  \ref{sec:colour-space} is show in order to illustrated the assessment of our methods in face the colour perceptions based on human detection.
 
 \subsection{Colour identification}
+\label{sec:results_identification}
 
 The colour identification step yields the boolean $B^g$ matrix per colour $g$ for each $k$ drawing from where masked-image can be reconstructed to reveal the colour configuration of the original drawing as illustrated on Figures~\ref{fig:example1}~and ~\ref{fig:example2}.
 
 \begin{figure}[!h]
 	\centering
-	\raisebox{0.45cm}{\includegraphics[width=0.32\linewidth]{figures/ru08_bo_f_pb_07_05_ali-r.jpg}}
-	\includegraphics[width=0.62\linewidth]{figures/ru08_bo_f_pb_07_05_ali-rno_filter_mask.pdf}\hfil
+	\includegraphics[width=0.32\linewidth]{figures/ru08_bo_f_pb_07_05_ali-r.jpg}
+	\includegraphics[width=0.62\linewidth]{figures/ru08_bo_f_pb_07_05_ali-rno_filter_mask.pdf}
 	\caption{{[METTRE UNE FIGURE D'UN EXEMPLE QUI FONCTIONNE ]} }
 	\label{fig:example1}
 \end{figure}
 
 \begin{figure}[!h]
 	\centering
-	\includegraphics[width=0.32\linewidth]{figures/ch15_fr_m_rrs_08_08_fim-r.jpg}
-	\includegraphics[width=0.62\linewidth]{figures/ch15_fr_m_rrs_08_08_fim-rno_filter_mask.pdf}
+	\includegraphics[width=0.32\linewidth]{figures/ru08_bo_f_pb_07_05_ali-r.jpg}
+	\includegraphics[width=0.62\linewidth]{figures/ru08_bo_f_pb_07_05_ali-rno_filter_mask.pdf}
 	\caption{{[METTRE UNE FIGURE D'UN EXEMPLE QUI NE FONCTIONNE PAS]} }
 	\label{fig:example2}
 \end{figure}
 
+<<<<<<< HEAD
 \noindent The first figure illustrates a good extraction of the main colours whereas the second illustrates a less good colour extractions because of the similar distances between $\vec{s}$  pixel and the two or more $G$ main colours e.g. $g = \mbox{Green}$ and $g = \mbox{Achromatic}$. Also, the lack of the Brown in the defined set of colours produces errors during the colours identification process as well as a over attribution of the pixels to the Green when yellow and grey overlap. [CC:  Parler des bons resultats v.s. mauvais avec examples (qui sont encore \`a choisir)].
+=======
+\noindent The first figure show a good extraction of the main colours whereas the second show a less good extraction because ... [CC:  Parler des bons resultats v.s. mauvais avec examples (qui sont encore \`a choisir)].
+>>>>>>> 0d21e34704f6d8f2e608797745ee480349dca147
 
-From there, we compute the proportion of coloured pixels per $g$ colour, where $g \in G \not\ni g = white$, to reveal to weighted frequency of the identified colours (see Figure \ref{fig:propcolours}). Then, for this dataset, the results obtained allows to said that the achromatic is the most identified followed by the Blue and the Yellow whereas the Pink and the Purple are clearly less present (they represent $70.3\%$ against $0.9\%$). The Orange, Red, green and Cyan seem to be moderately present ($27.8\%$).
+From there, we compute the proportion of coloured pixels per $g$ colour, where $g \in G \not\ni g = white$, to reveal to weighted frequency of the observed (or used) colours (see Figure \ref{fig:propcolours}). Then, for this dataset, the results obtained allows to said that the achromatic is the most used followed by the Blue and the Yellow whereas the Pink and the Purple are clearly less used (they represent $70.3\%$ against $0.9\%$). The Orange, Red, green and Cyan seem to be moderately used ($27.8\%$).
 
 \begin{figure}[!h]
 	\centering
 	\includegraphics[width=\linewidth]{figures/colors-barplot.png}
-	\caption{Proportion of coloured pixels per $g$ colour, where $g \in G \not\ni g = white$.}
+	\caption{ }
 	\label{fig:propcolours}
 \end{figure}
 
-\ 
-
  [PYB: Que peut-on en dire?]
 
+<<<<<<< HEAD
 \subsection{Colour diversity}
 
 However we are able to identified automatically colours with a specific chosen set of colours, the colour variety of the drawing still not considered.
@@ -490,6 +489,8 @@ Based on the chosen colour sets, the entropy measure is sensitive to the errors 
 
 \subsubsection{Human Concordance}
 
+=======
+>>>>>>> 0d21e34704f6d8f2e608797745ee480349dca147
 % \begin{table}
 % \begin{tabular}[]{@{}cc@{}}
 
@@ -503,7 +504,24 @@ Based on the chosen colour sets, the entropy measure is sensitive to the errors 
 % \end{table}
 
 
+\subsection{Colour diversity}
+\label{sec:results_diversity}
 
+test 
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=\linewidth]{figures/colors-boxplot.png}
+	\caption{ }
+	\label{}
+\end{figure}
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=\linewidth]{figures/colors-grille.png}
+	\caption{ }
+	\label{}
+\end{figure}
 
 \begin{figure}[h!]
 	\centering
@@ -524,7 +542,12 @@ Based on the chosen colour sets, the entropy measure is sensitive to the errors 
 	\label{}
 \end{figure}
 
-
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=\linewidth]{figures/colors-greysacale-entropies.png}
+	\caption{ }
+	\label{}
+\end{figure}
 
 %\begin{table}
 %	\begin{tabular}[!h]{cccc}
