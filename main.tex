@@ -415,6 +415,7 @@ intensity the lighter the drawing.
 Here, we first show an explicit sample of the results obtained from the method Identification of colours (see section \ref{sec:identification}) applied on all drawings. We then extend the presentation of these results using the method of Colour diversity retrieval (see section \ref{sec:diversity}) crossed with the results of a deeper measure of variety commonly used in Computer Vision. The results of the Colours space definition experiment depicted in section  \ref{sec:colour-space} are presented in order to illustrated the quality of the automatic method of variety estimation in face of the variety human perception.
 
 \subsection{Colour identification}
+ \label{sec:results_identification}
 The colour identification step yields the filtered boolean $B^g$ matrix per colour $g$ for each $k$ drawing from where masked-image can be reconstructed to reveal the colour configuration of the original drawing as illustrated on Figures~\ref{fig:example1}~and ~\ref{fig:example2}.
 
 \begin{figure}[!h]
@@ -447,6 +448,7 @@ From there, we compute the proportion of coloured pixels per $g$ colour, where $
 [IDEE : Cross validation en prennant al\' eatoirement quelques pixels par dessin et les attribuer manuelle \`a une couleurs principales ou avoir un toy example avec un dessin o\`u l'on "connait" les couleurs.]
 
 \subsection{Colour diversity}
+\label{sec:results_diversity}
 However we are able to identified automatically colours with a specific chosen set of colours, the colour variety of the drawing still not considered. 
 
 \subsubsection{Entropy and variety}
