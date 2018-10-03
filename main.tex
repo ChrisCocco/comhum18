@@ -63,6 +63,7 @@ queries e.g. ``Which colours appear?'', or ``How much yellow appears?''.
 
 
 \section{Introduction}\label{introduction}
+\label{sec:introduction}
 
 In computer vision, there are well developed techniques to analyse and retrieve natural images (e.g.~pictures or videos). 
 However, the status of the image in humanities or in human sciences depends more on the perception of the image. Moreover, the images are not necessarily natural (e.g.~paintings or drawings). Therefore, specific techniques need to be developed according to precise research questions of humanities.
@@ -111,44 +112,33 @@ Defining a set of colours for a human is a difficult task as itself. Indeed, a h
 	their use, or a very rough and to some extent false one." (68,I)
 \end{quote}
 
-Besides the difficulty to find words to describe a category of colours, this is due to the fact that colour perception, which differs from colour vision, varies according to each person. In fact, perception is a complex phenomenon, including neurobiological and cultural aspects. 
+Besides the difficulty to find words to describe a category of colours, the challenge of defining a colour set is also due to the fact that colour perception, which differs from colour vision, varies according to each person. In fact, perception is a complex phenomenon, including neurobiological and cultural aspects. 
 Moreover, perception depends on the age and on the society, and is not a universal law. 
 For instance, West perception differs from other place perception and colour terms vary between languages \cite[][p. 35 and p.87]{pastoureau2017}.
 
-He also explains that colours are mental categories
-\cite[][p. 36]{pastoureau2017} and he differentiates colours according
-to physical laws (spectral colours, Newton) and colours which are the
-base of our vocabulary based on the classification of Aristotle
-\cite[][p. 90-91]{pastoureau2017}.
+Indeed, colours are mental categories whose the vocabulary, at least for West culture, is based on the classification of Aristotle and not on physical laws, such as the prismatic (spectral?) colours observed by Newton 
+\cite[][p. 12 and p. 90-91]{pastoureau2017}. Thus, human perception is completely different from the computer process.
 
-Therefore, it is difficult or even impossible to define universal human
-categories. Some attempt in psychology\ldots{} {[}VOIR TRAVAUX D'ANNA
+Although it is difficult or even impossible to define universal human
+categories, Some attempt in psychology\ldots{} {[}VOIR TRAVAUX D'ANNA
 FRANKLIN{]}  
+
+\cite{berlinkay1969}...
+	the gap between the human perception (continuous colours) and the
+colour categorisation (discrete colours)
+\cite[see e.g.][]{parragaakbarinia2016}, 
 
 According to the historian and colour specialist,
 Pastoureau, a colour is not equivalent to the shade of a colour, which
 has neither its own history, nor its own symbolic, unlike colours
-\cite[][p. 12 and p. 63]{pastoureau2017}. Thus, he counts 11 colours for
+\cite[][p. 12 and p. 63 and p. 183]{pastoureau2017}. Thus, he counts 11 colours for
 the West {[}VERIFIER{]}, whose 6 from the first rank: white, red, black, green, yellow and blue; and 5 from the second rank: pink, orange, purple (violet), gray and brown.
-
-
-
-Thus, it is impossible to obtain universal categories of colours and
-there is a ``big'' gap between spectral colours and human categories of
-colours\ldots{}.
-
  Regarding the definition of a set of
 colours -\textgreater{} Berlin and Kay and so on\ldots{}. {[}to be
 completed{]}
 
 
-	the gap between the human perception (continuous colours) and the
-	colour categorisation (discrete colours)
-	\cite[see e.g.][]{parragaakbarinia2016, benavente2008, berlinkay1969}, [PERCEPTION]
-
-	the gap between the human categories of colours (ideally universal)
-	and the exact colour of each pixel in the image (continuous colours)
-	\cite{khan2012, khan2013} [STATE OF THE ART?]
+	
 
 
 In order to attest these categories, we asked to
@@ -160,7 +150,7 @@ another set of drawings (\ldots{} were part of both sets). Moreover,
 they had space to write name of missing colours.
 Kappa...... [CITER POUR POOLED KAPPA]
 
-For human sciences questions, it is necessary to develop specific
+To answer questions in humanities and human sciences, it is necessary to develop specific
 techniques, since the aim is not to precisely find the nuance/shade of the
 colour in the drawing, but to figure whether there is one colour that stands
 out from a set of colours on the one hand (see sections~\ref{sec:identification} and \ref{sec:results_identification}); and to determine the diversity of colours on the
@@ -189,6 +179,12 @@ researches, the aim is to find if two images have the same colours and
 not, as in this project, to discover if the pixels in the image belongs
 to a certain colour of a set {[}REF{]}.
 
+\cite{benavente2008}
+
+the gap between the human categories of colours (ideally universal)
+and the exact colour of each pixel in the image (continuous colours)
+\cite{khan2012, khan2013} [STATE OF THE ART?]
+
 When the aim is still to find colour groups, the
 K-means algorithm is often used \cite[see e.g.][]{yendrikhovskij2001,konyushkova2015,hulee2007}. However, there are two main
 drawbacks with this method: 1) it is necessary to define the number of
@@ -196,21 +192,20 @@ clusters (K), thus the number of colours a priori; 2) for each cluster,
 we can obtain a mean of colours belonging to this cluster and these
 means can be difficult to name and to distinguish.
 
-Possible with the Munsell colour space, as done by \citet{kimbaelee2007}, near human perception, but no linear transformation between
-RGB and Munsell \cite[see e.g.][]{zhangsokhansanjwuetal1998}
-
 \section{Methods}\label{methods}
 
 \subsection{Colour space}
 \label{sec:colour-space}
-{[}SUITE A REECRIRE{]} Therefore, we decided to start with a set of
-colours. At this point, there are two main choices to make: 1) chose the
-colour space and 2) definition a set of colours.
-
-{[}SUITE A REECRIRE{]} Concerning the first choice, there are many
-colours spaces \cite{tkalcictasic2003}, but RGB can be stated as ``the basic colour space''. For instance, Gong et al.~1998
+Numerous colour spaces are available in computer vision and all have advantages and drawbacks \cite{tkalcictasic2003}.  For instance, Gong et al.~1998
 for their image indexing and retrieval method based on the NBS colour
 distance, use the HVC space.
+
+
+However, RGB can be stated as ``the basic colour space''\cite{tkalcictasic2003}.
+
+
+Possible with the Munsell colour space, as done by \citet{kimbaelee2007}, near human perception, but no linear transformation between
+RGB and Munsell \cite[see e.g.][]{zhangsokhansanjwuetal1998}
 
 \begin{itemize}
 	
@@ -231,11 +226,11 @@ distance, use the HVC space.
 
 \subsection{Data}
 
-The dataset consists of $N = 1212$ children's drawings of gods collected in four countries: Japan, Switzerland, Russia and Iran. AGE RANGE... The children were asked to.... [COMPLETER]
+The dataset consists of $N = 1212$ children's drawings of gods collected in four countries: Japan, Switzerland and Russia, between 2003 and 2016. The compulsory school aged children, met in small groups, were sat in a way that discouraged copying from each other and were asked to draw ``god'' following the procedure described in \citet{DandarovaRobertDessartSerbaevaEtAl2016}.
 
 
 \subsection{Preprocessing}
-Each drawing ($k$), with $k = 1,\dots, N$, is a matrix $S = (\vec{s}_{ij})$ which contains $i \times j$
+Each drawing, $k = 1,\dots, N$, is a matrix $S = (\vec{s}_{ij})$ which contains $i \times j$
 pixels ($\vec{s}$) and each pixel has three values (for Red, Green and Blue), \textit{i.e.}
 $\vec{s} = \{ s^{\tt \scriptstyle R}, s^{\tt \scriptstyle G}, s^{\tt \scriptstyle B} \}$.
 
@@ -254,20 +249,19 @@ rescaled at the same scale but not precisely at the same size.
 
 
 
-In order to fill the second gap between the categories of colour and its
-perception, a method based on the image in the RGB colour space is
-proposed. With a similar approach of the one developed by
+In order to identify the colours present in each drawing, a method based on the image in the RGB colour space is
+proposed. With a similar approach to the one developed by
 \cite{kimbaelee2007} in the the Munsell colour system, the dissimilarity
 between each pixel and a set of colours is computed. More precisely, for
 each image, a squared Euclidean dissimilarity is computed between each
-pixel \(\vec{s}\) and a set of $L = 117$ colours (see Figure~\ref{colour_set}) defined in RGB:
+pixel \(\vec{s}\) and a set of $L = 117$ colours (see Figure~\ref{colour_set}) defined in RGB, \textit{i.e.}
 \(\vec{c_l} = \{ c^{\tt \scriptstyle R}_{l}, c^{\tt \scriptstyle G}_{l}, s^{\tt \scriptstyle B}_{l} \}\),
 with $l = 1, ..., L$.
 
 \begin{figure}
 	\centering
 	\includegraphics[width=0.5\textwidth]{figures/Col_tab.pdf}
-	\caption{Set of 117 colours aggregated in 10 groups. \label{colour_set}}
+	\caption{Set of 117 colours aggregated in 10 groups. For each colour, the three values represent the RGB components. \label{colour_set}}
 \end{figure}
 
 Then, for each pixel \(\vec{s}\), the less dissimilar \(c_l\) is considered as
@@ -293,14 +287,11 @@ Thus, the number of pixels of each main colour $g$ for one drawing is defined as
 \end{equation}
 
 
+It is important to note that the set of $L=117$ colours is based on a typical RGB colour chart\footnote{such as the one available on: \url{https://www.rapidtables.com/web/color/RGB_Color.html}}, bur another one could be used. Regarding the set of main colours $G$.... [COMPLETER SELON 1.1!!!!!!]
 
-
-{[}A COMPLETER + METTRE EXEMPLE{]}Then we can extract the proportion of
-each colour used in each drawing (see table \ref{colquant}), as well as
-the presence or absence of each colour. Thus, we can answer the
-psychological research questions mentioned above. These methods are
-applicable to other data and research, e.g.~studying the main colours
-used by a painter according to various periods of his/her life.
+Therefore, we are able to attribute one colour per pixel and thus, extract the proportion of
+each colour used in each drawing (see section~\ref{sec:results_identification}), in order to answer the first type of psychological research questions mentioned in section~\ref{sec:introduction}. 
+Regarding the second type of questions, the proposed methods are explained in the next section.
 
 
 
@@ -544,6 +535,7 @@ We evaluate the concordances of the variety computed automatically, by the algor
 
 \section{Conclusion}
 
+[IN PROGRESS]
 As a next step, since humans are more sensitive to colour patches than
 to isolated pixels, a filter should be applied at the beginning of the
 process, such as the Mumford-Shah Regulariser proposed by
@@ -552,6 +544,12 @@ the sheet with colour, the application is not regular and consequently
 not all pixels of the zone are coloured. Thus, in order to avoid
 underestimating the proportion of one particular colour, standardizing
 colours by zone could help work around the possible issue.
+
+These methods are
+applicable to other data and research, e.g.~studying the main colours
+used by a painter according to various periods of his/her life.
+
+Moreover, as explained in section..., it is possible to define a different set of colours and/or to start with more or less than 117 colours.
 
 \bibliography{bibliography}
 \bibliographystyle{acl_natbib}
