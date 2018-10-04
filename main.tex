@@ -466,16 +466,17 @@ Globally, the medians of the boxes indicate an linear  relationship between the 
 	\label{fig:boxplotvariety}
 \end{figure}
 
-In more details, we observe on Figure \ref{fig:grille} that the entropy value attached to each drawing indicates a degree of completeness: the higher the entropy value is, more the colours are covering the page revealing more complex drawings whereas the lower values depicts lower coloured and complex drawings where $H(f) \rightarrow 0$ reveals whiter pages.
-Also, combined with the variety, we observe that measure allows a gradual distinction between white drawing background with a single object to drawing with more contextualized (mutli-)object(s).
-{\color{red} ** P.-Y.B. **}
-
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=0.8\linewidth]{figures/colors-grille.png}
 	\caption{Sample of drawings, selected per quartiles, and ordered by entropy (column) and variety (row). {\color{red}[AJOUTER ENCORE LE AXES]}}
 	\label{fig:grille}
 \end{figure}
+
+In more details, we observe on Figure \ref{fig:grille} that the entropy value attached to each drawing indicates a degree of completeness: the higher the entropy value is, more the colours are covering the page revealing more complex drawings whereas the lower values depicts lower coloured and complex drawings where $H(f) \rightarrow 0$ reveals whiter pages.
+Also, combined with the variety, we observe that measure allows a gradual distinction between white drawing background with a single object to drawing with more contextualized (mutli-)object(s).
+{\color{red} ** P.-Y.B. **}
+
 
 Based on the chosen colour sets, the entropy measure is sensitive to the errors during the pixel colour attributions (e.g. similar distances, no Brown, etc.). 
 Then, we compare it with a common approach of Computer Vision which consists to measure the entropy on the greyscale levels histogram of the drawing. 
@@ -492,33 +493,43 @@ The scatter plot, figure~\ref{fig:entropies}, depicts the significant Pearson co
 
 \subsubsection{Variety concordance}
 
-For each $i$ drawing, we evaluate the concordance of the variety computed automatically $v^c_i = {1, \dots, G}$, by the algorithm of section \ref{sec:identification}, and the human perceived variety $v^h_i = {1, \dots, +\infty}$. 
-First, we observe on Figure~\ref{fig:compnbcolourssd} that the numbers of colours identified automatically is different to the humans in a range of two colours in average. 
-These results are quite impressive in face of the number of factors considered during both estimations of variety; on one hand the errors of the automatic attributions observed previously and, on the other hand, the human perception bias). 
-The Figure \ref{fig:compnbcoloursscatter} confirms this trend with a linear relationship.
+For each $i$ drawing in a sample of $\tilde{N} = 10$ drawings, we evaluate the concordance of the variety computed automatically $v^c_i = {1, \dots, G}$, by the algorithm of section \ref{sec:identification}, and the human perceived variety $v^h_i = {1, \dots, +\infty}$. 
 
 \
 
-the Figure~\ref{fig:blandandaltman} shows the range of the disagreement using the Bland and Altman graphic \cite{bland1986}.The differences between the varieties of each $i$ drawing,  $d_i = v^c_i - v^h_i$, are represented in function of their means $\tilde{d}_i = v^c_i + v^h_i/2$.
+First, we observe on Figure~\ref{fig:compnbcolourssd} that the numbers of colours identified automatically is different to the humans in a range of two colours in average. 
+These results are quite impressive in face of the number of factors considered during both estimations of variety; on one hand the errors of the automatic attributions observed previously and, on the other hand, the human perception bias. 
+The Figure \ref{fig:compnbcoloursscatter} confirms this trend with a linear relationship.
 
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=\linewidth]{figures/comp_nb_colours_sd.png}
-	\caption{}
+	\caption{Drawings in function of the means numbers of colours estimated by the algorithm and human.}
 	\label{fig:compnbcolourssd}
 \end{figure}
 
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=\linewidth]{figures/comp_nb_colours_scatter.png}
-	\caption{}
+	\caption{Scatter plot of the variety observed by human in function of the automatic estimation of the variety.}
 	\label{fig:compnbcoloursscatter}
 \end{figure}
+
+\
+
+The Figure~\ref{fig:blandandaltman} shows the range of the disagreement using the \textit{Bland and Altman graphic} \cite{bland1986}.
+The differences between the varieties of each $i$ drawing,  $d_i = v^c_i - v^h_i$, are represented in function of their means $\overline{d}_i = v^c_i + v^h_i/2$. 
+The range of disagreement $d_i$ is then analysed in function of the mean $\overline{d}_i$. More $d_i$ is distant of  $0$, respectively close, $d_i \rightarrow 0$ , more the disagreement is higher, respectively concordant,  whereas $\overline{d} = 1/N\sum_{i}^{\tilde{N}}d_i = 0$ depicts a perfect concordance between these two varieties. 
+
+\
+
+Although there is no significant disagreement under the normal distribution hypothesis, the low size $\tilde{N}$ of the sample is not representative and show already a mean disagreement $\overline{d}=?$ {\color{red}[AJOUTER LA VALEUR DE D\'ESACCORD]}.
+
 
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=\linewidth]{figures/comp_nb_colours_agreement.png}
-	\caption{Bland et Altman  Graphic}
+	\caption{Range of disagreement of variety estimations using Bland et Altman  Graphic.}
 	\label{fig:blandandaltman}
 \end{figure}
 
