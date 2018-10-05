@@ -402,13 +402,13 @@ intensity the lighter the drawing.
 
 
 \section{Results [RAPHAEL]}
-In this section, we first show an explicit sample of the results obtained from the method \textit{Identification of colours} (see section \ref{sec:identification}) applied on the $N$ drawings. 
-We then extend the presentation of these results using the method to measure the \textit{Colour diversity} of the drawings (see section \ref{sec:diversity}) crossed with the results of a deeper measure of variety, the greyscale levels entropy,  commonly used in Computer Vision. 
-The results of the \textit{Colours space definition} experiment from a sample of ten drawings depicted in section \ref{sec:colour-space} are presented in order to asses the automatic method of variety estimation in face of human perceived variety.
+Here, we first show an explicit sample of the results obtained from the method Identification of colours (see section \ref{sec:identification}) applied on all drawings. 
+We then extend the presentation of these results using the method of Colour diversity retrieval (see section \ref{sec:diversity}) crossed with the results of a deeper measure of variety commonly used in Computer Vision. 
+The results of the Colours space definition experiment depicted in section \ref{sec:colour-space} are presented in order to asses the automatic method of variety estimation in face of human perceived variety.
 
 \subsection{Colour identification}
- \label{sec:results_identification}
-The colour identification method yields the filtered boolean $\tilde{B}^g$ matrix per colour $g$ for each $k$ drawing from where masked-image can be reconstructed to reveal the colour configuration of the original drawing as illustrated on Figures~\ref{fig:example1}~and ~\ref{fig:example2}.
+\label{sec:results_identification}
+The colour identification step yields the filtered boolean $\tilde{B}^g$ matrix per colour $g$ for each $k$ drawing from where masked-image can be reconstructed to reveal the colour configuration of the original drawing as illustrated on Figures~\ref{fig:example1}~and ~\ref{fig:example2}.
 
 \begin{figure}[!h]
 	\centering
@@ -428,8 +428,7 @@ The colour identification method yields the filtered boolean $\tilde{B}^g$ matri
 
 \
 
-The first figure illustrates a good extraction of the main colours whereas the second illustrates a less good colour extractions.
-This unsupervised method provides globally good results from a qualitative assessment. However we observed some issue induced by the similar computed distances between $\vec{s}$  pixel and the two or more $G$ main colours e.g. $g = \mbox{Green}$ and $g = \mbox{Achromatic}$. 
+The first figure illustrates a good extraction of the main colours whereas the second illustrates a less good colour extractions because of the similar computed distances between $\vec{s}$  pixel and the two or more $G$ main colours e.g. $g = \mbox{Green}$ and $g = \mbox{Achromatic}$. 
 Also, the lack of the main colour  Brown in the defined set of colours produces errors during the colours identification process as well as a over attribution of the pixels to the Green when yellow and grey overlap into the drawing. 
 {\color{red}[CC:  Parler des bons resultats v.s. mauvais resultats avec examples (qui sont encore \`a choisir)]}.
 
@@ -532,6 +531,7 @@ Although there is no significant disagreement under the normal distribution hypo
 	\caption{Range of disagreement of variety estimations using Bland et Altman  Graphic.}
 	\label{fig:blandandaltman}
 \end{figure}
+
 
 
 \section{Conclusion}
