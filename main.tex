@@ -232,7 +232,7 @@ The dataset consists of $N = 1212$ children's drawings of gods collected in four
 
 \subsection{Preprocessing}
 \label{sec:preprocessing}
-Each drawing, $k = 1,\dots, N$, is a matrix $S = (\vec{s}_{ij})$ which contains $i \times j$
+Each drawing, $k = 1,\dots, N$, is a matrix $S = (\vec{s}_{ij})$ which contains $I \times J$, \textit{i.e} the size of the image,
 pixels ($\vec{s}$) and each pixel has three values (for Red, Green and Blue), \textit{i.e.}
 $\vec{s} = \{ s^{\tt \scriptstyle R}, s^{\tt \scriptstyle G}, s^{\tt \scriptstyle B} \}$.
 
@@ -283,9 +283,9 @@ boolean matrix per colour $g$:
 B^{g} = (b_{ij}^{g}) \quad \textrm{with} \quad b_{ij}^{g} =  \mathds{1}(C(\vec{s}_{ij}) = g)
 \end{equation}
 
-Thus, the number of pixels of each main colour $g$ for one drawing is defined as:
+Thus, the \textit{count of pixels}  (\textit{i.e.} the number of pixels) of each main colour $g$ for one drawing is defined as:
 \begin{equation}
-	f^{g} = \sum_{ij}b_{ij}^{g}
+	n^{g} = \sum_{ij}b_{ij}^{g}
 \end{equation}
 
 
