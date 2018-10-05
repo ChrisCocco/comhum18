@@ -231,6 +231,7 @@ The dataset consists of $N = 1212$ children's drawings of gods collected in four
 
 
 \subsection{Preprocessing}
+\label{sec:preprocessing}
 Each drawing, $k = 1,\dots, N$, is a matrix $S = (\vec{s}_{ij})$ which contains $i \times j$
 pixels ($\vec{s}$) and each pixel has three values (for Red, Green and Blue), \textit{i.e.}
 $\vec{s} = \{ s^{\tt \scriptstyle R}, s^{\tt \scriptstyle G}, s^{\tt \scriptstyle B} \}$.
@@ -304,25 +305,23 @@ Regarding the second type of questions, the proposed methods are explained in th
 \subsection{Colour diversity [ARIS]}
 \label{sec:diversity}
 
-There are a number of ways of quantifying the diversity associated with
-a discrete distribution, such as the distribution of colours in a drawing
-obtained with the identification method described in section~\ref{sec:identification}
-above. In the present study, we experiment with two diversity measures,
-namely the {\em variety} or number of distinct colours in a drawing, and the
-{\em Shannon entropy} of the colour distribution.
+{\color{red}[AX: peut-on renommer $f^{g}$ ci-dessus (et ailleurs si necessaire) en $n^{g}$ et l'appeler {\em count}? comme ca on peut reserver la notation $f^{g}$ et le terme {\em frequency} pour les frequences relatives. Dans ma partie ci-dessous je fais d'office ce changement.]}
 
-In the case of variety, an additional preprocessing step is performed: in order
-to reduce the amount of noise--anomalous pixels resulting from the
-digitisation process--a median filter of \(3 \times 3\) pixels is applied to each 
-boolean matrix colour matrix $B^{g}$. The filtered matrix, $\tilde{B}^{g}$, is 
-then used to compute new frequency values $\tilde{f}^{g} = 
-\sum_{ij}\tilde{b}_{ij}^{g}$, which in turn make it possible to calculate the colour 
-variety as:
+There are a number of ways of quantifying the diversity associated with a discrete distribution, such as the distribution of colours in a drawing obtained with the identification method described in section~\ref{sec:identification} above. All diversity measures are, to a certain extent, dependent on the size of the sample from which the considered distribution has been obtained \cite[see e.g.][]{TweedieBaayen1998}, however the impact of this dependence is lessened in our case by the (partial) normalisation of drawing size (see section~\ref{sec:preprocessing} above). In the present study, we experiment with two diversity measures, namely the {\em variety} or number of distinct colours in a drawing, and the {\em Shannon entropy} of the colour distribution.
+
+In the case of variety, an additional preprocessing step is performed: in order to reduce the amount of noise--anomalous pixels resulting from the digitisation process--a median filter of \(3 \times 3\) pixels is applied to each boolean colour matrix $B^{g}$. The filtered matrix, $\tilde{B}^{g}$, is then used to compute new counts $\tilde{n}^{g} = \sum_{ij}\tilde{b}_{ij}^{g}$, which in turn make it possible to calculate the colour variety as:
 \begin{equation}
-	V = \sum_{g}\mathds{1}(\tilde{f}^{g} > 0)
+	V = \sum_{g}\mathds{1}(\tilde{n}^{g} > 0)
 \end{equation}
 
-[TODO Aris: Entropy] 
+Following \citet{Shannon1948}, the colour entropy is defined as:
+\begin{equation}
+	H = -\sum_{g} f^{g}\mbox{ log }f^{g}
+\end{equation}
+where $f^{g}:= n^{g}/\sum_{k}n^{k}$ stands for the (unfiltered) colour relative frequency. $H$ varies between 0 and log $G$: $H=0$ corresponds to a deterministic configuration where a single colour occurs with relative frequency $f^{g} = 1$, while the maximum $H=\mbox{log }G$ is reached when the colour distribution is uniform ($\forall g: f^{g} = 1/G$).
+
+{\color{red}[AX: y a-t-il autre chose a dire a ce stade? il me semble que l'entropie sur les niveaux de gris peut et devrait etre introduite directement dans les resultats, et meme chose pour le fait d'utiliser les quantiles de l'entropie. Si vous etes d'accord, une bonne partie de la fin de la section peut etre supprimee (ou inseree dans la section~\ref{sec:results_diversity} si necessaire)].}
+
 
 % \hypertarget{from-human-perception-to-colour-categorisation}{%
 % \subsection{From human perception to colour
