@@ -103,6 +103,7 @@ digitalisation encoding, as well as the quantification of colours.
 
 
 \subsection{Attempts to define a set of colours}
+\label{sec:set_col_definition}
 
 Defining a set of colours for a human is a difficult task as itself. Indeed, a human cannot describe precisely a colour, as explained by \citet{wittgenstein1977}:
 
@@ -116,75 +117,47 @@ Defining a set of colours for a human is a difficult task as itself. Indeed, a h
 
 Besides the difficulty to find words to describe a category of colours, the challenge of defining a colour set is also due to the fact that colour perception, which differs from colour vision, varies according to each person. In fact, perception is a complex phenomenon, including neurobiological and cultural aspects. 
 Moreover, perception depends on the age and on the society, and is not a universal law. 
-For instance, West perception differs from other place perception and colour terms vary between languages \cite[][p. 35 and p.87]{pastoureau2017}.
+For instance, West perception differs from other place perception and colour terms vary between languages \cite[][pp. 35 and 87]{pastoureau2017}.
 
 Indeed, colours are mental categories whose the vocabulary, at least for West culture, is based on the classification of Aristotle and not on physical laws, such as the prismatic (spectral?) colours observed by Newton 
-\cite[][p. 12 and p. 90-91]{pastoureau2017}. Thus, human perception is completely different from the computer process.
+\cite[][pp. 12 and 90-91]{pastoureau2017}. Thus, human perception is completely different from the computer process.
 
 Although it is difficult or even impossible to define universal human
-categories, there are several works from linguistic and psychological perspectives to obtain an universal inventory of basic colour terms (focal colours) \cite[see e.g.]{berlinkay1969,RegierKayCook2005},  Moreover, (psychology) naming a colour does not mean recognise/differentiate a colour {[}VOIR TRAVAUX D'ANNA
-FRANKLIN{]}  [OU PLUTÒT POUR EXPLIQUER RESULTATS COULEURS NOMBRES AVEC COMPARAISON HUMAINS; FIGURE 8, 9 et 10]
-...
-	the gap between the human perception (continuous colours) and the
-colour categorisation (discrete colours)
-\cite[see e.g.][]{parragaakbarinia2016}, 
+categories, there are several works from linguistic and psychological perspectives to obtain an universal inventory of basic colour terms (focal colours) \cite[see e.g.]{berlinkay1969,RegierKayCook2005}. However, naming a colour does not mean perceive a colour, at least during the early stages of childhood {[}VOIR TRAVAUX D'ANNA FRANKLIN{]}, even if it exists works which try to tackle this gap \cite[see \textit{e.g.}][]{parragaakbarinia2016}.
 
-According to the historian and colour specialist,
-Pastoureau, a colour is not equivalent to the shade of a colour, which
-has neither its own history, nor its own symbolic, unlike colours
-\cite[][p. 12 and p. 63 and p. 183]{pastoureau2017}. Thus, he counts 11 colours for
-the West {[}VERIFIER{]}, whose 6 from the first rank: white, red, black, green, yellow and blue; and 5 from the second rank: pink, orange, purple (violet), gray and brown.
- Regarding the definition of a set of
-colours -\textgreater{} Berlin and Kay and so on\ldots{}. {[}to be
-completed{]}
+Therefore, how to define a set of colours in this project? And with which precision? According to the historian and colour specialist,
+\citet[][pp. 12, 63 and 183]{pastoureau2017}, a colour is not equivalent to the shade of a colour, which
+has neither its own history, nor its own symbolic. Thus, he counts eleven colours for
+the West, whose six from the first rank: white, red, black, green, yellow and blue; and five from the second rank: pink, orange, purple (violet), gray and brown. \cite{berlinkay1969} finds that ... Finally, there are also eleven \textit{hues} in the Munsell colour system, ....
 
+In order to obtain a ground truth, we asked to five human experts (from Swiss, Russia, Iran and Belgium) to look at ... drawings and to select the presence or absence of colours in a list based on the Munsell colour system [REF]... we added colours:...  (it was the second step of the experiment, the first one consisted in writing the colours they saw, see section~\ref{sec:results_diversity} {\color{red}[ADD A LABEL IN 4.2.2 to be more precise]}). However, the agreement between annotators was really low... [RESULTS AND REF] and thus, it was not possible to create a gold standard. This result is not surprising according to the works mentioned above.
 
-	
-
-
-In order to attest these categories, we asked to
-\ldots{} human annotators (two Russians, one Swiss/Iranian, one/two
-Swiss people, one Belgian), to write the colour names of the colour of a
-set of\ldots{} drawings. In the second phase, annotators had to select
-presence or absence of colours in a list based on the Munsell system for
-another set of drawings (\ldots{} were part of both sets). Moreover,
-they had space to write name of missing colours.
-Kappa...... [CITER POUR POOLED KAPPA]
-
-To answer questions in humanities and human sciences, it is necessary to develop specific
-techniques, since the aim is not to precisely find the nuance/shade of the
-colour in the drawing, but to figure whether there is one colour that stands
-out from a set of colours on the one hand (see sections~\ref{sec:identification} and \ref{sec:results_identification}); and to determine the diversity of colours on the
-other hand (see sections~\ref{sec:diversity} and \ref{sec:results_diversity}).
-
+Although the difficulty to define a set of colours and the fact that is not possible to obtain a gold standard, starting from the colour set mentioned above and the RGB colour chart in Figure~\ref{fig:colour_set}, the project team reached an agreement on ten colours (see section~\ref{sec:identification}).
 
 \section{State of the art}
 
-A number of previous researches in computer vision proposed promising
-descriptors such as colour histograms \cite{sun2006} or colour names
-\cite{weijer2009, lindner2013} through mapping learned from images.
-However, their aims differed from the one found in the human sciences
-and described above. For instance, when colour is used in image
+For instance, when colour is used in image
 retrieval, the aim is to find which images of a dataset correspond to
 the one stated as the query. Thus, the main point is to determine if the
 colours of the query and those of the dataset are similar, no matter
-which colour it is. More specifically, the paper of
-\cite{konyushkova2015} proposes a solution closer to the aim of finding
-the set of colours displayed in children's drawings with the well-known
-method of \emph{K-means}. However, it allows to extract mean colours for
-a set of drawings which is not the aim here.
-
+which colour it is.
 Most of the researches about colours in
 computer vision concern the field of image retrieval. In this type of
 researches, the aim is to find if two images have the same colours and
 not, as in this project, to discover if the pixels in the image belongs
 to a certain colour of a set {[}REF{]}.
 
-\cite{benavente2008}
-
+A number of previous researches in computer vision proposed promising
+descriptors such as colour histograms \cite{sun2006} or colour names
+\cite{weijer2009, lindner2013} through mapping learned from images.
+However, their aims differed from the one found in the human sciences
+and described above.    \cite{benavente2008}
 the gap between the human categories of colours (ideally universal)
 and the exact colour of each pixel in the image (continuous colours)
 \cite{khan2012, khan2013} [STATE OF THE ART?]
+
+
+
 
 When the aim is still to find colour groups, the
 K-means algorithm is often used \cite[see e.g.][]{yendrikhovskij2001,konyushkova2015,hulee2007}. However, there are two main
@@ -192,6 +165,20 @@ drawbacks with this method: 1) it is necessary to define the number of
 clusters (K), thus the number of colours a priori; 2) for each cluster,
 we can obtain a mean of colours belonging to this cluster and these
 means can be difficult to name and to distinguish.
+More specifically, the paper of
+\cite{konyushkova2015} proposes a solution closer to the aim of finding
+the set of colours displayed in children's drawings with the well-known
+method of \emph{K-means}. However, it allows to extract mean colours for
+a set of drawings which is not the aim here.
+
+as done by \citet{kimbaelee2007}
+
+To answer questions in humanities and human sciences, it is necessary to develop specific
+techniques, since the aim is not to precisely find the nuance/shade of the
+colour in the drawing, but to figure whether there is one colour that stands
+out from a set of colours on the one hand (see sections~\ref{sec:identification} and \ref{sec:results_identification}); and to determine the diversity of colours on the
+other hand (see sections~\ref{sec:diversity} and \ref{sec:results_diversity}).
+
 
 \section{Methods}\label{methods}
 
@@ -256,14 +243,14 @@ proposed. With a similar approach to the one developed by
 \cite{kimbaelee2007} in the the Munsell colour system, the dissimilarity
 between each pixel and a set of colours is computed. More precisely, for
 each image, a squared Euclidean dissimilarity is computed between each
-pixel \(\vec{s}\) and a set of $L = 117$ colours (see Figure~\ref{colour_set}) defined in RGB, \textit{i.e.}
+pixel \(\vec{s}\) and a set of $L = 117$ colours (see Figure~\ref{fig:colour_set}) defined in RGB, \textit{i.e.}
 \(\vec{c_l} = \{ c^{\tt \scriptstyle R}_{l}, c^{\tt \scriptstyle G}_{l}, s^{\tt \scriptstyle B}_{l} \}\),
 with $l = 1, ..., L$.
 
 \begin{figure}
 	\centering
 	\includegraphics[width=0.5\textwidth]{figures/Col_tab.pdf}
-	\caption{Set of 117 colours aggregated in 10 groups. For each colour, the three values represent the RGB components. \label{colour_set}}
+	\caption{Set of 117 colours aggregated in 10 groups. For each colour, the three values represent the RGB components. \label{fig:colour_set}}
 \end{figure}
 
 Then, for each pixel \(\vec{s}\), the less dissimilar \(c_l\) is considered as
@@ -272,10 +259,12 @@ the colour of the pixel:
 c(\vec{s}_{ij}) := \operatornamewithlimits{argmin}_{l \in [1,L]} \| s_{ij} - c_{l} \|^{2}
 \end{equation*}
 
-Finally, according to the Figure~\ref{colour_set}, the 117 colours are grouped into $G = 10$
+{\color{red}[Other distances tested, add ref in 4.1 for fig. 3]}
+
+Finally, according to the Figure~\ref{fig:colour_set}, the 117 colours are grouped into $G = 10$
 main colours ($g = 1, \dots, G$), \textit{i.e.} red, orange, yellow, green, cyan, blue, purple, pink,
 white and achromatic. Therefore, each pixel belongs to one of these
-$G$ groups and the name of the colour of each pixel is defined as $C(\vec{s}_{ij}) = \mathds{1}(c(\vec{s}_{ij}) \in g)$ [CE N'EST PAS ENCORE CA, MAIS ON S'EN APPROCHE, ON NE VEUT PAS 1, MAIS LE NOM... $= g \quad \textrm{if} \quad c(\vec{s}_{ij}) \in g$ ?]. \footnote{Here and in the sequel, $\mathds{1}(A)$ denotes the \textit{indicator function} of event $A$, taking on the value 1 if $A$ is true, and 0 otherwise.}
+$G$ groups and the name of the colour of each pixel is defined as $C(\vec{s}_{ij}) = \mathds{1}(c(\vec{s}_{ij}) \in g)$ {\color{red}[CE N'EST PAS ENCORE CA, MAIS ON S'EN APPROCHE, ON NE VEUT PAS 1, MAIS LE NOM... $= g \quad \textrm{if} \quad c(\vec{s}_{ij}) \in g$ ?]}. \footnote{Here and in the sequel, $\mathds{1}(A)$ denotes the \textit{indicator function} of event $A$, taking on the value 1 if $A$ is true, and 0 otherwise.}
 
 For each drawing $k$, this permits us to obtain one
 boolean matrix per colour $g$:
@@ -289,7 +278,7 @@ Thus, the \textit{count of pixels}  (\textit{i.e.} the number of pixels) of each
 \end{equation}
 
 
-It is important to note that the set of $L=117$ colours is based on a typical RGB colour chart~\footnote{such as the one available on: \url{https://www.rapidtables.com/web/color/RGB_Color.html}}, bur another one could be used. Regarding the set of main colours $G$.... [COMPLETER SELON 1.1!!!!!!]
+It is important to note that the set of $L=117$ colours is based on a typical RGB colour chart~\footnote{such as the one available on: \url{https://www.rapidtables.com/web/color/RGB_Color.html}}, bur another one could be used. Regarding the set of main colours $G$, it is a result of discussions in the project team, as explained in section~\ref{sec:set_col_definition}. Black and grey were grouped into achromatic, since it is complicate to differentiate these two colours (or which pencil was used by the children), for a computer, as well as for an human. Moreover, this distinction is not necessary to study a child's colour choice. Moreover, brown is not included in the colour list, since it is difficult to define according to the method described above and the colour space chosen. However, it would be possible to group some of the 117 colours into a new group ``brown''.
 
 Therefore, we are able to attribute one colour per pixel and thus, extract the proportion of
 each colour used in each drawing (see section~\ref{sec:results_identification}), in order to answer the first type of psychological research questions mentioned in section~\ref{sec:introduction}. 
@@ -297,9 +286,7 @@ Regarding the second type of questions, the proposed methods are explained in th
 
 
 
-
-
-[MET-ON LE CODE SUR GITHUB??? ET ENSUITE UN LIEN?]
+{\color{red}[MET-ON LE CODE SUR GITHUB??? ET ENSUITE UN LIEN?]}
 
 
 \subsection{Colour diversity [ARIS]}
@@ -552,6 +539,8 @@ applicable to other data and research, e.g.~studying the main colours
 used by a painter according to various periods of his/her life.
 
 Moreover, as explained in section..., it is possible to define a different set of colours and/or to start with more or less than 117 colours.
+
+Later: define and detect brown.
 
 \bibliography{bibliography}
 \bibliographystyle{acl_natbib}
