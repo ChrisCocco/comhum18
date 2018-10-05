@@ -135,43 +135,34 @@ In order to obtain a ground truth, we asked to five human experts (two native Ru
 Although the difficulty to define a set of colours and the fact that is not possible to obtain a gold standard, starting from the colour set mentioned above and the RGB colour chart in Figure~\ref{fig:colour_set}, the project team reached an agreement on ten colours (see section~\ref{sec:identification}).
 
 \section{State of the art}
+Most of the researches about colours in computer vision concern the field of image segmentation \cite[see \textit{e.g.}][]{ChengSun2000,ChenPappasMojsilovicEtAl2005,HanmandluVermaSusanEtAl2013} or image retrieval \cite[see \textit{e.g.}][]{DengManjunathKenneyEtAl2001,RaoKumar2015,ZhangZhangYaoEtAl2016}.
+Thus, the aim of the latter is to find which images of a dataset correspond to
+the one stated as the query, and therefore to determine if the colours of the query and those of the dataset are similar, no matter which colour it is, unlike this contribution.
 
-For instance, when colour is used in image
-retrieval, the aim is to find which images of a dataset correspond to
-the one stated as the query. Thus, the main point is to determine if the
-colours of the query and those of the dataset are similar, no matter
-which colour it is.
-Most of the researches about colours in
-computer vision concern the field of image retrieval. In this type of
-researches, the aim is to find if two images have the same colours and
-not, as in this project, to discover if the pixels in the image belongs
-to a certain colour of a set {[}REF{]}.
-
-A number of previous researches in computer vision proposed promising
+However, a number of previous researches in computer vision proposed promising
 descriptors such as colour histograms \cite{sun2006} or colour names
 \cite{weijer2009, lindner2013} through mapping learned from images.
-However, their aims differed from the one found in the human sciences
-and described above.    \cite{benavente2008}
+Again, their aims differed from the one found in the human sciences
+and described above.    
+
+{\color{red} [A TERMINER]
+\cite{benavente2008}
 the gap between the human categories of colours (ideally universal)
 and the exact colour of each pixel in the image (continuous colours)
 \cite{khan2012, khan2013} [STATE OF THE ART?]
-
-
+}
 
 
 When the aim is still to find colour groups, the
 K-means algorithm is often used \cite[see e.g.][]{yendrikhovskij2001,konyushkova2015,hulee2007}. However, there are two main
 drawbacks with this method: 1) it is necessary to define the number of
-clusters (K), thus the number of colours a priori; 2) for each cluster,
+clusters (K), thus the number of colours \textit{a priori}; 2) for each cluster,
 we can obtain a mean of colours belonging to this cluster and these
-means can be difficult to name and to distinguish.
-More specifically, the paper of
-\cite{konyushkova2015} proposes a solution closer to the aim of finding
-the set of colours displayed in children's drawings with the well-known
-method of \emph{K-means}. However, it allows to extract mean colours for
-a set of drawings which is not the aim here.
+means can be difficult to name and to distinguish, or to compare between two images.
+More specifically, the paper of \cite{konyushkova2015} proposes a solution closer to the aim of finding
+the set of colours displayed in children's drawings of gods.
 
-as done by \citet{kimbaelee2007}
+\citet{kimbaelee2007} proposed a method to detect the colours in drawings highly similar to the one proposed here, the main difference being that they use the Munsell colour system (see section~\ref{sec:colour-space}) and they start with 15 colours instead of 117 (section~\ref{sec:identification}).
 
 To answer questions in humanities and human sciences, it is necessary to develop specific
 techniques, since the aim is not to precisely find the nuance/shade of the
@@ -184,6 +175,7 @@ other hand (see sections~\ref{sec:diversity} and \ref{sec:results_diversity}).
 
 \subsection{Colour space}
 \label{sec:colour-space}
+{\color{red} [A TERMINER]
 Numerous colour spaces are available in computer vision and all have advantages and drawbacks \cite{tkalcictasic2003}.  For instance, Gong et al.~1998
 for their image indexing and retrieval method based on the NBS colour
 distance, use the HVC space.
@@ -211,7 +203,7 @@ RGB and Munsell \cite[see e.g.][]{zhangsokhansanjwuetal1998}
 		distance to this colour
 	\end{itemize}
 \end{itemize}
-
+}
 
 
 \subsection{Data}
