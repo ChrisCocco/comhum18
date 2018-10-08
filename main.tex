@@ -136,21 +136,20 @@ Although the difficulty to define a set of colours and the fact that is not poss
 
 \section{State of the art}
 Most of the researches about colours in computer vision concern the field of image segmentation \cite[see \textit{e.g.}][]{ChengSun2000,ChenPappasMojsilovicEtAl2005,HanmandluVermaSusanEtAl2013} or image retrieval \cite[see \textit{e.g.}][]{DengManjunathKenneyEtAl2001,RaoKumar2015,ZhangZhangYaoEtAl2016}.
-Thus, the aim of the latter is to find which images of a dataset correspond to
-the one stated as the query, and therefore to determine if the colours of the query and those of the dataset are similar, no matter which colour it is, unlike this contribution.
+
+For the former (image segmentation), the aim is to segment the image according to the object, often on pictures, and thus to find a set of pixels with quite the same colour. For instance, as proposed by \citet[][p. 445]{GonzalezWoods2008}, the first step is to define an "average" colour of pixels of interest which are part of the image.
+
+The aim of the latter (image retrieval) is to find which images of a dataset correspond to
+the one stated as the query, and therefore to determine if the colours of the query and those of the dataset are similar. 
+Thus, in both cases, there are no need to determine which colour it is (only which pixels have similar colours), unlike this contribution.
+
+
+There are also some colour researches in computer vision in the field of object detection or recognition \cite[see \textit{e.g.}]{khan2012}, using sometimes also colour names \cite[see \textit{e.g.}]{khan2013}. 
+Nevertheless, their aims differed from the one found in the human sciences and described above. Furthermore, all these methods are developed to treat pictures and not drawings.
 
 However, a number of previous researches in computer vision proposed promising
-descriptors such as colour histograms \cite{sun2006} or colour names
-\cite{weijer2009, lindner2013} through mapping learned from images.
-Again, their aims differed from the one found in the human sciences
-and described above.    
-
-{\color{red} [A TERMINER]
-\cite{benavente2008}
-the gap between the human categories of colours (ideally universal)
-and the exact colour of each pixel in the image (continuous colours)
-\cite{khan2012, khan2013} [STATE OF THE ART?]
-}
+descriptors such as colour histograms \cite[see \textit{e.g.}][]{sun2006}, colour names
+\cite{weijer2009, lindner2013} through mapping learned from images, or parametric models for automatic colour naming (with each colour category modeled as a fuzzy set with a parametric membership function) \cite{benavente2008}.  
 
 
 When the aim is still to find colour groups, the
@@ -166,7 +165,7 @@ the set of colours displayed in children's drawings of gods.
 
 To answer questions in humanities and human sciences, it is necessary to develop specific
 techniques, since the aim is not to precisely find the nuance/shade of the
-colour in the drawing, but to figure whether there is one colour that stands
+colour in the drawing or to detect a set of similar pixels according to the colour, but to figure whether there is one colour that stands
 out from a set of colours on the one hand (see sections~\ref{sec:identification} and \ref{sec:results_identification}); and to determine the diversity of colours on the
 other hand (see sections~\ref{sec:diversity} and \ref{sec:results_diversity}).
 
@@ -182,10 +181,10 @@ distance, use the HVC space.
 
 
 However, RGB can be stated as ``the basic colour space''\cite{tkalcictasic2003}.
-
+\citet[][p. 445]{GonzalezWoods2008}
 
 Possible with the Munsell colour space, as done by \citet{kimbaelee2007}, near human perception, but no linear transformation between
-RGB and Munsell \cite[see e.g.][]{zhangsokhansanjwuetal1998}
+RGB and Munsell \cite[see e.g.][]{zhangsokhansanjwuetal1998} + not in the basic packages...
 
 \cite{yendrikhovskij2001,konyushkova2015} use CIELUV [VERIFIER] colour space.
 
@@ -273,7 +272,7 @@ Thus, the \textit{count of pixels}  (\textit{i.e.} the number of pixels) of each
 \end{equation}
 
 
-It is important to note that the set of $L=117$ colours is based on a typical RGB colour chart~\footnote{such as the one available on: \url{https://www.rapidtables.com/web/color/RGB_Color.html}}, bur another one could be used. Regarding the set of main colours $G$, it is a result of discussions in the project team, as explained in section~\ref{sec:set_col_definition}. Black and grey were grouped into achromatic, since it is complicate to differentiate these two colours (or which pencil was used by the children), for a computer, as well as for an human. Moreover, this distinction is not necessary to study a child's colour choice. Moreover, brown is not included in the colour list, since it is difficult to define according to the method described above and the colour space chosen. However, it would be possible to group some of the 117 colours into a new group ``brown''. Similarly, it is possible to create a complete different set of main colours. For instance, blue and cyan could be grouped.
+It is important to note that the set of $L=117$ colours is based on a typical RGB colour chart~\footnote{such as the one available on: \url{https://www.rapidtables.com/web/color/RGB_Color.html}}, bur another one could be used. Regarding the set of main colours $G$, it is a result of discussions in the project team, as explained in section~\ref{sec:set_col_definition}. Black and grey were grouped into achromatic, since it is complicate to differentiate these two colours (or which pencil was used by the children), for a computer, as well as for an human. Moreover, this distinction is not necessary to study a child's colour choice. Furthermore, brown is not included in the colour list, since it is difficult to define according to the method described above and the colour space chosen. However, it would be possible to group some of the 117 colours into a new group ``brown''. Similarly, it is possible to create a complete different set of main colours. For instance, blue and cyan could be grouped.
 
 Therefore, we are able to attribute one colour per pixel and thus, extract the proportion of
 each colour used in each drawing (see section~\ref{sec:results_identification}), in order to answer the first type of psychological research questions mentioned in section~\ref{sec:introduction}. 
