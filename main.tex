@@ -174,36 +174,18 @@ other hand (see sections~\ref{sec:diversity} and \ref{sec:results_diversity}).
 
 \subsection{Colour space}
 \label{sec:colour-space}
-{\color{red} [A TERMINER]
-Numerous colour spaces are available in computer vision and all have advantages and drawbacks \cite{tkalcictasic2003}.  For instance, Gong et al.~1998
-for their image indexing and retrieval method based on the NBS colour
-distance, use the HVC space.
 
+Numerous colour spaces are available in computer vision and all have advantages and drawbacks \cite{tkalcictasic2003}.  
+For instance, \citet{GongProiettiFaloutsos1998} used the Munsell HVC colour space, based on human colour perception, for their image indexing and retrieval method based on the NBS (The National Bureau of Standards of the United States) colour distance, as \citet{kimbaelee2007}, while \citet{yendrikhovskij2001} and \citet{konyushkova2015} used respectively the CIE LUV and the CIE LAB colour spaces.
+The first colour space is known to be near human perception, or at least as a mind's representation of colours, while the two other ones are based on a standard colorimetric observer \cite{tkalcictasic2003}.
+We also previously tested the HSV colour space.
 
-However, RGB can be stated as ``the basic colour space''\cite{tkalcictasic2003}.
-\citet[][p. 445]{GonzalezWoods2008}
+Although all these colour spaces are nearer human perception than the RGB colour space, there are no linear transformation between RGB and the other spaces (see \textit{e.g.} \citealt{zhangsokhansanjwuetal1998} for the Munsell colour space and \citealt{tkalcictasic2003} for the other colour spaces). 
+Since the drawings are scanned, the first digital information is in RGB, which can be stated as ``the basic colour space''\cite{tkalcictasic2003}, and we are more interested in the colour chosen by the child than the colour perceived by an external human.
+Moreover, unlike the other colours spaces, there is no ready to use packages to our knowledge in current programming language, such as Python. 
 
-Possible with the Munsell colour space, as done by \citet{kimbaelee2007}, near human perception, but no linear transformation between
-RGB and Munsell \cite[see e.g.][]{zhangsokhansanjwuetal1998} + not in the basic packages...
-
-\cite{yendrikhovskij2001,konyushkova2015} use CIELUV [VERIFIER] colour space.
-
-\begin{itemize}
-	
-	\item
-	First tests: HSV with range of colours -\textgreater{} difficult to
-	define the limit between two colours
-	\item
-	Final choice: distance to colours
-	
-	\begin{itemize}
-		\item
-		Final choice: RGB with a set of colours, each from light to dark and
-		distance to this colour
-	\end{itemize}
-\end{itemize}
-}
-
+Finally, for all these colours spaces, a distance can be computed between a pixel of the image and a set of colours (as the method presented in the section~\ref{sec:identification}), but the main difficulty is to define the set of colours, since all colours spaces are continuous. 
+The method presented here has the advantage to avoid the transformation step.
 
 \subsection{Data}
 \label{sec:dataset}
@@ -253,7 +235,7 @@ the colour of the pixel:
 c(\vec{s}_{ij}) := \operatornamewithlimits{argmin}_{l \in [1,L]} \| s_{ij} - c_{l} \|^{2}
 \end{equation*}
 
-{\color{red}[Other distances tested, add ref in 4.1 for fig. 3]}
+{\color{red}[Other distances tested, such the one from Androutsos 1999 et un autre plus récent et mieux, add ref in 4.1 for fig. 3]}
 
 Finally, according to the Figure~\ref{fig:colour_set}, the 117 colours are grouped into $G = 10$
 main colours ($g = 1, \dots, G$), \textit{i.e.} red, orange, yellow, green, cyan, blue, purple, pink,
