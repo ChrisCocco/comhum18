@@ -41,7 +41,7 @@
   ${}^2$Department of Geography and Sustainability / University of Lausanne, Switzerland \\
   ${}^3$Department of Language and Information Sciences / University of Lausanne, Switzerland \\
   {\tt \{Christelle.Cocco, Raphael.Cere, Aris.Xanthos, Pierre-Yves.Brandt\}@unil.ch} \\
-  {\color{red} [1) ** A tous, quels sont vos mails raccourcis? genre ccocco@unil.ch]}
+  {\color{red} [1) ** A tous, quels sont vos mails raccourcis? genre ccocco@unil.ch] (AX: axanthos)}
 %  \And
 %  Second Author \\
 %  Affiliation / Address line 1 \\
@@ -61,51 +61,29 @@ must consider various aspects of what is a colour from the flow of
 energy (for physics) to discrete information (for humantities and human
 sciences). Hence, the proposed method deals with color variety measures
 and colours quantifications upon the drawing to respond at specific
-queries e.g. ``Which colours appear?'', or ``How much yellow appears?''.}
+queries e.g.~``Which colours appear?'', or ``How much yellow appears?''.}
 \end{abstract}
 
 
 \section{Introduction}\label{introduction}
 \label{sec:introduction}
 
-In computer vision, there are well developed techniques to analyse and retrieve natural images (e.g.~pictures or videos). {\color{red} [Mettre une ref globale -> livre computer vision]}
-However, the status of the image in humanities or in human sciences depends more on the perception of the image. Moreover, the images are not necessarily natural (e.g.~paintings or drawings). {\color{red} [Ref sur computer vision sur les peintures, CC: j'en ai une serie]} Therefore, specific techniques need to be developed according to precise research questions of humanities.
+Social sciences and humanities (SSH) have a rich tradition of using computational methods for analysing text data. In contrast, researchers in SSH have only just begun to explore the methodological opportunities offered by computerized image analysis, although visual media have an increasing importance in many disciplines, and a central role in some of them. Rooted in developmental psychology and psychology of religion, the ``Drawings of gods'' project\footnote{This project is supported by the Swiss National Science Foundation (SNSF), grant number: CR11\textbar1\_156383.} is an example of an SSH project in which image is the primary data type: its main goals are the collection and analysis of drawings of gods produced by children in various countries and cultures \cite[see e.g.][]{BrandtKagataSpittelerGillieronPaleologue2009,Dandarova2013,DandarovaRobertDessartSerbaevaEtAl2016}.\footnote{The database of the project is available at \url{http://ddd.unil.ch/}.} In this context, an important class of research questions is related to colour usage in the drawings, e.g.~``Which colours are used to draw god?'', ``Are the colours used preferentially to answer the task of drawing god the same in each country?'', or ``Do older children use a larger array of colours than younger ones?''. Answering such questions presupposes the ability to identify the colours used in each of the thousands of drawings in the ``Drawings of gods'' database. This paper attempts to give a formal characterisation of this problem, proposes a computational methodology for solving it, and discusses the first results of its application to the project's dataset.
 
-For the multicultural and interdisciplinary project: ``Drawings of gods''\footnote{This project is supported by the Swiss National Science Foundation (SNSF), grant number: CR11\textbar1\_156383.}, whose the main fields are developmental psychology and psychology of religion, children's drawings of gods were collected in several countries \cite[for more details about this project, see \textit{e.g.}][]{BrandtKagataSpittelerGillieronPaleologue2009,Dandarova2013,DandarovaRobertDessartSerbaevaEtAl2016}.\footnote{The database of the project is available on \url{http://ddd.unil.ch/}.} 
-In order to analyse these drawings, it would be helpful to identify and quantify the colours used by the children in their drawings. 
-Indeed, several research questions in the project are related to colours, such as ``Which colours are used to draw god?'', ``Are the same colours utilised in all countries?'', ``Did older children use more or less colours than younger ones?'' {\color{red} 2) ** PYB **, une question a ajouter?}
+%To answer this type of questions, the main steps are \textit{1)} to define a set of colours 
+%(sections~\ref{sec:set_col_definition} and~\ref{sec:identification}); \textit{2)} to select a colour space (section~\ref{sec:colour-space}); \textit{3)} to assign a colour to each pixel (section~\ref{sec:identification}); and \textit{4)} to count the number of colours in each drawing (section~\ref{sec:diversity}).
 
-To answer this type of questions, the main steps are \textit{1)} to define a set of colours 
-(sections~\ref{sec:set_col_definition} and~\ref{sec:identification}); \textit{2)} to select a colour space (section~\ref{sec:colour-space}); \textit{3)} to assign a colour to each pixel (section~\ref{sec:identification}); and \textit{4)} to count the number of colours in each drawing (section~\ref{sec:diversity}).
+Processes for captating colours and providing numerical representations of them have been standardized long ago by such institutions as the  \textit{Commission Internationale de l'Eclairage} (CIE). Arguably, the most well-known scheme for digital colour representation is the {\em RGB} colour space: a colour is described by a triplet of values, each of which corresponds to the intensity of a primary colour light beam (red, green, or blue); each value is encoded with one octet, so that there are $256^3 = 16'777'216$ possible RGB colour triplets. This representation, which is the one in which the drawings of our dataset are converted by the digitization process, is vastly too fine-grained for answering research questions of the kind stated above, as a single pencil stroke on a sheet of paper typically contain dozens of RGB colours when digitized. The challenge of colour identification, then, consists in defining a consistent mapping from a standard digital colour space (in our case, RGB) to a much more coarse-grained colour set, adapted to the research purposes of the widest possible range of SSH disciplines.
 
-Concerning the first step, although it is possible to obtain precise values defining the colour of a pixel with a computer, there is no universal colour set.
-It is even difficult to align the perception of two humans.
-Indeed, the human colour perception occurs through the radiance incident upon
-the retina on which three photoreceptor cells, named cones, are located.
-Only these three photoreceptors (corresponding to the \emph{Red}, \emph{Green} and \emph{Blue} numerical components (RGB) of a pixel) are necessary to describe a colour using appropriate spectral functions. Standard curves have been adopted in 1931 by the \textit{Commission Internationale de l'Eclairage} (CIE) to specify the colour by those three numbers from spectral power distribution transformation.
+This task is rendered significantly more difficult by the fact that colour perception is a complex phenomenon which varies from one person to another on the basis of neurobiological factors such as age, as well as cultural factors such as first language~\cite[][pp. 35 and 87]{pastoureau2017} {\color{red}[AX: OK DE METTRE LA CITATION ICI?]}. This was confirmed by a preliminary experiment where we asked five human experts of various languages and cultures to look at 21 children's drawings and indicate the presence or absence of colours in a list (in French) based on the Munsell colour system~\cite{Munsell1912}.\footnote{The agreement between annotators, as measured by Fleiss's Kappa~\cite{Fleiss1971}, varied between $0.0512$ and $0.876$. It was even negative for white, since part of the subjects did not consider the background of the page as a colour.}. Recognizing the difficulty (if not the impossibility) to define universal human colour categories, we settled in this work on a set of 10 categories (red, orange, yellow, green, cyan, blue, purple, pink, white and achromatic) which proved relevant for addressing the ``Drawings of gods'' research questions, and which our method is able to identify consistently. This set is very similar to those proposed by \citet{Munsell1912}, \citet{berlinkay1969}, and \citet{pastoureau2017}. The main differences lie in the absence of brown, which the proposed method fails to identify consistently, the fusion of black and gray, whose distinction is not relevant for characterizing the drawings of our dataset, and the addition of cyan. It is worth noting, however, that this particular colour set is but one possible configuration of the method, which can be easily adapted to fit different user needs.
 
-Although the CIE standard exists, only computers are able to assign
-those three numbers to a colour in a precise manner. Therefore, any
-human assignment is basically obsolete due to the influence of an
-individual's interpretation of the colour. 
-%(e.g. ``Where can I put a threshold between red and orange?'', ``Is it not already brown?'').
-Moreover, the human perception of colour distributions of an image can be
-drastically different from recorded colour images in terms of vision \cite[see \textit{e.g.}][]{jobson1997} and,
-respectively, in terms of perception depending on the context (\textit{e.g.}
-\emph{Chubb illusion}  \cite{ChubbSperlingSolomon1989} or \emph{Checker shadow illusion}\footnote{See \textit{e.g.} \url{http://www.michaelbach.de/ot/lum-adelsonCheckShadow/index.html}}) and on the experience of the human visual system \cite[see \textit{e.g.}][]{LottoPurves2001}.
-
-
-Besides this, this paper focusses on a children's drawing dataset. 
-The particularity of this kind of image depends on the drawer's
-colour choices. It can be intentional according to his/her own
-perception and his/her human singularity or constraints according to
-colour availability. Subsequently, the resulting object analysis is
-technically constrained: the final colours are altered by the
-digitalisation encoding, as well as the quantification of colours.
+The remainder of the paper is organized as follows. Section~\ref{sec:state_of_the_art} offers a brief overview of related work in the computer vision literature. Section~\ref{sec:method} proposes a detailed, formal account of the proposed algorithm for colour identification, and describes two ways of quantifying colour diversity based on the results of colour identification. Section~\ref{sec:results} discusses the results of colour identification and colour diversity quantification applied to the ``Drawings of gods'' dataset, and section~\ref{sec:conclusion} draws a brief conclusion.
 
 
 \section{State of the art}
-Most of the researches about colours in computer vision concern the field of image segmentation \cite[see \textit{e.g.}][]{ChengSun2000,ChenPappasMojsilovicEtAl2005,HanmandluVermaSusanEtAl2013} or image retrieval \cite[see \textit{e.g.}][]{DengManjunathKenneyEtAl2001,RaoKumar2015,ZhangZhangYaoEtAl2016}.
+\label{sec:state_of_the_art}
+
+Most of the researches about colours in computer vision concern the field of image segmentation \cite[see e.g.][]{ChengSun2000,ChenPappasMojsilovicEtAl2005,HanmandluVermaSusanEtAl2013} or image retrieval \cite[see e.g.][]{DengManjunathKenneyEtAl2001,RaoKumar2015,ZhangZhangYaoEtAl2016}.
 
 For the former (image segmentation), the aim is to segment the image according to the object, often on pictures, and thus to find a set of pixels with quite the same colour. For instance, as proposed by \citet[][p. 445]{GonzalezWoods2008}, the first step is to define an ``average'' colour of pixels of interest which are part of the image.
 
@@ -114,11 +92,11 @@ the one stated as the query, and therefore to determine if the colours of the qu
 Thus, in both cases, there are no need to determine which colour it is (only which pixels have similar colours), unlike this contribution.
 
 
-There are also some colour researches in computer vision in the field of object detection or recognition \cite[see \textit{e.g.}]{khan2012}, using sometimes also colour names \cite[see \textit{e.g.}]{khan2013}. 
+There are also some colour researches in computer vision in the field of object detection or recognition \cite[see e.g.]{khan2012}, using sometimes also colour names \cite[see e.g.]{khan2013}. 
 Nevertheless, their aims differed from the one found in the human sciences and described above. Furthermore, the majority of these methods are developed to treat pictures and not drawings.
 
 However, a number of previous researches in computer vision proposed promising
-descriptors such as colour histograms \cite[see \textit{e.g.}][]{sun2006}, colour names
+descriptors such as colour histograms \cite[see e.g.][]{sun2006}, colour names
 \cite{weijer2009, lindner2013} through mapping learned from images, or parametric models for automatic colour naming, with each colour category modeled as a fuzzy set with a parametric membership function \cite{benavente2008}.  
 
 
@@ -140,67 +118,17 @@ out from a set of colours on the one hand (see sections~\ref{sec:identification}
 other hand (see sections~\ref{sec:diversity} and \ref{sec:results_diversity}). {\color{red} [Adapter ou deplacer cette transition pour coller a la nouvelle structure]}
 
 
-\section{Attempts to define a set of colours}
-\label{sec:set_col_definition}
-
-Defining a set of colours for a human is a difficult task as itself. Indeed, a human cannot describe precisely a colour, as explained by \citet{wittgenstein1977}:
-
-\begin{quote}
-	``When we're asked about ``What do the words `red', `blue', `black',
-	`white', mean?" we can, of course, immediately point to things which
-	have these colours, - but our ability to explain the meanings of these
-	words goes no further! For the rest, we have either no idea at all of
-	their use, or a very rough and to some extent false one." (68,I)
-\end{quote}
-
-Besides the difficulty to find words to describe a category of colours, the challenge of defining a colour set is also due to the fact that colour perception, which differs from colour vision, varies according to each person. In fact, perception is a complex phenomenon, including neurobiological and cultural aspects. 
-Moreover, perception depends on the age and on the society, and is not a universal law. 
-For instance, West perception differs from other place perception and colour terms vary between languages \cite[][pp. 35 and 87]{pastoureau2017}.
-
-Indeed, colours are mental categories whose the vocabulary, at least for West culture, is based on the classification of Aristotle and not on physical laws, such as the prismatic (spectral?) colours observed by Newton 
-\cite[][pp. 12 and 90-91]{pastoureau2017}. Thus, human perception is completely different from the computer process.
-
-While it is difficult or even impossible to define universal human
-categories, there are several works from anthropological, linguistic and psychological perspectives to obtain an universal inventory of basic colour terms (focal colours) \cite[see e.g.]{berlinkay1969,RegierKayCook2005}. However, naming a colour does not mean perceive a colour, at least during the early stages of childhood \cite[see \textit{e.g.}][]{FranklinCliffordWilliamsonEtAl2005}, even if it exists works which try to tackle this gap \cite[see \textit{e.g.}][]{parragaakbarinia2016} and if colour categorisation depends partly on colour vision, not only on language \cite{SkeltonCatchpoleAbbottEtAl2017}.
-
-Therefore, how to define a set of colours in this project? And with which precision? According to the historian and colour specialist,
-\citet[][pp. 12, 63 and 183]{pastoureau2017}, a colour is not equivalent to the shade of a colour, which
-has neither its own history, nor its own symbolic. Thus, he counts eleven colours for
-the West, whose six from the first rank: white, red, black, green, yellow and blue; and five from the second rank: pink, orange, purple (violet), gray and brown. \citet{berlinkay1969} found also eleven universal focal colours: white, black, red, green, yellow, blue, brown, purple, pink, orange, and gray. Finally, there are also ten \textit{hues} in the Munsell colour system \cite{Munsell1912}, whose five principals: R (red), Y (yellow), G (green), B (blue) and P (purple); and five intermediates: YR, GY, BG, PB and RP (black and white are not included in this list, since they depend on Munsell value and not on Munsell hue).
-
-In order to obtain a ground truth, we asked to five human experts (two native Russian speakers, one native Iranian speaker and two native French speakers) to look at 21 children's drawings of gods (from a larger dataset than the one describe in~\ref{sec:dataset}) and to select the presence or absence of colours in a list (in French) based on the Munsell colour system, as well as four added colours: brown, white, black and grey.~\footnote{It was the second step of the experiment, the first one consisted in writing the colours they saw, see section~\ref{sec:results_variety_concordance}.} There was also the possibility to add another colour, which is not counted here. The agreement between annotators, computed with the Fleiss's Kappa \cite{Fleiss1971}, was not sufficient to create a gold standard. Indeed, for the principal hues, the agreement varies from $\kappa = 0.336$ (for purple) to $\kappa = 0.876$ (for yellow); and for the intermediate values, from $\kappa = 0.0512$ (for BG) to $\kappa = 0.5$ (for GY). For white, kappa is negative (not all annotators considered the background of the page as a colour), and there is a fair or moderate agreement for the other colours (brown: $\kappa = 0.531$, black: $\kappa = 0.497$ and grey: $\kappa = 0.359$). This result is not surprising according to the works mentioned above.
-
-Although the difficulty to define a set of colours and the fact that is not possible to obtain a gold standard, starting from the colour set mentioned above and the RGB colour chart in Figure~\ref{fig:colour_set}, the project team reached an agreement on ten colours (see section~\ref{sec:identification}).
-
-{\color{red} [Ajouter une transition]}
+\section{Method}\label{methods}
+\label{sec:method}
 
 
-\section{Methods}\label{methods}
-
-\subsection{Colour space}
-\label{sec:colour-space}
-
-Numerous colour spaces are available in computer vision and all have advantages and drawbacks \cite{tkalcictasic2003}.  
-For instance, \citet{GongProiettiFaloutsos1998} used the Munsell HVC colour space, based on human colour perception, for their image indexing and retrieval method based on the NBS (The National Bureau of Standards of the United States) colour distance, as \citet{kimbaelee2007}, while \citet{yendrikhovskij2001} and \citet{konyushkova2015} used respectively the CIE LUV and the CIE LAB colour spaces.
-The first colour space is known to be near human perception, or at least as a mind's representation of colours, while the two other ones are based on a standard colorimetric observer \cite{tkalcictasic2003}.
-We also previously tested the HSV colour space {\color{red} [Citer abstract DH?]}.
-
-Although all these colour spaces are nearer human perception than the RGB colour space, there are no linear transformation between RGB and the other spaces (see \textit{e.g.} \citealt{zhangsokhansanjwuetal1998} for the Munsell colour space and \citealt{tkalcictasic2003} for the other colour spaces). 
-Since the drawings are scanned, the first digital information is in RGB, which can be stated as ``the basic colour space''\cite{tkalcictasic2003}, and we are more interested in the colour chosen by the child than the colour perceived by an external human.
-Moreover, unlike the other colours spaces, there is no ready to use packages to our knowledge in current programming language, such as Python, to transform images in RGB colour space to images into Munsell colour system.
-
-Finally, for all these colours spaces, a distance can be computed between a pixel of the image and a set of colours (as the method presented in the section~\ref{sec:identification}), but the main difficulty is to define the set of colours, since all colours spaces are continuous. 
-The method presented here has the advantage to avoid the transformation step and to be based on standard RGB colour charts.
-
-\subsection{Data}
-\label{sec:dataset}
+\subsection{Data and preprocessing}
+\label{sec:dataset_preprocessing}
 
 The dataset consists of $N = 1212$ children's drawings of gods collected in four countries: Japan, Switzerland and Russia, between 2003 and 2016. The compulsory school aged children, met in small groups, were sat in a way that discouraged copying from each other and were asked to draw ``god'' following the procedure described in \citet{DandarovaRobertDessartSerbaevaEtAl2016}.
 {\color{red} 3) ** PYB **, QUELQUE CHOSE A AJOUTER?}
 
-\subsection{Preprocessing}
-\label{sec:preprocessing}
-Each drawing, $k = 1,\dots, N$, is a matrix $S = (\vec{s}_{ij})$ which contains $I \times J$, \textit{i.e} the size of the image,
+Each drawing, $k = 1,\dots, N$, is a matrix $S = (\vec{s}_{ij})$ which contains $I \times J$, i.e.~the size of the image,
 pixels ($\vec{s}$) and each pixel has three values (for Red, Green and Blue), \textit{i.e.}
 $\vec{s} = \{ s^{\tt \scriptstyle R}, s^{\tt \scriptstyle G}, s^{\tt \scriptstyle B} \}$.
 
@@ -243,7 +171,7 @@ c(\vec{s}_{ij}) := \operatornamewithlimits{argmin}_{l \in [1,L]} \| s_{ij} - c_{
 
 
 Finally, according to the Figure~\ref{fig:colour_set}, the 117 colours are grouped into $G = 10$
-main colours ($g = 1, \dots, G$), \textit{i.e.} red, orange, yellow, green, cyan, blue, purple, pink,
+main colours ($g = 1, \dots, G$), i.e.~red, orange, yellow, green, cyan, blue, purple, pink,
 white and achromatic. Therefore, each pixel belongs to one of these
 $G$ groups and the name of the colour of each pixel is defined as: 
 {\color{red}
@@ -258,7 +186,7 @@ boolean matrix per colour $g$, $B^{g} = (b_{ij}^{g})$, with~\footnote{Here and i
 	b_{ij}^{g} =  \mathds{1}(C(\vec{s}_{ij}) = g)
 \end{equation}
 
-Thus, the \textit{count of pixels}  (\textit{i.e.} the number of pixels) of each main colour $g$ for one drawing is defined as:
+Thus, the \textit{count of pixels}  (i.e.~the number of pixels) of each main colour $g$ for one drawing is defined as:
 \begin{equation}
 	n^{g} = \sum_{ij}b_{ij}^{g}
 \end{equation}
@@ -296,6 +224,7 @@ where $f^{g}:= n^{g}/\sum_{k}n^{k}$ stands for the (unfiltered) colour relative 
 
 
 \section{Results [RAPHAEL]}
+\label{sec:results}
 Here, we first show an explicit sample of the results obtained from the method Identification of colours (see section \ref{sec:identification}) applied on all drawings. 
 We then extend the presentation of these results using the method of Colour diversity retrieval (see section \ref{sec:diversity}) crossed with the results of a deeper measure of variety commonly used in Computer Vision. 
 The first step of the colour experiment depicted in section \ref{sec:set_col_definition} is presented in order to asses the automatic method of variety estimation in face of human perceived variety.
@@ -325,7 +254,7 @@ The colour identification step yields the boolean $B^g$ matrix per colour $g$ fo
 
 {\color{red}[Met-on encore un bon exemple, comme le buisson vert du Japon? Si oui, a faire par CC]}
 
-The first figure illustrates a good extraction of the main colours whereas the second illustrates a less good colour extraction because of the similar computed distances between $\vec{s}$  pixel and the two or more $G$ main colours e.g. $g = \mbox{Green}$ and $g = \mbox{Achromatic}$. 
+The first figure illustrates a good extraction of the main colours whereas the second illustrates a less good colour extraction because of the similar computed distances between $\vec{s}$  pixel and the two or more $G$ main colours e.g.~$g = \mbox{Green}$ and $g = \mbox{Achromatic}$. 
 Also, the lack of the main colour Brown in the defined set of colours produces errors during the colour identification process as well as a over attribution of the pixels to the Green when yellow and grey overlap into the drawing. Except these problems with low saturated colours, an other typical problem occurs when two colours are mixed, such as grey and yellow which are detected as green. This type of mixing represents only a few pixels in a drawing and thus, does not affect percentages of colours. However, for this reason, $B^g$ is transformed into $\tilde{B}^g$ to count the number of pixels. Despite these errors, the results are good enough for the majority of drawings. As it was not possible to create a gold standard, the quality was assessed visually.
 {\color{red}[CC:  Parler des bons resultats v.s. mauvais resultats avec examples (qui sont encore \`a choisir)]}.
 
@@ -373,7 +302,7 @@ Also, combined with the variety, we observe that measure allows a gradual distin
 {\color{red} 6) ** P.-Y.B. **}
 
 
-Based on the chosen colour sets, the entropy measure is sensitive to the errors during the pixel colour attributions (e.g. similar distances, no Brown, etc.). 
+Based on the chosen colour sets, the entropy measure is sensitive to the errors during the pixel colour attributions (e.g.~similar distances, no Brown, etc.). 
 Then, we compare it with a common approach of Computer Vision which consists to measure the entropy on the greyscale levels histogram of the drawing. 
 The scatter plot, figure~\ref{fig:entropies}, depicts the significant Pearson correlation ($r=0.8866$, $p=0.000$) between these two entropy values {\color{red}[Reprendre quelques parties de 3.5 et citer \citet{wu2013}]}. 
 
@@ -438,7 +367,7 @@ Although there is no significant disagreement under the normal distribution hypo
 
 
 \section{Conclusion}
-
+\label{sec:conclusion}
 {\color{red}[TO UPDATE AT THE END] }
 {\color{gray} As a next step, since humans are more sensitive to colour patches than
 
