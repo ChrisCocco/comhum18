@@ -107,16 +107,11 @@ Finally, \citet{kimbaelee2007} describe a method for identifying colours in draw
 \subsection{Data and preprocessing}
 \label{sec:dataset_preprocessing}
 
-{\color{red} [AX: dernier paragraphe de section 1, ajouter un mot sur data and preprocessing]}
-The dataset used in this study is a subset of $N = 1212$ drawings extracted from the complete ``Drawings of gods'' database and collected in four countries (Japan, Switzerland and Russia {\color{red} [AX: that's 3 countries]}) between 2003 and 2016. Small groups of compulsory school aged children were sat in a way that discouraged copying from each other and were asked to draw ``god'', following the procedure described in \citet{DandarovaRobertDessartSerbaevaEtAl2016}.
-{\color{red} 3) ** PYB **, QUELQUE CHOSE A AJOUTER?}
+The dataset used in this study is a subset of $N = 1212$ drawings extracted from the complete ``Drawings of gods'' database (which contains 6651 drawings) and collected in four countries (Japan, Switzerland and Russia {\color{red} [AX: that's 3 countries]}) between 2003 and 2016. Small groups of compulsory school aged children were sat in a way that discouraged copying from each other and were asked to draw ``god'', according to the procedure described in \citet{DandarovaRobertDessartSerbaevaEtAl2016}.
 
-In what follows, each drawing $k \in 1,\dots, N$ is represented formally as a matrix $S = (\vec{s}_{ij})$ of $I \times J$ pixels ($\vec{s}$) and each pixel has three values (for Red, Green and Blue), i.e.~$\vec{s} = \{ s^{\tt \scriptstyle R}, s^{\tt \scriptstyle G}, s^{\tt \scriptstyle B} \}$.
+After digitisation, each drawing $k \in 1,\dots, N$ can be represented formally as a matrix $S = (\vec{s}_{ij})$ of $I \times J$ pixels ($\vec{s}$), where each pixel is a triplet of values corresponding to red, green, and blue intensity, i.e.~$\vec{s} = \{ s^{\tt \scriptstyle R}, s^{\tt \scriptstyle G}, s^{\tt \scriptstyle B} \}$.
 
-As a first step, each image $k$ is resized with the {\tt imresize}
-module of the {\tt scipy.misc} package, in such a way that the longer side is
-equal to 320 pixels. Note here that the drawings are
-rescaled at the same scale but not precisely at the same size.
+Preprocessing consists in resizing each image $k$ using the {\tt imresize} module of the {\tt scipy.misc} python package, in such fashion that the length of the drawing's longest side is normalised to 320 pixels. Note that with this procedure, there remains a small amount of variability in the length of the drawings' shortest side.
 
 
 \subsection{Identification of colours}
