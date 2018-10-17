@@ -212,25 +212,22 @@ The first step of the colour experiment depicted in section \ref{sec:set_col_def
 
 \subsection{Colour identification}
 \label{sec:results_identification}
-The colour identification step yields the boolean $B^g$ matrix per colour $g$ for each $k$ drawing from where masked-image can be reconstructed to reveal the colour configuration of the original drawing as illustrated on Figures~\ref{fig:example1}~and ~\ref{fig:example2}.
+The colour identification step yields the boolean $B^g$ matrix per colour $g$ for each $k$ drawing from where masked-image can be reconstructed to reveal the colour configuration of the original drawing as illustrated on Figure~\ref{fig:example}.
 
-\begin{figure}[!h]
+\begin{figure*}
 	\centering
+	\raisebox{0.45cm}{\includegraphics[width=0.32\linewidth]{figures/jp04_ko_m_ryx_13_09_kmx-r.jpg}}
+	\includegraphics[width=0.62\linewidth]{figures/jp04_ko_m_ryx_13_09_kmx-rno_filter_mask.pdf}\hfil
 	\raisebox{0.45cm}{\includegraphics[width=0.32\linewidth]{figures/ru08_bo_f_pb_07_05_ali-r.jpg}}
 	\includegraphics[width=0.62\linewidth]{figures/ru08_bo_f_pb_07_05_ali-rno_filter_mask.pdf}\hfil
-	\caption{Good illustration of the colour identifications: Russian drawing.}
-	\label{fig:example1}
-\end{figure}
+	\includegraphics[width=0.32\linewidth]{figures/ch16_fr_m_rec_13_07_rap-r.jpg}
+	\includegraphics[width=0.62\linewidth]{figures/ch16_fr_m_rec_13_07_rap-rno_filter_mask.pdf}
+	\caption{Illustration of the colour identifications. Top: Japanese drawing. Middle: Russian drawing. Down: Swiss drawing.}
+	\label{fig:example}
+\end{figure*}
 
-\begin{figure}[h!]
-	\centering
-	\includegraphics[width=0.32\linewidth]{figures/ch15_fr_m_rrs_08_08_fim-r.jpg}
-	\includegraphics[width=0.62\linewidth]{figures/ch15_fr_m_rrs_08_08_fim-rno_filter_mask.pdf}
-	\caption{Less good illustration of the colour identifications: Swiss drawing.}
-	\label{fig:example2}
-\end{figure}
 
-\
+
 {\color{red}[CC: Other distances tested, such the one from Androutsos 1999 et un autre plus récent et mieux, add ref in 4.1 for fig. 3]}
 
 {\color{red}[Met-on encore un bon exemple, comme le buisson vert du Japon? Si oui, a faire par CC]}
@@ -271,12 +268,12 @@ Globally, the medians of the boxes indicate a linear  relationship between the e
 	\label{fig:boxplotvariety}
 \end{figure}
 
-\begin{figure}[h!]
+\begin{figure*}
 	\centering
-	\includegraphics[width=0.8\linewidth]{figures/colors-grille.png}
+	\includegraphics[width=0.75\linewidth]{figures/colors-grille.png}
 	\caption{Sample of drawings, selected per quartiles, and ordered by entropy (column) and variety (row). {\color{red}[AJOUTER ENCORE LE AXES]}}
 	\label{fig:grille}
-\end{figure}
+\end{figure*}
 
 In more details, we observe on Figure \ref{fig:grille} that the entropy value attached to each drawing indicates a degree of completeness: the higher the entropy value is, more the colours are covering the page revealing more complex drawings whereas the lower values depicts lower coloured and complex drawings where $H(f) \rightarrow 0$ reveals whiter pages.
 Also, combined with the variety, we observe that measure allows a gradual distinction between white drawing background with a single object to drawing with more contextualized (mutli-)object(s).
