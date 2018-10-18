@@ -40,8 +40,7 @@
   ${}^1$Institute for Social Sciences of Religions / University of Lausanne, Switzerland \\
   ${}^2$Department of Geography and Sustainability / University of Lausanne, Switzerland \\
   ${}^3$Department of Language and Information Sciences / University of Lausanne, Switzerland \\
-  {\tt \{ccocco, Raphael.Cere, axanthos, pbrandt\}@unil.ch} \\
-  {\color{red} [1) ** A Rpahael, quel est ton mail raccourci?]}
+  {\tt \{ccocco, rcere, axanthos, pbrandt\}@unil.ch} \\
 %  \And
 %  Second Author \\
 %  Affiliation / Address line 1 \\
@@ -105,7 +104,7 @@ Finally, \citet{kimbaelee2007} describe a method for identifying colours in draw
 \subsection{Data and preprocessing}
 \label{sec:dataset_preprocessing}
 
-The dataset used in this study is a subset of $N = 1212$ drawings extracted from the complete ``Drawings of gods'' database (which contains 6651 drawings) and collected in four countries (Japan, Switzerland and Russia {\color{red} [AX: that's 3 countries]}) between 2003 and 2016. Small groups of compulsory school aged children were sat in a way that discouraged copying from each other and were asked to draw ``god'', according to the procedure described in \citet{DandarovaRobertDessartSerbaevaEtAl2016}.
+The dataset used in this study is a subset of $N = 1212$ drawings collected in three countries (Japan, Switzerland and Russia) between 2003 and 2016 and extracted from the complete ``Drawings of gods'' database (which contains over 6600 drawings from nine countries and which is constantly growing). Small groups of compulsory school aged children were sat in a way that discouraged copying from each other and were asked to draw ``god'', according to the procedure described in \citet{DandarovaRobertDessartSerbaevaEtAl2016}. Especially, each child received a blank sheet paper A4 format, a gray crayon, a ten-colour set of wax pastels and an eraser. Sometimes, due to the lack of available material, children employed ordinary coloured pencils such as in Russia.
 
 Each drawing $k \in 1,\dots, N$ has been digitised and, for the purpose of this study, resized using the {\tt imresize} module of the {\tt scipy.misc} Python package, in such fashion that the length of the drawing's longest side is normalised to 320 pixels. Note that with this procedure, there remains a small amount of variability in the length of the drawings' shortest side. 
 
@@ -118,7 +117,7 @@ In what follows, each normalised drawing is represented formally as a matrix $S 
 % pixels}\label{from-colour-categories-to-exact-colour-of-pixels}}
 
 The proposed colour identification method draws on the work of~\citet{kimbaelee2007}, who associate each pixel of an image with the most similar colour in the Munsell system~\cite{Munsell1912}. 
-Besides the adoption of another colour set (see section~\ref{sec:introduction}), the particularity of our approach is that it uses a two-stage assignment process. Each pixel is first associated with a ``micro-colour'' (represented by one of the 117 small rectangular areas in Figure~\ref{fig:colour_set}), which in turn belongs to a ``macro-colour'' (red, orange, yellow, green, cyan, blue, purple, pink, white, and achromatic). Decomposing colour identification in this way has the advantage that {\color{red} [AX: ... quel avantage?]}.\footnote{The Python source code implementing our method is available at \url{https://github.com/ChrisCocco/ddd_colours}.}
+Besides the adoption of another colour set (see section~\ref{sec:introduction}), the particularity of our approach is that it uses a two-stage assignment process. Each pixel is first associated with a ``micro-colour'' (represented by one of the 117 small rectangular areas in Figure~\ref{fig:colour_set}), which in turn belongs to a ``macro-colour'' (red, orange, yellow, green, cyan, blue, purple, pink, white, and achromatic). Decomposing colour identification in this way offers two advantages. Firstly, micro-colours are more fine-grained and permit thus to grasp more shades of each colour.  Secondly, it is possible to create a new set of macro-colours without modifying the set of micro-colours as explained at the end of this section.
 
 \begin{figure}
 	\centering
@@ -142,7 +141,7 @@ This enables us to define the \textit{pixel count} (i.e.~the number of pixels) o
 \end{equation}
 Pixel counts can be used to compute the proportion of each colour in a given image or in a set of images, in order to answer the first type of research questions mentioned in section~\ref{introduction}. In section~\ref{sec:results_identification} below, we show the resulting proportions for the $N = 1212$ drawings of our sample, along with the decomposition into binary matrices of a couple drawings.
 
-It is important to note that while the set of $L=117$ micro-colours used in this study is based on a typical RGB colour chart,~\footnote{such as the one available at \url{https://www.rapidtables.com/web/color/RGB_Color.html}} it could have been easily substituted with another one. The same holds for the set of $G$ macro-colours used here, which is the result of discussions in the ``Drawing of gods'' project team. Since it is complicated for computers and for human to differentiate black and grey (or which pencil was used by the children), they were grouped into a single ``achromatic'' category. Moreover, this distinction is not necessary to study a child's colour choice. Brown is not included in the colour list, since the proposed method proves unable to reliably identify it. However, it would be possible to group some of the 117 micro-colours into a new ``brown'' group {\color{red} [AX: pourquoi ne pas l'avoir fait?]}. 
+It is important to note that while the set of $L=117$ micro-colours used in this study is based on a typical RGB colour chart,~\footnote{such as the one available at \url{https://www.rapidtables.com/web/color/RGB_Color.html}} it could have been easily substituted with another one. The same holds for the set of $G$ macro-colours used here, which is the result of discussions in the ``Drawing of gods'' project team. Since it is complicated for computers and for human to differentiate black and grey (or which pencil was used by the children), they were grouped into a single ``achromatic'' category. Moreover, this distinction is not necessary to study a child's colour choice. Brown, which is considered as a colour of the second rank by \citet{pastoureau2017} and not as a hue in the Munsell system or in the HSV or HSL colour spaces for instance, is not included in the colour list. Indeed, brown is a shade of red or orange (eventually green) in these colour spaces, with a high saturation and a relatively low lightness or value. It would be possible to group some of the 117 micro-colours into a new ``brown'' group, however there was no consensus in the project team to decide which micro-colours should change macro-colour group.
 
 \subsection{Quantification of colour diversity}
 \label{sec:diversity}
@@ -160,7 +159,9 @@ Following \citet{Shannon1948}, the colour entropy is defined as:
 \end{equation}
 where $f^{g}:= n^{g}/\sum_{k}n^{k}$ stands for the (unfiltered) colour relative frequency (computed on the basis of $B^{g}$). $H$ varies between 0 and log $G$: $H=0$ corresponds to a deterministic configuration where a single colour occurs with relative frequency $f^{g} = 1$, while the maximum $H=\mbox{log }G$ is reached when the colour distribution is uniform ($\forall g: f^{g} = 1/G$).
 
-\section{Results [RAPHAEL]}
+These two ways of quantifying colours permit to answer SSH research questions, such as the last one mentioned in section~\ref{sec:introduction} about the number of colours used in a subset of drawings according to the age of children (or to another feature). Moreover, as illustrated in the section~\ref{sec:results_entropy_variety}, it is also possible to detect children's strategies in the task of drawing god, also a goal of the psychologists of the project team. {\color{red} [Tentative de transition, est-ce que ca vous convient?]}
+
+\section{Results}
 \label{sec:results}
 Here, we first show an explicit sample of the results obtained from the method Identification of colours (see section \ref{sec:identification}) applied on all drawings. 
 We then extend the presentation of these results using the method of Colour diversity retrieval (see section \ref{sec:diversity}) crossed with the results of a deeper measure of variety commonly used in Computer Vision. 
@@ -216,6 +217,7 @@ For this dataset, the results obtained allows to said that the Achromatic is the
 However we are able to identify automatically colours with a specific chosen set of colours, the colour variety of the drawing was still not considered. 
 
 \subsubsection{Entropy and variety}
+\label{sec:results_entropy_variety}
 Based on the colour identification results, we then compute the relative entropy {\color{red}[Ajouter ref. \'equation quand disponible]} as well as the variety in order to reveal, first, the proportional colour variety of the dataset and, secondly, to compare it with the absolute variety of the dataset (number of non-empty main colours $g$), see Figure~\ref{fig:boxplotvariety}. {\color{red} CC: finalement on a utilise $B_{g}$ au lieu de $\tilde{B}_g$???]}
 Globally, the medians of the boxes indicate a linear  relationship between the entropy and the variety, whereas the absolute frequency of drawings per number of colours identified, the variety, has an normal distribution.
 
