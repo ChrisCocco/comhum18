@@ -187,19 +187,23 @@ The colour identification step yields the boolean $B^g$ matrix per colour $g$ fo
 
 
 
-{\color{red}[CC: Other distances tested, such the one from Androutsos 1999 et un autre plus récent et mieux, add ref in 4.1 for fig. 3]}
 
-{\color{red}[Met-on encore un bon exemple, comme le buisson vert du Japon? Si oui, a faire par CC]}
+
+
 
 The first figure illustrates a good extraction of the main colours whereas the second illustrates a less good colour extraction because of the similar computed distances between $\vec{s}$  pixel and the two or more $G$ main colours e.g.~$g = \mbox{Green}$ and $g = \mbox{Achromatic}$. 
 Also, the lack of the main colour Brown in the defined set of colours produces errors during the colour identification process as well as a over attribution of the pixels to the Green when yellow and grey overlap into the drawing. Except these problems with low saturated colours, an other typical problem occurs when two colours are mixed, such as grey and yellow which are detected as green. This type of mixing represents only a few pixels in a drawing and thus, does not affect percentages of colours. However, for this reason, $B^g$ is transformed into $\tilde{B}^g$ to count the number of pixels. Despite these errors, the results are good enough for the majority of drawings. As it was not possible to create a gold standard, the quality was assessed visually.
-{\color{red}[CC:  Parler des bons resultats v.s. mauvais resultats avec examples (qui sont encore \`a choisir)]}.
+
+{\color{gray} On the top, all colours are identified as expected by the team, which is generally the case. In the middle, again, all colours are identified correctly and as expected, since there is no brown macro-colour, it is divided into orange and red. Also, and it is coherent, blue and yellow together in the centre of the drawing creates green. On the bottom, it is a default of the method for high saturated colours, especially for green.
+}
+
+{\color{red}[CC: Other distances tested, such the one from Androutsos 1999 et un autre plus récent et mieux, add ref in 4.1 for fig. 3]}
 
 {\small \color{teal}[IDEE: Cross validation en prennant al\' eatoirement quelques pixels par dessin et les attribuer manuelle \`a une couleurs principales ou avoir un toy example avec un dessin o\`u l'on "connait" les couleurs.]}
 
 From there, we compute the proportion of coloured pixels per $g$ colour for the whole dataset considered as a unique drawing, where $g \in G \not\ni g = white$, to reveal the weighted frequency of main colours (see Figure \ref{fig:propcolours}). 
-For this dataset, the results obtained allows to said that the Achromatic is the most identified followed by the Blue and the Yellow whereas the Pink and the Purple are clearly less present (they represent $70.3\%$ against $0.9\%$). The Orange, Red, green and Cyan seem to be moderately present ($27.8\%$). 
-{\color{red} 5) ** P.-Y.B. ** [Les resultats sont differents de ceux obtenus dans le chapitre des couleurs, et c'est normal, car l'ensemble des dessins est considere comme un tout. Donc les dessins qui utilisent une plus garnde partie de la page sont plus importants. Ainsi on n'a des resultats de premiere main dans le chapitre.]}
+For this dataset, the results obtained allows to said that the Achromatic is the most identified followed by the Blue and the Yellow whereas the Pink and the Purple are clearly less present (they represent $71.3\%$ against $0.9\%$). The Orange, Red, green and Cyan seem to be moderately present ($27.8\%$). 
+{\color{red} 5) ** P.-Y.B. ** 5)} {\color{gray} Most preferred colours in general are blues and greens such as cyan, as well as red (especially for female and 3- to 4-year old children), while the least preferred colour is yellow (as well as orange and sometimes red [SEULEMENT POUR GRANGER]) \cite[see e.g.][]{Granger1955,Zentner2001,JonauskaiteMohrAntoniettiEtAl2016}. The results obtained show that children certainly do not use their preferred colours to draw god, but specific colours for this task. Assuming that they employ blue to depict the sky and the yellow for the light or the sun, it confirms the idea that children imagine god as something or someone shining in the sky. With this method, it will also be possible to obtain the same type of results for each country and then to compare them or for a an age group, and so on. Thus, it will possible to test various hypothesis of psychology.}
 
 
 
@@ -244,7 +248,10 @@ Globally, the medians of the boxes indicate a linear  relationship between the e
 
 In more details, we observe on Figure \ref{fig:grille} that the entropy value attached to each drawing indicates a degree of completeness: the higher the entropy value is, more the colours are covering the page revealing more complex drawings whereas the lower values depicts lower coloured and complex drawings where $H(f) \rightarrow 0$ reveals whiter pages.
 Also, combined with the variety, we observe that measure allows a gradual distinction between white drawing background with a single object to drawing with more contextualized (mutli-)object(s).
-{\color{red} 6) ** P.-Y.B. **}
+{\color{red} 6) ** P.-Y.B. **} {\color{gray} 1) On a le nombre de couleurs, ce dont on avait besoin
+2) Ca permet de distinguer les enfants qui gardent le fonds blanc par rapport à ceux qui remplissent la page (donc une composante spatiale)
+3) Comprendre le rôle relatif des couleurs dans une composition spatiale
+}
 
 
 Based on the chosen colour sets, the entropy measure is sensitive to the errors during the pixel colour attributions (e.g.~similar distances, no Brown, etc.). 
