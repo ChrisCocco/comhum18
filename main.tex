@@ -132,7 +132,7 @@ Besides the adoption of another colour set (see section~\ref{sec:introduction}),
 
 Formally, let \(\vec{c_l} := \{ c^{\tt \scriptstyle R}_{l}, c^{\tt \scriptstyle G}_{l}, s^{\tt \scriptstyle B}_{l} \}\) with $l \in 1, ..., L$ denote each micro-colour. For each pixel \(\vec{s}_{ij}\) in an image, we find the micro-colour whose squared Euclidean dissimilarity with the pixel is minimal:
 \begin{equation*}
-c(\vec{s}_{ij}) := \operatornamewithlimits{argmin}_{l \in [1,L]} \| s_{ij} - c_{l} \|^{2}
+c(\vec{s}_{ij}) := \operatornamewithlimits{argmin}_{l \in [1,L]} \| \vec{s}_{ij} - \vec{c}_{l} \|^{2}
 \end{equation*}
 The pixel is then associated with one out of $G = 10$ macro-colours, according to the groupings of micro-colours delineated in Figure~\ref{fig:colour_set}. This macro-colour, which we denote with $C(\vec{s}_{ij})$, is ultimately considered to be the pixel's colour.
 
@@ -153,14 +153,14 @@ It is important to note that while the set of $L=117$ micro-colours used in this
 
 There are a number of ways of quantifying the diversity associated with a discrete distribution, such as the distribution of colours in a drawing obtained with the identification method described in section~\ref{sec:identification} above. All diversity measures are, to a certain extent, dependent on the size of the sample from which the considered distribution has been obtained \cite[see e.g.][]{TweedieBaayen1998}, however the impact of this dependence is lessened in our case by the (partial) normalisation of drawing size (see section~\ref{sec:dataset_preprocessing} above). In the present study, we experiment with two diversity measures, namely the {\em variety} or number of distinct colours in a drawing, and the {\em Shannon entropy} of the colour distribution.
 
-In the case of variety, an additional preprocessing step is performed: in order to reduce the amount of noise--anomalous pixels resulting from the digitisation process--a median filter of \(3 \times 3\) pixels is applied to each boolean colour matrix $B^{g}$. The filtered matrix, $\tilde{B}^{g}$, is then used to compute new counts $\tilde{n}^{g} = \sum_{ij}\tilde{b}_{ij}^{g}$, which in turn make it possible to calculate the colour variety as:
+In the case of variety, an additional preprocessing step is performed: in order to reduce the amount of noise--anomalous pixels resulting from the digitisation process--a median filter of \(3 \times 3\) pixels is applied to each boolean colour matrix $B^{g}$. The filtered matrix, $\tilde{B}^{g}$, is then used to compute new counts $\tilde{n}^{g} := \sum_{ij}\tilde{b}_{ij}^{g}$, which in turn make it possible to calculate the colour variety as:
 \begin{equation}
-	V = \sum_{g}\mathds{1}(\tilde{n}^{g} > 0)
+	V := \sum_{g}\mathds{1}(\tilde{n}^{g} > 0)
 \end{equation}
 
 Following \citet{Shannon1948}, the colour entropy is defined as:
 \begin{equation}
-	H = -\sum_{g} f^{g}\mbox{ log }f^{g}
+	H := -\sum_{g} f^{g}\mbox{ log }f^{g}
 \end{equation}
 where $f^{g}:= n^{g}/\sum_{k}n^{k}$ stands for the (unfiltered) colour relative frequency (computed on the basis of $B^{g}$). $H$ varies between 0 and log $G$: $H=0$ corresponds to a deterministic configuration where a single colour occurs with relative frequency $f^{g} = 1$, while the maximum $H=\mbox{log }G$ is reached when the colour distribution is uniform ($\forall g: f^{g} = 1/G$).
 
@@ -169,13 +169,24 @@ In section~\ref{sec:results_diversity} below, we will show how these two ways of
 
 \section{Results}
 \label{sec:results}
-Here, we first show an explicit sample of the results obtained from the method Identification of colours (see section \ref{sec:identification}) applied on all drawings. 
-We then extend the presentation of these results using the method of Colour diversity retrieval (see section \ref{sec:diversity}) crossed with the results of a deeper measure of variety commonly used in Computer Vision. 
-The first step of the colour experiment depicted in section \ref{sec:set_col_definition} is presented in order to asses the automatic method of variety estimation in face of human perceived variety.
+
+In this section, we present the first results obtained by applying the methods for colour identification and colour diversity assessment described in section~\ref{methods} to the selected subset of the ``Drawings of gods'' database.
+%Here, we first show an explicit sample of the results obtained from the method Identification of colours (see section \ref{sec:identification}) applied on all drawings. 
+%We then extend the presentation of these results using the method of Colour diversity retrieval (see section \ref{sec:diversity}) crossed with the results of a deeper measure of variety commonly used in Computer Vision. 
+%The first step of the colour experiment depicted in section \ref{sec:set_col_definition} is presented in order to asses the automatic method of variety estimation in face of human perceived variety.
 
 \subsection{Colour identification}
 \label{sec:results_identification}
-The colour identification step yields the boolean $B^g$ matrix per colour $g$ for each $k$ drawing from where masked-image can be reconstructed to reveal the colour configuration of the original drawing as illustrated on Figure~\ref{fig:example}.
+
+The first outcome of the proposed colour identification method is the decomposition of each image into a set of $G$ binary matrices, one matrix $B^g := (b_{ij})$ per colour $g$. One way of visualising these matrices consists in using them as an inverted ``mask'', in the sense of image processing, and applying them to the original image. Formally, for each colour $g$, we construct a new image $S^g := (\vec{s}^{\,g}_{ij})$, where each pixel is defined as:
+\begin{equation}
+	\vec{s}^{\,g}_{ij} := 
+	\begin{cases} 
+		\vec{s}_{ij} \mbox{ if } b^g_{ij} = 1 \\
+		(0, 0, 0) \mbox{ otherwise} 
+	\end{cases}
+\end{equation}
+The result is a set of $G$ images filled with black except for the pixels that have been identified as belonging to a given colour $g$. Figure~\ref{fig:example} below shows three examples of this way of visualising the colour configuration detected in an image.
 
 \begin{figure*}
 	\centering
@@ -187,32 +198,19 @@ The colour identification step yields the boolean $B^g$ matrix per colour $g$ fo
 	\vspace{0.075\textheight}
 	$\vcenter{\hbox{\includegraphics[width=0.32\linewidth]{figures/ch16_fr_m_rec_13_07_rap-r.jpg}}}$\hspace{0.038\textwidth}
 	$\vcenter{\hbox{\includegraphics[width=0.62\linewidth]{figures/ch16_fr_m_rec_13_07_rap-rno_filter_mask.pdf}}}$
-	\caption{Illustration of the colour identifications. Top: Japanese drawing. Middle: Russian drawing. Down: Swiss drawing.}
+	\caption{Visualising the results of the colour identification method. Top: Japanese drawing. Middle: Russian drawing. Down: Swiss drawing.}
 	\label{fig:example}
 \end{figure*}
 
+These examples were selected to illustrate various (and decreasing) degrees of concordance between the automated colour identification and the human intuition. In the first example, all colours are identified as expected by the project's team, which is what visual inspection of the results generally reveals. All colours are also identified correctly and as expected in the second example, considering that brown is not part of the selected colour set; as a result it is divided into orange and red. Also, and it is coherent, the mixing of blue and yellow around the centre of the drawing creates nuances that are identified as green. The third example illustrates a weakness of the method, namely the identification of highly saturated colours, in particular green.
+%first example illustrates a good extraction of the main colours whereas the second illustrates a less good colour extraction because of the similar computed distances between $\vec{s}$  pixel and the two or more $G$ main colours e.g.~$g = \mbox{Green}$ and $g = \mbox{Achromatic}$. 
+%Also, the lack of the main colour Brown in the defined set of colours produces errors during the colour identification process as well as a over attribution of the pixels to the Green when yellow and grey overlap into the drawing. Except these problems with low saturated colours, an other typical problem occurs when two colours are mixed, such as grey and yellow which are detected as green. This type of mixing represents only a few pixels in a drawing and thus, does not affect percentages of colours. However, for this reason, $B^g$ is transformed into $\tilde{B}^g$ to count the number of pixels. Despite these errors, the results are good enough for the majority of drawings. As it was not possible to create a gold standard, the quality was assessed visually.
 
+%{\color{red}[CC: Other distances tested, such the one from Androutsos 1999 et un autre plus récent et mieux, add ref in 4.1 for fig. 3]}
 
+%{\small \color{teal}[IDEE: Cross validation en prennant al\' eatoirement quelques pixels par dessin et les attribuer manuelle \`a une couleurs principales ou avoir un toy example avec un dessin o\`u l'on "connait" les couleurs.]}
 
-
-
-
-The first figure illustrates a good extraction of the main colours whereas the second illustrates a less good colour extraction because of the similar computed distances between $\vec{s}$  pixel and the two or more $G$ main colours e.g.~$g = \mbox{Green}$ and $g = \mbox{Achromatic}$. 
-Also, the lack of the main colour Brown in the defined set of colours produces errors during the colour identification process as well as a over attribution of the pixels to the Green when yellow and grey overlap into the drawing. Except these problems with low saturated colours, an other typical problem occurs when two colours are mixed, such as grey and yellow which are detected as green. This type of mixing represents only a few pixels in a drawing and thus, does not affect percentages of colours. However, for this reason, $B^g$ is transformed into $\tilde{B}^g$ to count the number of pixels. Despite these errors, the results are good enough for the majority of drawings. As it was not possible to create a gold standard, the quality was assessed visually.
-
-{\color{gray} On the top, all colours are identified as expected by the team, which is generally the case. In the middle, again, all colours are identified correctly and as expected, since there is no brown macro-colour, it is divided into orange and red. Also, and it is coherent, blue and yellow together in the centre of the drawing creates green. On the bottom, it is a default of the method for high saturated colours, especially for green.
-}
-
-{\color{red}[CC: Other distances tested, such the one from Androutsos 1999 et un autre plus récent et mieux, add ref in 4.1 for fig. 3]}
-
-{\small \color{teal}[IDEE: Cross validation en prennant al\' eatoirement quelques pixels par dessin et les attribuer manuelle \`a une couleurs principales ou avoir un toy example avec un dessin o\`u l'on "connait" les couleurs.]}
-
-From there, we compute the proportion of coloured pixels per $g$ colour for the whole dataset considered as a unique drawing, where $g \in G \not\ni g = white$, to reveal the weighted frequency of main colours (see Figure \ref{fig:propcolours}). 
-For this dataset, the results obtained allows to said that the Achromatic is the most identified followed by the Blue and the Yellow whereas the Pink and the Purple are clearly less present (they represent $71.3\%$ against $0.9\%$). The Orange, Red, green and Cyan seem to be moderately present ($27.8\%$). 
-{\color{red} 5) ** P.-Y.B. ** 5)} {\color{gray} Most preferred colours in general are blues and greens such as cyan, as well as red (especially for female and 3- to 4-year old children), while the least preferred colour is yellow (as well as orange and sometimes red [SEULEMENT POUR GRANGER]) \cite[see e.g.][]{Granger1955,Zentner2001,JonauskaiteMohrAntoniettiEtAl2016}. The results obtained show that children certainly do not use their preferred colours to draw god, but specific colours for this task. Assuming that they employ blue to depict the sky and the yellow for the light or the sun, it confirms the idea that children imagine god as something or someone shining in the sky. With this method, it will also be possible to obtain the same type of results for each country and then to compare them or for a an age group, and so on. Thus, it will possible to test various hypothesis of psychology.}
-
-
-
+Besides the visualisation of colour decomposition, the method allows us to compute the proportion of each colour $g$ in the selected dataset, based on the summation of each colour's pixel counts (with the exception of white) over all drawings. The resulting histogram, represented in Figure~\ref{fig:propcolours} shows that the most frequently identified ``colour'' is achromatic, followed by blue and yellow. Orange, red, green and cyan have a moderate representation, while pink and purple are clearly underrepresented. Studies on colour preference \cite[see e.g.][]{Granger1955,Zentner2001,JonauskaiteMohrAntoniettiEtAl2016} have shown that shades of blue and green, such as cyan, as well as red (especially for female and 3- to 4-year old children) are the most preferred colours, while the least preferred ones are yellow and orange (and sometimes red). The distribution of identified colours in our data shows that children certainly do not use their preferred colours to draw god, but specific colours for this task. Assuming that they employ blue to depict the sky and yellow for the light or the sun, the results are compatible with the hypothesis that children imagine god as something or someone shining in the sky. The proposed method will also make it possible to compare the colour distribution across countries, age groups, and so on, and thus to test various psychological hypotheses.
 
 \begin{figure}[h!]
 	\centering
