@@ -153,7 +153,7 @@ It is important to note that while the set of $L=117$ micro-colours used in this
 
 There are a number of ways of quantifying the diversity associated with a discrete distribution, such as the distribution of colours in a drawing obtained with the identification method described in section~\ref{sec:identification} above. All diversity measures are, to a certain extent, dependent on the size of the sample from which the considered distribution has been obtained \cite[see e.g.][]{TweedieBaayen1998}, however the impact of this dependence is lessened in our case by the (partial) normalisation of drawing size (see section~\ref{sec:dataset_preprocessing} above). In the present study, we experiment with two diversity measures, namely the {\em variety} or number of distinct colours in a drawing, and the {\em Shannon entropy} of the colour distribution.
 
-In the case of variety, an additional preprocessing step is performed: in order to reduce the amount of noise--anomalous pixels resulting from the digitisation process--a median filter of \(3 \times 3\) pixels is applied to each boolean colour matrix $B^{g}$. The filtered matrix, $\tilde{B}^{g}$, is then used to compute new counts $\tilde{n}^{g} := \sum_{ij}\tilde{b}_{ij}^{g}$, which in turn make it possible to calculate the colour variety as:
+In the case of variety, an additional preprocessing step is performed: in order to reduce the amount of noise--anomalous pixels resulting from the digitisation process--a median filter of \(3 \times 3\) pixels is applied to each binary colour matrix $B^{g}$. The filtered matrix, $\tilde{B}^{g}$, is then used to compute new counts $\tilde{n}^{g} := \sum_{ij}\tilde{b}_{ij}^{g}$, which in turn make it possible to calculate the colour variety as:
 \begin{equation}
 	V := \sum_{g}\mathds{1}(\tilde{n}^{g} > 0)
 \end{equation}
@@ -215,48 +215,42 @@ Besides the visualisation of colour decomposition, the method allows us to compu
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=\linewidth]{figures/colors-barplot.png}
-	\caption{Proportion of coloured pixels per $g$ colour, where $g \in G \not\ni g = white$.}
+	\caption{Distribution of identified colours.{\color{green}[AX: je propose de supprimer le titre de l'axe des x et remplacer celui des y par "Proportion of pixels". Aussi, est-ce possible d'agrandir encore un peu la police des etiquettes de l'axe des x, pour les vieux comme moi? ;) Mais ca peut attendre la version finale.]}}
 	\label{fig:propcolours}
 \end{figure}
 
-
-\subsection{Colour diversity}
+\subsection{Quantification of colour diversity}
 \label{sec:results_diversity}
-However we are able to identify automatically colours with a specific chosen set of colours, the colour variety of the drawing was still not considered. 
 
-\subsubsection{Entropy and variety}
+\subsubsection{Variety and entropy}
 \label{sec:results_entropy_variety}
-Based on the colour identification results, we then compute the relative entropy {\color{red}[Ajouter ref. \'equation quand disponible]} as well as the variety in order to reveal, first, the proportional colour variety of the dataset and, secondly, to compare it with the absolute variety of the dataset (number of non-empty main colours $g$), see Figure~\ref{fig:boxplotvariety}. {\color{red} CC: finalement on a utilise $B_{g}$ au lieu de $\tilde{B}_g$???]}
-Globally, the medians of the boxes indicate a linear  relationship between the entropy and the variety, whereas the absolute frequency of drawings per number of colours identified, the variety, has an normal distribution.
+
+Based on the output of the colour identification method, the variety and entropy of colours were computed as described in section~\ref{sec:diversity}. Figure~\ref{fig:variety_histogram} shows the distribution of colour variety in the dataset, which reveals that a majority of drawings (about 70\%) have between 5 and 8 identified colours. The distribution deviates slightly from normality, in the sense that drawings with 7 and 8 colours are particularily frequent, and there is also a small peak of drawings with a single non-white colour ($V=2$). The box-plots in Figure~\ref{fig:entropy_boxplot} depict the variability of colour entropy for a given amount of  colour variety. While the median of entropy is consistently increasing with variety, as expected, the spread of individual entropy values is quite large regardless of the corresponding variety.
+ 
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=\linewidth]{figures/colors-boxplot-hist.png}
+	\caption{Distribution of colour variety.{\color{green}[AX: je supprimerais "rate" dans le titre de l'axe des y, et je noterais "Colour variety" au lieu de V dans celui des x.]}}
+	\label{fig:variety_histogram}
+\end{figure}
 
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=\linewidth]{figures/colors-boxplot.png}
-	\caption{Entropy $H(f)$ box plot for the $N$ drawings per the numbers of colours identified, namely the variety $V$ {\color{red}[CC: ref equation?]}.}
-	\label{fig:boxplotvariety}
+	\caption{Colour entropy box-plots as a function of colour variety.{\color{green}[AX: je remplacerais les titre des axes par "Colour entropy" et "Colour variety".]}}
+	\label{fig:entropy_boxplot}
 \end{figure}
 
-\begin{figure}[h!]
-	\centering
-	\includegraphics[width=\linewidth]{figures/colors-boxplot-hist.png}
-	\caption{{\color{red}[NEW: Histogram]}.}
-	\label{fig:boxplotvariety}
-\end{figure}
+In order to get a better idea of the interpretation of colour entropy variations for a given amount of variety, we have designed a visualisation in which a sample of drawings are plotted on a grid with 9 rows corresponding to colour variety (between 2 and 10, excluding empty drawings) and 5 columns corresponding to specific points in the distribution of colour entropy (minimum, first quartile, median, third quartile, and maximum), as represented in Figure~\ref{fig:grille}. In practice, this visualisation was constructed one row after another, by extracting all drawings with a given amount of variety in the dataset, then finding in this subset the drawings with the minimum and maximum colour entropy as well as those that are closest to the desired quantiles. This representation shows that colour entropy seems to correspond well with the intuitive notion of drawing completeness: the higher the entropy, the more the colours are covering the page. Also, entropy and variety seem to conspire to create a gradual distinction between drawings with a white background and single object (bottom-left) and drawings representing one or more objects in a more contextualized fashion. Thus, besides operationalizing the basic notion of colour diversity, colour variety and entropy enable us to characterize certain aspects of drawing ``strategy'' and of the spatial organisation of colours in a drawing.
 
 \begin{figure*}
 	\centering
 	\includegraphics[width=0.75\linewidth]{figures/colors-grille.pdf}
-	\caption{Sample of drawings, selected per quartiles, and ordered by entropy (column) and variety (row). {\color{red}[AJOUTER ENCORE LE AXES]}}
+	\caption{Sample of drawings illustrating selected points in the distribution of colour entropy (columns) as a funtion of colour variety (rows).}
 	\label{fig:grille}
 \end{figure*}
 
-In more details, we observe on Figure \ref{fig:grille} that the entropy value attached to each drawing indicates a degree of completeness: the higher the entropy value is, more the colours are covering the page revealing more complex drawings whereas the lower values depicts lower coloured and complex drawings where $H(f) \rightarrow 0$ reveals whiter pages.
-Also, combined with the variety, we observe that measure allows a gradual distinction between white drawing background with a single object to drawing with more contextualized (mutli-)object(s).
-{\color{red} 6) ** P.-Y.B. **} {\color{gray} 1) On a le nombre de couleurs, ce dont on avait besoin
-2) Ca permet de distinguer les enfants qui gardent le fonds blanc par rapport à ceux qui remplissent la page (donc une composante spatiale)
-3) Comprendre le rôle relatif des couleurs dans une composition spatiale
-}
-
+{\color{green}[AX: je m'arrete ici pour le moment.]}
 
 Based on the chosen colour sets, the entropy measure is sensitive to the errors during the pixel colour attributions (e.g.~similar distances, no Brown, etc.). 
 Then, we compare it with a common approach of Computer Vision which consists to measure the entropy on the greyscale levels histogram of the drawing. 
