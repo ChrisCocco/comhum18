@@ -326,24 +326,18 @@ Although there is no significant disagreement under the normal distribution hypo
 
 \section{Conclusion}
 \label{sec:conclusion}
-{\color{red}[TO UPDATE AT THE END] }
-{\color{gray} As a next step, since humans are more sensitive to colour patches than
+In this paper, we have proposed a simple and efficient method to identify colours in children's drawings (and in other type of images), adapted to answer SSH research questions, as well as two ways of quantifying colour diversity based on the results of colour identification.
+The methods were tested on a subset of data of the project ``Drawings of gods'' in this paper and will be employed systematically in the future in the project to answer various research questions based on various features related to children, such as their age, their country or their gender. Unlike usual inter-ratter methodology in psychology which ask to a few humans to annotate the data, a task which is exhausting and difficult with a large number of these complex drawings, the methods exposed in this paper have the advantage to be objective and constant on a large volume of data. 
+Moreover, as illustrated in the section~\ref{sec:results_entropy_variety}, the methods allow us to go further in answering the project research questions. Indeed, a set of children's strategies to draw god can be detected, such as filling the complete page or drawing only a main character or object without background.
 
-to isolated pixels, a filter should be applied at the beginning of the
-process, such as the Mumford-Shah Regulariser proposed by
-\citet{erdem2009}. Indeed, when children (or adults) fill in an area of
-the sheet with colour, the application is not regular and consequently
-not all pixels of the zone are coloured. Thus, in order to avoid
-underestimating the proportion of one particular colour, standardizing
-colours by zone could help work around the possible issue.}
+The proposed method of colour identification also introduces the advantage to be adaptable, as explained in the section~\ref{sec:identification}, since the set of micro- and macro-colours can be easily modified for specific SSH research purposes. For instance, as suggested in the section~\ref{sec:state_of_the_art}, one of these colour sets could be replaced by the ones defined with colour-naming methods.
 
-These methods are
-applicable to other data and research, e.g.~studying the main colours
-used by a painter according to various periods of his/her life.
+While the methods were illustrated on data extracted from the project ``Drawings of gods'', they are easily applicable to other SSH  research dataset. For instance, it would be possible studying the main colours used by a painter according to various periods of his/her life; or comparing the mean number of colours of cover pages of a magazine in the various seasons of a year.
 
-Moreover, as explained in section..., it is possible to define a different set of colours and/or to start with more or less than 117 colours.
+As a next step, it could be interesting to apply a filter at the beginning of the process, such as the Mumford-Shah regularizer proposed by \citet{erdem2009} which transforms a set of noisy pixels in an uniform patch. 
+Indeed, when children (or adults) fill in an area of the sheet with one colour, the application is not regular and consequently not all pixels of the zone are coloured. 
+Thus, in order to avoid underestimating the proportion of one particular colour, standardizing colours by zone could help work around the possible issue.
 
-Later: define and detect brown.
 
 \bibliography{bibliography}
 \bibliographystyle{acl_natbib}
