@@ -261,56 +261,34 @@ As a final empirical result regarding colour entropy, we compare it with a well-
 	\label{fig:entropies}
 \end{figure}
 
-\subsubsection{Variety concordance} {\color{red} Titre a modifier}
-\label{sec:results_variety_concordance}
+\subsubsection{Concordance with human judgment} \label{sec:results_variety_concordance}
 
-For each $\tilde{k}$ drawing in a sample of $\tilde{N} = 10$ drawings, we evaluate the concordance of the variety computed automatically $v^c_i = {1, \dots, G}$, by the algorithm of section \ref{sec:identification} {\color{red} Plutot selon $V$ de la section 4.5}, and the human perceived variety $v^h_i = {1, \dots, +\infty}$. 
+To conclude this section, we discuss the results of an attempt to compare the colour variety obtained using the proposed colour identification method with the human perception of colour variety. We asked five human experts (the same ones as mentioned in section~\ref{sec:introduction}) to write down all the colours they saw in each drawing $\tilde{k}$ in a sample of $\tilde{N} = 10$ drawings. Annotators had at their disposal a paper sheet with 15 areas for writing colour names. Since only two of them mentioned white, this colour was removed altogether (both in human and automated color identification results) {\color{green}[AX: c'est bien juste, aussi automatique?]}. The colour variety perceived by an annotator in a drawing was then defined as the number of non-empty areas on their sheet. Thus, if an annotator described a colour using several colour or shade names in a single area, it was counted as a single colour.
 
-{\color{red}[CC: a modifier, juste pour montrer que c'est autre chose que l'autre partie de l'experience]}
-More precisely, we asked five human experts (the same ones as described in the section~\ref{sec:set_col_definition}) to write all the colours they saw in each drawing.
-The annotators had at their disposal 15 spaces to write the colour names.
-Only two annotators considered "white" as a colour of the drawing and thus it was removed from the results.
-To count the number of colours found by each annotator, we counted the number of spaces filled. 
-For instance, if an annotator wrote several colour or shade names in a same space to describe one colour, it was counted as one colour.
-
-
-First, we observe on Figure~\ref{fig:compnbcolourssd} that the numbers of colours identified automatically is different to the humans in a range of two colours in average. 
-These results are quite impressive in face of the number of factors considered during both estimations of variety; on one hand the errors of the automatic attributions observed previously and, on the other hand, the human perception bias. 
-The Figure \ref{fig:compnbcoloursscatter} confirms this trend with a linear relationship.
+Figure~\ref{fig:compnbcolourssd} shows that the difference between the colour variety $V(\tilde{k})$ automatically detected in a drawing $\tilde{k}$ and the average $V^h(\tilde{k})$ of the corresponding human-perceived variety over the five experts is no greater than 2. This result is quite impressive considering the limitations of the automatic attributions discussed previously as well as the human perception bias. The scatterplot in Figure \ref{fig:compnbcoloursscatter} confirms that there is a considerable degree of concordance between $V(\tilde{k})$ and $V^h(\tilde{k})$.
 
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=\linewidth]{figures/comp_nb_colours_sd.png}
-	\caption{Drawings in function of the means numbers of colours estimated by the algorithm and human.}
+	\caption{Comparison of automatically detected colour variety with human-perceived variety.}
 	\label{fig:compnbcolourssd}
 \end{figure}
 
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=\linewidth]{figures/comp_nb_colours_scatter.png}
-	\caption{Scatter plot of the variety observed by human in function of the automatic estimation of the variety.}
+	\caption{Relationship between automatically detected colour variety and average human-perceived variety.}
 	\label{fig:compnbcoloursscatter}
 \end{figure}
 
-
-
-The Figure~\ref{fig:blandandaltman} shows the range of the disagreement using the \textit{Bland and Altman graphic} \cite{bland1986}.
-The differences between the varieties of each $i$ drawing,  $d_i = v^c_i - v^h_i$, are represented in function of their means $\overline{d}_i = v^c_i + v^h_i/2$. 
-The range of disagreement $d_i$ is then analysed in function of the mean $\overline{d}_i$. More $d_i$ is distant of  $0$, respectively close, $d_i \rightarrow 0$ , more the disagreement is higher, respectively concordant,  whereas $\overline{d} = 1/N\sum_{i}^{\tilde{N}}d_i = 0$ depicts a perfect concordance between these two varieties. 
-
-
-
-Although there is no significant disagreement under the normal distribution hypothesis, the low size $\tilde{N}$ of the sample is not representative and show a mean disagreement $\overline{d}=-0.74$ {\color{red}[AJOUTER LA VALEUR DE D\'ESACCORD, CC: FAIT MAIS ETRE MOINS NEGATIF, deja un essai et explication]}. It is coherent that there are more colours found by humans than by the algorithm, since the brown is not detected automatically and the grey and the black were aggregated.
-
+Figure~\ref{fig:blandandaltman} shows the range of disagreement between the two variety estimates using the so-called \textit{Bland and Altman graphic}~\cite{bland1986}. For each drawing $\tilde{k}$, the difference $d(\tilde{k}) := V(\tilde{k}) - V^h(\tilde{k})$ (on the vertical axis) is represented as a function of their mean $\overline{d}(\tilde{k}) := \frac{V(\tilde{k}) + V^h(\tilde{k})}{2}$ (on the horizontal axis). The more $d_i$ is distant of  $0$, the higher the disagreement between the two variety estimates, whereas $\overline{d} := 1/\tilde{N}\sum_{\tilde{k}}d_{\tilde{k}} = 0$ indicates a perfect concordance between them. {\color{green}[AX: je ne comprends pas ce dernier point: si l'algo voit 10 couleurs quand les humains en voient 1 et vice-versa, on aura $\overline{d}=0$, non?]} In this case, although the sample is too small to be representative, the mean disagreement $\overline{d}=-0.74$ is relatively small. That more colours are found by humans than by the algorithm on average is consistent with the fact that brown not part of the automatically identified colour set and that grey and black are aggregated.
 
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=\linewidth]{figures/comp_nb_colours_agreement.png}
-	\caption{Range of disagreement of variety estimations using Bland et Altman  Graphic.}
+	\caption{Bland et Altman graphic showing the range of disagreement between automatically detected colour variety and average human-perceived variety.}
 	\label{fig:blandandaltman}
 \end{figure}
-
-
 
 \section{Conclusion}
 \label{sec:conclusion}
