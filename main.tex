@@ -225,7 +225,7 @@ Besides the visualisation of colour decomposition, the method allows us to compu
 \subsubsection{Variety and entropy}
 \label{sec:results_entropy_variety}
 
-Based on the output of the colour identification method, the variety and entropy of colours were computed as described in section~\ref{sec:diversity}. Figure~\ref{fig:variety_histogram} shows the distribution of colour variety in the dataset, which reveals that a majority of drawings (about 70\%) have between 5 and 8 identified colours. The distribution deviates slightly from normality, in the sense that drawings with 7 and 8 colours are particularily frequent, and there is also a small peak of drawings with a single non-white colour ($V=2$). The box-plots in Figure~\ref{fig:entropy_boxplot} depict the variability of colour entropy for a given amount of  colour variety. While the median of entropy is consistently increasing with variety, as expected, the spread of individual entropy values is quite large regardless of the corresponding variety.
+Based on the output of the colour identification method, the variety and entropy of colours were computed as described in section~\ref{sec:diversity}. Figure~\ref{fig:variety_histogram} shows the distribution of colour variety in the dataset, which reveals that a majority of drawings (about 70\%) have between 5 and 8 identified colours. The distribution deviates slightly from normality, in the sense that drawings with 7 and 8 colours are particularily frequent, and there is also a small peak of drawings with a single non-white colour ($V=2$). The box plots in Figure~\ref{fig:entropy_boxplot} depict the variability of colour entropy for a given amount of  colour variety. While the median of entropy is consistently increasing with variety, as expected, the spread of individual entropy values is quite large regardless of the corresponding variety.
  
 \begin{figure}[h!]
 	\centering
@@ -250,18 +250,14 @@ In order to get a better idea of the interpretation of colour entropy variations
 	\label{fig:grille}
 \end{figure*}
 
-{\color{green}[AX: je m'arrete ici pour le moment.]}
-
-Based on the chosen colour sets, the entropy measure is sensitive to the errors during the pixel colour attributions (e.g.~similar distances, no Brown, etc.). 
-Then, we compare it with a common approach of Computer Vision which consists to measure the entropy on the greyscale levels histogram of the drawing. 
-The scatter plot, figure~\ref{fig:entropies}, depicts the significant Pearson correlation ($r=0.8866$, $p=0.000$) between these two entropy values. % {\color{red}[Reprendre quelques parties de 3.5 et citer \citet{wu2013}]}. 
+As a final empirical result regarding colour entropy, we compare it with a well-established approach in computer vision, which consists in computing the entropy on the distribution of color shades resulting from the conversion of an image to greyscale~\cite[see e.g.][]{wu2013}. The scatterplot in Figure~\ref{fig:entropies} shows that colour entropy and greyscale entropy are strongly correlated (Pearsons'$r=0.8866$, $p<0.001$). However, a few drawings have a high greyscale entropy associated with a relatively low colour entropy. They seem to be characterized by a high degree of page coverage, albeit in a small number of well-defined colours. {\color{green}[AX: je n'arrive decidement pas a voir ce resultat comme apportant quelque chose de l'ordre de la validation, plutot que comme soulevant la question de l'utilite de tout le dispositif precedent. Pour cette raison, je n'arrive pas bien a mettre en evidence l'apport specifique de cette observation, dans l'esprit de la fin du paragraphe precedent, p.ex. Vous me semblez plus convaincus que moi de l'utilite d'inclure ce resultat alors n'hesitez pas si vous voyez une facon de mieux la mettre en evidence--dans l'etat actuel je trouve que ca affaiblit un peu la partie en la concluant sur une note pas tres clairement definie.]} 
 
 %{\small \color{teal}[IDEE: Est-ce que les extr\`emes ne permettraient pas d'en dire plus? A creuser.]}
 
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=\linewidth]{figures/colors-greysacale-entropies.png}
-	\caption{Scatter plot of the entropies on the greyscale levels histogram with the main colours entropies.}
+	\caption{Relationship between grayscale entropy and colour entropy.}
 	\label{fig:entropies}
 \end{figure}
 
