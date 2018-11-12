@@ -63,14 +63,9 @@ Researchers in social sciences and humanities disciplines are confronted with th
 
 Social sciences and humanities (SSH) have a rich tradition of using computational methods for analysing text data. In contrast, although visual media have an increasing importance in many disciplines and a central role in some of them, researchers in SSH have only just begun to explore the methodological opportunities offered by computerized image analysis. Rooted in developmental psychology and psychology of religion, the ``Drawings of gods'' project\footnote{This project is supported by the Swiss National Science Foundation (SNSF), grant number: CR11\textbar1\_156383. The database of the project is available at \url{http://ddd.unil.ch/}.} is an example of an SSH project in which image is the primary data type: its main goals are the collection and analysis of drawings of gods produced by children in various countries and cultures \cite[see e.g.][]{BrandtKagataSpittelerGillieronPaleologue2009,Dandarova2013,DandarovaRobertDessartSerbaevaEtAl2016}. In this context, an important class of research questions is related to colour usage in the drawings, e.g.~``Which colours are used to draw god?'', ``Are the colours used preferentially to answer the task of drawing god the same in each country?'', or ``Do older children use a larger array of colours than younger ones?''. Answering such questions presupposes the ability to identify the colours used in each of the thousands of drawings in the ``Drawings of gods'' database. This paper attempts to give a formal characterisation of this problem, proposes a computational methodology for solving it, and discusses the first results of its application to a subset of the project's drawings.
 
-%To answer this type of questions, the main steps are \textit{1)} to define a set of colours 
-%(sections~\ref{sec:set_col_definition} and~\ref{sec:identification}); \textit{2)} to select a colour space (section~\ref{sec:colour-space}); \textit{3)} to assign a colour to each pixel (section~\ref{sec:identification}); and \textit{4)} to count the number of colours in each drawing (section~\ref{sec:diversity}).
-
 Processes for captating colours and providing numerical representations of them have been standardised long ago by such institutions as the  \textit{Commission Internationale de l'Eclairage} (CIE). Arguably, the most well-known scheme for digital colour representation is the {\em RGB} colour space: a colour is described by a triplet of values, each of which corresponds to the intensity of a primary colour light beam (red, green, or blue); each value is encoded with one octet, so that there are $256^3 = 16'777'216$ possible RGB colour triplets. This representation, which is the one in which the drawings of our dataset are converted by the digitisation process, is vastly too fine-grained for answering research questions of the kind stated above, as a single pencil stroke on a sheet of paper typically contains dozens of RGB shades when digitised. The challenge of colour identification, then, consists in defining a consistent mapping from a standard digital colour space (in our case, RGB) to a much more coarse-grained colour set, adapted to the research purposes of the widest possible range of SSH disciplines.
 
 This task is rendered significantly more difficult by the fact that colour perception is a complex phenomenon which varies from one person to another on the basis of neurobiological factors, as well as cultural factors such as language~\cite[][pp. 35 and 87]{pastoureau2017}. This was confirmed by a preliminary experiment where we asked five human experts of various languages and cultures to look at 21 children's drawings and indicate the presence or absence of colours in a list (in French) based on the five principal and the five intermediate hues of the Munsell colour system~\cite{Munsell1912} and completed by four colours (namely, brown, black, white and grey).\footnote{The agreement between annotators for each colour, as measured by Fleiss's Kappa~\cite{Fleiss1971}, varied between $0.0512$ and $0.876$. It was even negative for white, since part of the subjects did not consider the background of the page as a colour.} Recognizing the difficulty (if not the impossibility) to define universal human colour categories, we settled in this work on a set of 10 categories (red, orange, yellow, green, cyan, blue, purple, pink, white, and achromatic) which proved relevant for addressing the ``Drawings of gods'' research questions, and which our method is able to identify consistently. Most colours in this set are also present in those proposed by~\citet{berlinkay1969} and \citet{pastoureau2017}. The main differences with those lie in the absence of brown, which the proposed method fails to identify consistently, the fusion of black and gray, whose distinction is not relevant for characterizing the drawings of our dataset, and the addition of cyan. It is worth noting, however, that this particular colour set is but one possible configuration of the method, which can be easily adapted to fit different user needs.
-
-% Je n'ai volontairement pas ajouté de note pour le brun, car on l'explique déjà bien à la fin de la section 3.2 et que ça n'a pas dérangé les reviewers
 
 The remainder of the paper is organized as follows. Section~\ref{sec:state_of_the_art} offers a brief overview of related work in the computer vision literature. After a synthetic presentation of the data used in this study (a sample of about 1200 drawings extracted from the ``Drawings of gods'' dataset), section~\ref{sec:method} proposes a detailed, formal account of the proposed algorithm for colour identification, and describes two ways of quantifying colour diversity based on the results of colour identification. Section~\ref{sec:results} discusses the results of colour identification and colour diversity quantification applied to our data, and section~\ref{sec:conclusion} draws a brief conclusion.
 
@@ -80,19 +75,13 @@ The remainder of the paper is organized as follows. Section~\ref{sec:state_of_th
 
 Research about colours in computer vision mostly focuses on image segmentation \cite[see e.g.][]{ChengSun2000,ChenPappasMojsilovicEtAl2005,HanmandluVermaSusanEtAl2013} and image retrieval \cite[see e.g.][]{DengManjunathKenneyEtAl2001,RaoKumar2015,ZhangZhangYaoEtAl2016}. In either case, the problem typically consists in assessing colour similarity rather than assigning pixels to predefined colour categories. Colour names have also been used in the framework of object recognition~\cite[see e.g.][]{khan2013}, but this task is essentially irrelevant for answering SSH research questions such as illustrated in section~\ref{sec:introduction}. Furthermore, these methods are usually adapted for processing photographic sources rather than drawings.
 
-%For the former (image segmentation), the aim is to segment the image according to the object, often on pictures, and thus to find a set of pixels with quite the same colour. For instance, as proposed by \citet[][p. 445]{GonzalezWoods2008}, the first step is to define an ``average'' colour of pixels of interest which are part of the image.
-
-%The aim of the latter (image retrieval) is to find which images of a dataset correspond to the one stated as the query, and therefore to determine if the colours of the query and those of the dataset are similar. Thus, in both cases, there are no need to determine which colour it is (only which pixels have similar colours), unlike this contribution.
-
-%There are also some colour researches in computer vision in the field of object detection or recognition \cite[see e.g.]{khan2012}, using sometimes also colour names \cite[see e.g.]{khan2013}. Nevertheless, their aims differed from the one found in the human sciences and described above. Furthermore, the majority of these methods are developed to treat pictures and not drawings.
 
 However, other studies in computer vision have proposed promising descriptors such as colour histograms~\cite[see e.g.][]{sun2006}, colour names acquired using machine learning techniques~\cite{weijer2009, lindner2013}, or parametric models for automatic colour naming, where each colour category is modeled as a fuzzy set with a parametric membership function \cite{benavente2008}. In both cases of colour naming, colour palettes are learned from annotated data collected from Google Images for the former and from psychophysical experiments for the latter. These palettes could be used as the starting point of the method presented in section~\ref{sec:identification}, although they are too fine-grained for our purpose.
 
 The K-means algorithm is often used to find colour groups~\cite[see e.g.][]{yendrikhovskij2001,konyushkova2015,hulee2007}. However, there are two main drawbacks with this method: (i) it is necessary to define \textit{a priori} the number of clusters ($K$), i.e.~the number of colours; (ii) the output of the method is the mean colour (i.e. the centroid) of each cluster, which can be difficult to relate to predefined colour categories. The article of~\citet{konyushkova2015} provides an example of the application of this technique to the analysis of the ``Drawings of gods'' images.
 
-Finally, \citet{kimbaelee2007} describe a method for identifying colours in drawings which is very similar to the one proposed here. The main differences are that their method starts with images in another colour space, namely HVC (``hue--value--chroma'', also known as the Munsell colour system) and, more importantly, that it does not rely on a formal distinction between micro- and macro-colours (see section~\ref{sec:identification}), since they define directly macro-colours and classify each pixel in one of these colours.
+Finally, \citet{kimbaelee2007} describe a method for identifying colours in drawings which is very similar to the one proposed here. The main differences are that their method starts with images in another colour space, namely HVC (``hue--value--chroma'', also known as the Munsell colour system) and, more importantly, that it does not rely on a formal distinction between micro- and macro-colours (see section~\ref{sec:identification}), since they define macro-colours directly and classify each pixel into one of these colours.
 
-%To answer questions in humanities and human sciences, it is necessary to develop specific techniques, since the aim is not to precisely find the nuance/shade of the colour in the drawing or to detect a set of similar pixels according to the colour, but to figure whether there is one colour that stands out from a set of colours on the one hand (see sections~\ref{sec:identification} and \ref{sec:results_identification}); and to determine the diversity of colours on the other hand (see sections~\ref{sec:diversity} and \ref{sec:results_diversity}). {\color{red} [Adapter ou deplacer cette transition pour coller a la nouvelle structure]}
 
 \section{Method}\label{methods}
 \label{sec:method}
@@ -108,12 +97,10 @@ In what follows, each normalised drawing is represented formally as a matrix $S 
 
 \subsection{Identification of colours}
 \label{sec:identification}
-% \hypertarget{from-colour-categories-to-exact-colour-of-pixels}{%
-% \subsection{From colour categories to exact colour of
-% pixels}\label{from-colour-categories-to-exact-colour-of-pixels}}
+
 
 The proposed colour identification method draws on the work of~\citet{kimbaelee2007}, who associate each pixel of an image with the most similar colour of a set of colours that they defined in the Munsell colour system. 
-Besides the adoption of another colour space\footnote{Using the RGB colour space instead of the Munsell colour system allows us to avoid an additional transformation step.} and of another colour set, the particularity of our approach is that it uses a two-stage assignment process. Each pixel is first associated with a ``micro-colour'' (represented by one of the 117 small rectangular areas in Figure~\ref{fig:colour_set}), which in turn belongs to a ``macro-colour'' (red, orange, yellow, green, cyan, blue, purple, pink, white, and achromatic). Decomposing colour identification in this way offers three advantages. First, micro-colours are more fine-grained and permit thus to grasp more shades of each colour. Secondly, it is possible to create a new set of macro-colours without modifying the set of micro-colours as explained at the end of this section. Thirdly, associating each pixel with a micro-colour and subsequently grouping micro-colours eliminates the need to define directly the boundaries of each macro-colour, advantage which is also available for the method of~\citet{kimbaelee2007}.
+Besides the adoption of another colour space\footnote{Using the RGB colour space instead of the Munsell colour system allows us to avoid an additional transformation step.} and of another colour set, the particularity of our approach is that it uses a two-stage assignment process. Each pixel is first associated with a ``micro-colour'' (represented by one of the 117 small rectangular areas in Figure~\ref{fig:colour_set}), which in turn belongs to a ``macro-colour'' (red, orange, yellow, green, cyan, blue, purple, pink, white, and achromatic). Decomposing colour identification in this way offers two advantages. First, micro-colours are more fine-grained and permit thus to grasp more shades of each colour. Secondly, it is possible to create a new set of macro-colours without modifying the set of micro-colours as explained at the end of this section.
 
 \begin{figure}
 	\centering
@@ -160,8 +147,6 @@ where $f^{g}:= n^{g}/\sum_{k}n^{k}$ stands for the (unfiltered) colour relative 
 
 In section~\ref{sec:results_diversity} below, we will discuss the results obtained when applying these two ways of quantifying colour diversity to the drawings of our sample. In particular, we will show how they can be used to characterise the strategies adopted by children for the task of drawing god, which is an important result for the psychologists of the project's team.
 
-%In section~\ref{sec:results_diversity} below, we will show how these two ways of quantifying colour diversity make it possible  permit to answer SSH research questions, such as the last one mentioned in section~\ref{sec:introduction} about the number of colours used in a subset of drawings according to the age of children (or to another feature). Moreover, as illustrated in the section~\ref{sec:results_entropy_variety}, it is also possible to detect children's strategies in the task of drawing god, also a goal of the psychologists of the project team. {\color{red} [Tentative de transition, est-ce que ca vous convient?]}
-
 \section{Results}
 \label{sec:results}
 
@@ -180,9 +165,6 @@ In section~\ref{sec:results_diversity} below, we will discuss the results obtain
 \end{figure*}
 
 In this section, we present the first results obtained by applying the methods for colour identification and colour diversity assessment described in section~\ref{methods} to the selected subset of the ``Drawings of gods'' database.
-%Here, we first show an explicit sample of the results obtained from the method Identification of colours (see section \ref{sec:identification}) applied on all drawings. 
-%We then extend the presentation of these results using the method of Colour diversity retrieval (see section \ref{sec:diversity}) crossed with the results of a deeper measure of variety commonly used in Computer Vision. 
-%The first step of the colour experiment depicted in section \ref{sec:set_col_definition} is presented in order to asses the automatic method of variety estimation in face of human perceived variety.
 
 \subsection{Colour identification}
 \label{sec:results_identification}
@@ -200,12 +182,6 @@ The first outcome of the proposed colour identification method is the decomposit
 The result is a set of $G$ images filled with black except for the pixels that have been identified as belonging to a given colour $g$. Figure~\ref{fig:example} shows three examples of this way of visualising the colour configuration detected in an image.
 
 These examples were selected to illustrate various (and decreasing) degrees of concordance between the automated colour identification and the human intuition. In the first example, all colours are identified as expected by the project's team, which is what visual inspection of the results generally reveals. All colours are also identified correctly and as expected in the second example, considering that brown is not part of the selected colour set; as a result it is divided into orange and red. Also, and it is coherent, the mixing of blue and yellow around the centre of the drawing creates nuances that are identified as green. The third example illustrates a weakness of the method, namely the identification of colours with a low saturation and a low lightness, in particular green.
-%first example illustrates a good extraction of the main colours whereas the second illustrates a less good colour extraction because of the similar computed distances between $\vec{s}$  pixel and the two or more $G$ main colours e.g.~$g = \mbox{Green}$ and $g = \mbox{Achromatic}$. 
-%Also, the lack of the main colour Brown in the defined set of colours produces errors during the colour identification process as well as a over attribution of the pixels to the Green when yellow and grey overlap into the drawing. Except these problems with low saturated colours, an other typical problem occurs when two colours are mixed, such as grey and yellow which are detected as green. This type of mixing represents only a few pixels in a drawing and thus, does not affect percentages of colours. However, for this reason, $B^g$ is transformed into $\tilde{B}^g$ to count the number of pixels. Despite these errors, the results are good enough for the majority of drawings. As it was not possible to create a gold standard, the quality was assessed visually.
-
-%{\color{red}[CC: Other distances tested, such the one from Androutsos 1999 et un autre plus récent et mieux, add ref in 4.1 for fig. 3]}
-
-%{\small \color{teal}[IDEE: Cross validation en prennant al\' eatoirement quelques pixels par dessin et les attribuer manuelle \`a une couleurs principales ou avoir un toy example avec un dessin o\`u l'on "connait" les couleurs.]}
 
 \begin{figure}[h!]
 	\centering
@@ -222,9 +198,6 @@ Besides the visualisation of colour decomposition, the method allows us to compu
 \subsubsection{Variety and entropy}
 \label{sec:results_entropy_variety}
 
-
-Based on the output of the colour identification method, the variety and entropy of colours were computed as described in section~\ref{sec:diversity}. Figure~\ref{fig:variety_histogram} shows the distribution of colour variety in the dataset, which reveals that a majority of drawings (about 70\%) have between 5 and 8 identified colours. The distribution deviates slightly from normality, in the sense that drawings with 7 and 8 colours are particularily frequent, and there is also a small peak of drawings with a single non-white colour ($V=2$). The box plots in Figure~\ref{fig:entropy_boxplot} depict the variability of colour entropy for a given amount of  colour variety. While the median of entropy is consistently increasing with variety, as expected, the spread of individual entropy values is quite large regardless of the corresponding variety.
-
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=\linewidth]{figures/colors-boxplot-hist.png}
@@ -233,7 +206,10 @@ Based on the output of the colour identification method, the variety and entropy
 \end{figure}
 
 
-\begin{figure}
+Based on the output of the colour identification method, the variety and entropy of colours were computed as described in section~\ref{sec:diversity}. Figure~\ref{fig:variety_histogram} shows the distribution of colour variety in the dataset, which reveals that a majority of drawings (about 70\%) have between 5 and 8 identified colours. The distribution deviates slightly from normality, in the sense that drawings with 7 and 8 colours are particularily frequent, and there is also a small peak of drawings with a single non-white colour ($V=2$). The box plots in Figure~\ref{fig:entropy_boxplot} depict the variability of colour entropy for a given amount of  colour variety. While the median of entropy is consistently increasing with variety, as expected, the spread of individual entropy values is quite large regardless of the corresponding variety.
+
+
+\begin{figure}[h!]
 	\centering
 	\includegraphics[width=\linewidth]{figures/colors-boxplot.png}
 	\caption{Colour entropy box-plots as a function of colour variety.}
@@ -249,16 +225,6 @@ In order to get a better idea of the interpretation of colour entropy variations
 	\label{fig:grille}
 \end{figure*}
 
-%As a final empirical result regarding colour entropy, we compare it with a well-established approach in computer vision, which consists in computing the entropy on the distribution of color shades resulting from the conversion of an image to greyscale~\cite[see e.g.][]{wu2013}. The scatterplot in Figure~\ref{fig:entropies} shows that colour entropy and greyscale entropy are strongly correlated (Pearsons'$r=0.8866$, $p<0.001$). However, a few drawings have a high greyscale entropy associated with a relatively low colour entropy. They seem to be characterised by a high degree of page coverage, albeit in a small number of well-defined colours. {\color{green}[AX: je n'arrive decidement pas a voir ce resultat comme apportant quelque chose de l'ordre de la validation, plutot que comme soulevant la question de l'utilite de tout le dispositif precedent. Pour cette raison, je n'arrive pas bien a mettre en evidence l'apport specifique de cette observation, dans l'esprit de la fin du paragraphe precedent, p.ex. Vous me semblez plus convaincus que moi de l'utilite d'inclure ce resultat alors n'hesitez pas si vous voyez une facon de mieux la mettre en evidence--dans l'etat actuel je trouve que ca affaiblit un peu la partie en la concluant sur une note pas tres clairement definie.]} 
-
-%{\small \color{teal}[IDEE: Est-ce que les extr\`emes ne permettraient pas d'en dire plus? A creuser.]}
-
-%\begin{figure}[h!]
-%	\centering
-%	\includegraphics[width=\linewidth]{figures/colors-greysacale-entropies.png}
-%	\caption{Relationship between grayscale entropy and colour entropy.}
-%	\label{fig:entropies}
-%\end{figure}
 
 \subsubsection{Concordance with human judgment} \label{sec:results_variety_concordance}
 
@@ -273,7 +239,7 @@ To conclude this section, we discuss the results of an attempt to compare the co
 	\label{fig:compnbcolourssd}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}
 	\centering
 	\includegraphics[width=\linewidth]{figures/comp_nb_colours_scatter.png}
 	\caption{Relationship between automatically detected colour variety and average human-perceived variety.}
@@ -290,9 +256,8 @@ Figure~\ref{fig:compnbcolourssd} shows that the difference between the colour va
 	\label{fig:blandandaltman}
 \end{figure}
 
-Figure~\ref{fig:blandandaltman} shows the range of disagreement between the two variety estimates using the so-called \textit{Bland and Altman graphic}~\cite{bland1986}. For each drawing $\tilde{k}$, the difference $d(\tilde{k}) := V(\tilde{k}) - V^h(\tilde{k})$ (on the vertical axis) is represented as a function of their mean $\overline{d}(\tilde{k}) := \frac{V(\tilde{k}) + V^h(\tilde{k})}{2}$ (on the horizontal axis). The more $d(\tilde{k})$ is distant of  $0$, the higher the disagreement between the two variety estimates, and $\overline{d} := 1/\tilde{N}\sum_{\tilde{k}}d(\tilde{k}) = 0$ indicates a perfect concordance between them. 
-%{\color{green}[AX: je ne comprends pas ce dernier point: si l'algo voit 10 couleurs quand les humains en voient 1 et vice-versa, on aura $\overline{d}=0$, non?]} Oui, en effet, ce serait un biais qui se compense, methode pas parfaire, mais c'est pour ça qu'on montre tous les points j'imagine.
-In this case, although the sample is too small to be representative, the mean disagreement $\overline{d}=-0.74$ is reasonably low. That more colours are found by humans than by the algorithm on average is consistent with the fact that brown is not part of the automatically identified colour set and that grey and black are aggregated.
+Figure~\ref{fig:blandandaltman} shows the range of disagreement between the two variety estimates using the so-called \textit{Bland and Altman graphic}~\cite{bland1986}. For each drawing $\tilde{k}$, the difference $d(\tilde{k}) := V(\tilde{k}) - V^h(\tilde{k})$ (on the vertical axis) is represented as a function of their mean $\overline{d}(\tilde{k}) := \frac{V(\tilde{k}) + V^h(\tilde{k})}{2}$ (on the horizontal axis). The more $d(\tilde{k})$ is distant of  $0$, the higher the disagreement between the two variety estimates, and $\overline{d} := 1/\tilde{N}\sum_{\tilde{k}}d(\tilde{k}) = 0$ indicates a perfect concordance between them if $d(\tilde{k}) = 0\; \forall\, \tilde{k}$, i.e.~$1/\tilde{N}\sum_{\tilde{k}} \left|d(\tilde{k})\right| = 0$.
+In this case, although the sample is too small to be representative, the mean disagreement $\overline{d}=-0.74$ is reasonably low ($1/\tilde{N}\sum_{\tilde{k}} \left|d(\tilde{k})\right| = 1.3$). That more colours are found by humans than by the algorithm on average is consistent with the fact that brown is not part of the automatically identified colour set and that grey and black are aggregated.
 
 
 
